@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>录入订单 - Zeen 客户管理后台</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="admin-container">
+  <div class="page-title">
+    <a href="/admin/dashboard.html">&larr; 返回列表</a>
+    <span style="margin-left:12px;">录入订单</span>
+  </div>
+
+  <form id="order-form" onsubmit="return submitOrder(event)">
+    <div class="card">
+      <h3>订单来源</h3>
+      <div style="display:flex;gap:20px;">
+        <label id="source-dealer" style="display:flex;align-items:center;gap:6px;font-weight:500;">
+          <input type="radio" name="source" value="dealer" checked> 经销商录入
+        </label>
+        <label id="source-manual" style="display:flex;align-items:center;gap:6px;font-weight:500;">
+          <input type="radio" name="source" value="manual"> 客服转账录入
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>客户信息</h3>
+      <div class="form-grid">
+        <div><label>客户姓名 *</label><input type="text" id="c-name" required></div>
+        <div><label>联系电话 *</label><input type="tel" id="c-phone" required></div>
+        <div class="full"><label>邮箱</label><input type="email" id="c-email"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>产品明细 *</h3>
+      <div id="prod-list"></div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="addProductRow()">+ 添加产品</button>
+    </div>
+
+    <div class="card">
+      <h3>支付信息</h3>
+      <div class="form-grid">
+        <div>
+          <label>支付方式</label>
+          <select id="p-method">
+            <option value="bank_transfer">银行转账</option>
+            <option value="airwallex">Airwallex 卡支付</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        <div><label>币种</label>
+          <select id="p-currency">
+            <option value="USD">USD</option>
+            <option value="HKD">HKD</option>
+            <option value="CNY">CNY</option>
+          </select>
+        </div>
+        <div><label>金额 *</label><input type="number" id="p-amount" step="0.01" min="0" required></div>
+        <div>
+          <label>支付状态</label>
+          <select id="p-status">
+            <option value="paid">已支付</option>
+            <option value="pending">待支付</option>
+            <option value="refunded">已退款</option>
+          </select>
+        </div>
+        <div class="full"><label>支付流水号/转账备注</label><input type="text" id="p-txn"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>邮寄信息</h3>
+      <div class="form-grid">
+        <div><label>收件人 *</label><input type="text" id="s-recipient" required></div>
+        <div><label>收货电话</label><input type="tel" id="s-phone"></div>
+        <div class="full"><label>详细地址 *</label><input type="text" id="s-street" required></div>
+        <div><label>城市 *</label><input type="text" id="s-city" required></div>
+        <div><label>省份/州</label><input type="text" id="s-state"></div>
+        <div><label>邮编</label><input type="text" id="s-zip"></div>
+        <div><label>国家 *</label><input type="text" id="s-country" required></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>物流信息（可后补）</h3>
+      <div class="form-grid">
+        <div><label>承运商</label><input type="text" id="l-carrier" placeholder="如 DHL / SF"></div>
+        <div><label>运单号</label><input type="text" id="l-tracking"></div>
+        <div>
+          <label>物流状态</label>
+          <select id="l-status">
+            <option value="unshipped">未发货</option>
+            <option value="shipped">已发货</option>
+            <option value="in_transit">运输中</option>
+            <option value="delivered">已签收</option>
+          </select>
+        </div>
+        <div class="full"><label>备注</label><input type="text" id="l-note"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn" id="submit-btn">保存订单</button>
+  </form>
+</div>
+
+<script src="/admin/admin.js"></script>
+<script>
+  if (!ADMIN.requireLogin()) { /* 已跳转 */ }
+  document.getElementById('topbar').innerHTML = ADMIN.renderTopbar('new');
+
+  // 按角色过滤来源选项：dealer 仅经销商录入，support 仅客服转账录入，admin 两者可选
+  var role = ADMIN.user ? ADMIN.user.role : '';
+  var fixedSource = null;
+  if (role === 'dealer') {
+    fixedSource = 'dealer';
+    var srcManual = document.getElementById('source-manual');
+    if (srcManual) srcManual.remove();
+  } else if (role === 'support') {
+    fixedSource = 'manual';
+    var srcDealer = document.getElementById('source-dealer');
+    if (srcDealer) srcDealer.remove();
+    var srcManual2 = document.getElementById('source-manual');
+    if (srcManual2) {
+      var radioManual = srcManual2.querySelector('input[type="radio"]');
+      if (radioManual) radioManual.checked = true;
+    }
+  }
+
+  var prodSeq = 0;
+  function addProductRow(data) {
+    data = data || {};
+    var wrap = document.getElementById('prod-list');
+    var div = document.createElement('div');
+    div.className = 'prod-row';
+    div.innerHTML =
+      '<input type="text" class="prod-name" placeholder="产品名称" value="' + (data.name || '') + '">' +
+      '<input type="text" class="prod-code" placeholder="产品编码" value="' + (data.code || '') + '">' +
+      '<input type="number" class="prod-qty" placeholder="数量" value="' + (data.quantity || 1) + '" min="1">' +
+      '<input type="number" class="prod-price" placeholder="单价" value="' + (data.unitPrice || '') + '" step="0.01" min="0">' +
+      '<button type="button" class="rm" onclick="this.parentNode.remove()">&times;</button>';
+    wrap.appendChild(div);
+    prodSeq++;
+  }
+
+  function submitOrder(e) {
+    e.preventDefault();
+    var source = fixedSource || (document.querySelector('input[name="source"]:checked') || {}).value || 'manual';
+    var products = [];
+    document.querySelectorAll('#prod-list .prod-row').forEach(function (row) {
+      var name = row.querySelector('.prod-name').value.trim();
+      if (!name) return;
+      products.push({
+        name: name,
+        code: row.querySelector('.prod-code').value.trim(),
+        quantity: parseInt(row.querySelector('.prod-qty').value, 10) || 1,
+        unitPrice: parseFloat(row.querySelector('.prod-price').value) || 0
+      });
+    });
+    if (!products.length) { alert('请至少填写一个产品'); return false; }
+
+    var body = {
+      source: source,
+      customer: {
+        name: document.getElementById('c-name').value.trim(),
+        email: document.getElementById('c-email').value.trim(),
+        phone: document.getElementById('c-phone').value.trim()
+      },
+      products: products,
+      payment: {
+        method: document.getElementById('p-method').value,
+        currency: document.getElementById('p-currency').value,
+        amount: parseFloat(document.getElementById('p-amount').value) || 0,
+        status: document.getElementById('p-status').value,
+        txnId: document.getElementById('p-txn').value.trim()
+      },
+      shipping: {
+        recipient: document.getElementById('s-recipient').value.trim(),
+        street: document.getElementById('s-street').value.trim(),
+        city: document.getElementById('s-city').value.trim(),
+        state: document.getElementById('s-state').value.trim(),
+        zip: document.getElementById('s-zip').value.trim(),
+        country: document.getElementById('s-country').value.trim(),
+        phone: document.getElementById('s-phone').value.trim()
+      },
+      logistics: {
+        carrier: document.getElementById('l-carrier').value.trim(),
+        trackingNo: document.getElementById('l-tracking').value.trim(),
+        status: document.getElementById('l-status').value,
+        note: document.getElementById('l-note').value.trim()
+      }
+    };
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '保存中...';
+    ADMIN.post('/api/orders', body).then(function (data) {
+      if (data.order) {
+        alert('订单已创建：' + data.order.id);
+        window.location.href = '/admin/order-detail.html?id=' + encodeURIComponent(data.order.id);
+      } else {
+        alert('创建失败：' + (data.error || 'unknown'));
+        btn.disabled = false;
+        btn.textContent = '保存订单';
+      }
+    }).catch(function (e) {
+      alert(e.message || '保存失败');
+      btn.disabled = false;
+      btn.textContent = '保存订单';
+    });
+    return false;
+  }
+
+  addProductRow();
+</script>
+</body>
+</html>

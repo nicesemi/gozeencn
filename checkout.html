@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <script>
+    window.performance.mark('debut:theme_stylesheet_loaded.start');
+    function onLoadStylesheet() {
+      performance.mark('debut:theme_stylesheet_loaded.end');
+      performance.measure('debut:theme_stylesheet_loaded', 'debut:theme_stylesheet_loaded.start', 'debut:theme_stylesheet_loaded.end');
+      var url = "/assets/cdn/shop/t/7/assets/theme.css";
+      var link = document.querySelector('link[href="' + url + '"]');
+      link.loaded = true;
+      link.dispatchEvent(new Event('load'));
+    }
+  </script>
+<script defer="defer" src="/assets/cdn/shop/t/7/assets/scripts.min.js"></script>
+<link href="/assets/cdn/shop/t/7/assets/fonts.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="/assets/cdn/shop/t/7/assets/stylesheet.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="/assets/cdn/shop/t/7/assets/theme.css" media="all" onload="this.media='all';onLoadStylesheet()" rel="stylesheet" type="text/css"/>
+<style>
+body { background-color: #fff; color: #333; }
+.page-container { background-color: var(--color-body, #f9f9f9); }
+.checkout-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+.checkout-title { font-size: 28px; font-weight: 700; margin-bottom: 30px; }
+.checkout-grid { display: grid; grid-template-columns: 1fr 400px; gap: 40px; align-items: start; }
+.checkout-form-section { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+.checkout-form-section h2 { font-size: 18px; font-weight: 600; margin: 0 0 16px; display: flex; align-items: center; gap: 8px; }
+.step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #f73437; color: #fff; border-radius: 50%; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 4px; color: #555; }
+.form-field input, .form-field select { width: 100%; padding: 10px 12px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 15px; box-sizing: border-box; }
+.form-field input:focus, .form-field select:focus { border-color: #f73437; outline: none; box-shadow: 0 0 0 1px #f73437; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-field .error-msg { color: #f73437; font-size: 12px; margin-top: 4px; display: none; }
+.form-field.error input, .form-field.error select { border-color: #f73437; }
+.form-field.error .error-msg { display: block; }
+.payment-option { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #e5e5e5; border-radius: 6px; margin-bottom: 8px; cursor: pointer; }
+.payment-option:hover { border-color: #f73437; }
+.payment-option input[type="radio"] { accent-color: #f73437; }
+.submit-btn { width: 100%; padding: 14px; background: #f73437; color: #fff; border: none; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+.submit-btn:hover { background: #d92d30; }
+.checkout-success { text-align: center; padding: 60px 20px; display: none; }
+.checkout-success h2 { font-size: 24px; color: #333; margin-bottom: 12px; }
+.checkout-success p { color: #666; margin-bottom: 8px; }
+.checkout-success .order-id { font-weight: 700; color: #f73437; }
+.order-summary-sticky { position: sticky; top: 120px; }
+@media (max-width: 768px) {
+  .checkout-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<noscript></noscript>
+<a class="in-page-link visually-hidden skip-link" href="#MainContent">Skip to content</a>
+
+<!-- Header -->
+<div class="shopify-section" id="shopify-section-header">
+<style>
+  .site-header__logo-image { max-width: 100px; margin: 0; }
+  /* Tailwind utility fallback — fixes header layout */
+  .flex { display: flex; }
+  .items-center { align-items: center; }
+  .justify-between { justify-content: space-between; }
+  .px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .w-full { width: 100%; }
+  .gap-4 { gap: 1rem; }
+  .text-right { text-align: right; }
+  .hidden { display: none; }
+    .list--inline > li { display: inline-block; }
+  .lg\:block { display: none; }
+  @media (min-width: 1024px) {
+    .lg\:block { display: block !important; }
+    .lg\:hidden { display: none; }
+    .lg\:w-1\/6 { width: 16.666%; }
+    .lg\:w-4\/6 { width: 66.666%; }
+  }
+</style>
+<div class="spacer h-[94px] xl:h-[117px]"></div>
+<div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
+<header class="site-header border-bottom logo--left bg-white" role="banner">
+<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">Call us today at (00852) 3050-1862</p></a></div>
+<div class="site-header__mobile-nav relative z-10 bg-white">
+<div class="flex items-center justify-between px-8 w-full">
+<div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
+<div class="h2 site-header__logo">
+<a class="site-header__logo-image" href="/">
+<img alt="Zeen Go" class="js" src="/assets/cdn/shop/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_100x.png" style="max-width: 100px"/>
+<noscript><img alt="Zeen Go" src="/assets/cdn/shop/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_100x.png" srcset="/assets/cdn/shop/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_100x.png" style="max-width: 100px;"/></noscript>
+</a>
+</div>
+</div>
+<nav class="grid__item lg:w-4/6 hidden lg:block" role="navigation">
+<ul class="site-nav list--inline">
+<li><a class="site-nav__link site-nav__link--main" href="/pages/zeen.html"><span class="site-nav__label">Order Your Zeen</span></a></li>
+<li><a class="site-nav__link site-nav__link--main" href="/collections/accessories.html"><span class="site-nav__label">Accessories</span></a></li>
+<li><a class="site-nav__link site-nav__link--main" href="/pages/events.html"><span class="site-nav__label">Zeen Demos</span></a></li>
+<li><a class="site-nav__link site-nav__link--main" href="/pages/help.html"><span class="site-nav__label">Training</span></a></li>
+<li><a class="site-nav__link site-nav__link--main" href="/pages/contact-us.html"><span class="site-nav__label">Contact Us</span></a></li>
+</ul>
+</nav>
+<div class="grid__item lg:w-1/6 w-1/2 text-right site-header__icons site-header__icons--plus">
+<div class="site-header__icons-wrapper gap-4">
+<div class="site-header__lang-switcher" style="display:flex;align-items:center;margin-left:12px;gap:4px;font-size:14px;">
+<span style="color:#333;font-weight:700;">English</span>
+<span style="color:#999;">|</span>
+<a href="/zh-hk/checkout.html" style="color:#666;text-decoration:none;" title="繁體中文">繁中</a>
+</div>
+<a class="site-header__icon site-header__cart w-4" href="/cart.html">
+<svg aria-hidden="true" class="icon icon-cart" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
+<span class="icon__fallback-text">Cart</span>
+<div class="site-header__cart-count hide critical-hidden" data-cart-count-bubble="" id="CartCount"><span data-cart-count="">0</span></div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+</div>
+</div>
+
+<div class="page-container drawer-page-content transition" id="PageContainer">
+<main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+
+<div class="checkout-container">
+  <h1 class="checkout-title">Checkout</h1>
+
+  <!-- Checkout form visible by default -->
+  <div class="checkout-grid" id="checkout-form-wrapper">
+    <!-- Left: Order Summary -->
+    <div class="order-summary-sticky" id="checkout-order-summary">
+      <div style="text-align:center;padding:40px;color:#666;">Loading cart...</div>
+    </div>
+
+    <!-- Right: Checkout Form -->
+    <div>
+      <form id="checkout-form" novalidate>
+
+        <!-- Step 1: Contact -->
+        <div class="checkout-form-section">
+          <h2><span class="step-number">1</span> Contact Information</h2>
+          <div class="form-field">
+            <label for="contact-email">Email <span style="color:#f73437;">*</span></label>
+            <input type="email" id="contact-email" name="email" placeholder="you@example.com" required />
+            <span class="error-msg">Please enter a valid email address</span>
+          </div>
+          <div class="form-field">
+            <label for="contact-phone">Phone Number <span style="color:#f73437;">*</span></label>
+            <input type="tel" id="contact-phone" name="phone" placeholder="+1 (555) 000-0000" required />
+            <span class="error-msg">Please enter your phone number</span>
+          </div>
+        </div>
+
+        <!-- Step 2: Shipping -->
+        <div class="checkout-form-section">
+          <h2><span class="step-number">2</span> Shipping Address</h2>
+          <div class="form-field">
+            <label for="shipping-name">Full Name <span style="color:#f73437;">*</span></label>
+            <input type="text" id="shipping-name" name="name" placeholder="John Doe" required />
+            <span class="error-msg">Please enter your full name</span>
+          </div>
+          <div class="form-field">
+            <label for="shipping-address">Address <span style="color:#f73437;">*</span></label>
+            <input type="text" id="shipping-address" name="address" placeholder="123 Main Street, Apt 4" required />
+            <span class="error-msg">Please enter your address</span>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="shipping-city">City <span style="color:#f73437;">*</span></label>
+              <input type="text" id="shipping-city" name="city" placeholder="New York" required />
+              <span class="error-msg">Please enter your city</span>
+            </div>
+            <div class="form-field">
+              <label for="shipping-zip">Postal Code <span style="color:#f73437;">*</span></label>
+              <input type="text" id="shipping-zip" name="zip" placeholder="10001" required />
+              <span class="error-msg">Please enter your postal code</span>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="shipping-country">Country/Region <span style="color:#f73437;">*</span></label>
+            <select id="shipping-country" name="country" required>
+              <option value="">Select country...</option>
+              <option value="US">United States</option>
+              <option value="HK">Hong Kong</option>
+              <option value="CN">China</option>
+              <option value="CA">Canada</option>
+              <option value="GB">United Kingdom</option>
+              <option value="AU">Australia</option>
+            </select>
+            <span class="error-msg">Please select your country</span>
+          </div>
+          <div class="form-field">
+            <label for="shipping-phone">Phone</label>
+            <input type="tel" id="shipping-phone" name="shipping_phone" placeholder="+1 (555) 000-0000" />
+          </div>
+        </div>
+
+        <!-- Step 3: Payment -->
+        <div class="checkout-form-section">
+          <h2><span class="step-number">3</span> Payment Method</h2>
+
+          <!-- Card Payment Form -->
+          <div id="card-form-container" style="margin-bottom:16px;">
+            <div class="form-field">
+              <label for="card-number">Card Number <span style="color:#f73437;">*</span></label>
+              <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" />
+              <span class="error-msg">Please enter a valid card number</span>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="card-expiry">Expiry (MM/YY) <span style="color:#f73437;">*</span></label>
+                <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" />
+                <span class="error-msg">Please enter a valid expiry date</span>
+              </div>
+              <div class="form-field">
+                <label for="card-cvc">CVC <span style="color:#f73437;">*</span></label>
+                <input type="text" id="card-cvc" placeholder="123" maxlength="4" autocomplete="cc-csc" />
+                <span class="error-msg">Please enter a valid CVC</span>
+              </div>
+            </div>
+            <div id="airwallex-card-error" style="color:#f73437;font-size:12px;margin-top:6px;display:none;"></div>
+          </div>
+
+          <!-- Billing Name for card -->
+          <div class="form-field">
+            <label for="billing-name">Cardholder Name <span style="color:#f73437;">*</span></label>
+            <input type="text" id="billing-name" name="billing_name" placeholder="Name on card" required />
+            <span class="error-msg">Please enter the cardholder name</span>
+          </div>
+
+          <!-- Alternative payment methods -->
+          <p style="color:#666;font-size:13px;margin:16px 0 8px;padding-top:12px;border-top:1px solid #eee;">Other payment methods:</p>
+          <div class="payment-option" id="bank-transfer-option">
+            <input type="radio" id="pay-bank-transfer" name="payment_method_alt" value="bank-transfer" />
+            <label for="pay-bank-transfer" style="font-weight:500;cursor:pointer;">Bank Transfer (Credit Card / Bank Card)</label>
+          </div>
+          <div id="bank-transfer-details" style="display:none;padding:12px 16px;background:#f9f9f9;border:1px solid #e5e5e5;border-radius:6px;margin:-4px 0 12px 28px;font-size:13px;color:#333;line-height:1.8;">
+            <div style="font-weight:600;margin-bottom:4px;">Account Information</div>
+            <div>Account Name: <strong>Exokinetics Hong Kong Limited</strong></div>
+            <div>Account Number: <strong>7949868375</strong></div>
+            <div>Region: <strong>Hong Kong SAR</strong></div>
+            <div style="margin-top:8px;color:#888;font-size:12px;">Please include your order reference in the transfer notes. Your order will be processed once payment is confirmed.</div>
+          </div>
+          <div class="payment-option" style="opacity:0.5;pointer-events:none;">
+            <input type="radio" id="pay-alipay" name="payment_method_alt" value="alipay" disabled />
+            <label for="pay-alipay" style="font-weight:500;color:#999;">Alipay</label>
+            <span style="font-size:11px;color:#999;margin-left:4px;">Coming Soon</span>
+          </div>
+          <div class="payment-option" style="opacity:0.5;pointer-events:none;">
+            <input type="radio" id="pay-wechat" name="payment_method_alt" value="wechat" disabled />
+            <label for="pay-wechat" style="font-weight:500;color:#999;">WeChat Pay</label>
+            <span style="font-size:11px;color:#999;margin-left:4px;">Coming Soon</span>
+          </div>
+        </div>
+
+        <!-- hidden active payment method tracker -->
+        <input type="hidden" name="payment_method" value="airwallex" id="active-payment-method" />
+
+        <button type="submit" class="submit-btn" id="checkout-submit-btn">
+          <span id="submit-btn-text">Place Order</span>
+          <span id="submit-btn-loading" style="display:none;">Processing...</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success State -->
+  <div class="checkout-success" id="checkout-success">
+    <div style="font-size:48px;margin-bottom:16px;">&#10003;</div>
+    <h2>Order Confirmed!</h2>
+    <p>Thank you for your order. Payment processed via Airwallex.</p>
+    <p>Order Number: <span class="order-id" id="order-ref"></span></p>
+    <p>Payment ID: <span class="order-id" id="payment-ref" style="font-size:12px;"></span></p>
+    <p style="margin-top:16px;">A confirmation email will be sent shortly.</p>
+    <p style="margin-top:24px;">
+      <a class="btn inline-block" href="/">Continue Shopping</a>
+    </p>
+  </div>
+</div>
+
+</main>
+
+<div class="shopify-section" id="shopify-section-footer">
+<footer class="site-footer critical-hidden bg-white border-top" role="contentinfo" style="padding:32px 0;">
+<div class="page-width" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+<div class="grid grid--no-gutters">
+<div class="grid__item text-center">
+<ul class="site-footer__linklist list--inline" style="margin-bottom:16px;">
+<li class="site-footer__linklist-item"><a href="/policies/refund-policy.html">Refund Policy</a></li>
+<li class="site-footer__linklist-item"><a href="/policies/privacy-policy.html">Privacy Policy</a></li>
+<li class="site-footer__linklist-item"><a href="/pages/contact-us.html">Contact Us</a></li>
+</ul>
+<div class="site-footer__copyright" style="font-size:12px;color:#999;">&copy; 2026 Zeen Go. All rights reserved. <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="Admin Login">Admin Login</a></div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+<script>
+  function setHeaderHeight() {
+    var header = document.querySelector('.site-header.border-bottom');
+    if (header) {
+      var h = header.offsetHeight;
+      document.querySelector('.spacer').style.height = h + 'px';
+    }
+  }
+  window.addEventListener('load', setHeaderHeight);
+  window.addEventListener('resize', setHeaderHeight);
+</script>
+<script src="/assets/js/cart.js"></script>
+<script>
+(function(){
+  // ===== Airwallex Production API Configuration =====
+  var AIRWALLEX_API_KEY = '07ef3f5439f1eabe16c558cfd51fb9571709ff2e468f8d5f078062246f707b4b98b7bd3d63f97f03dff4127322a936d0';
+  var AIRWALLEX_CLIENT_ID = 'VExUZ8FvQLiGS6bcvr6n1w';
+  var AIRWALLEX_BASE_URL = 'https://api.airwallex.com';
+
+  var AIRWALLEX_INTENT_ID = null;
+  var AIRWALLEX_CLIENT_SECRET = null;
+  var orderData = null;
+
+  // ===== Build order payload from cart + form =====
+  function buildOrderData(method, totalCents) {
+    var cart = (window.Cart && typeof window.Cart.get === 'function') ? window.Cart.get() : { items: [] };
+    var items = (cart && cart.items) || [];
+    var products = items.map(function(it) {
+      return {
+        name: it.title || '',
+        code: it.variant_title || it.variant || '',
+        quantity: it.quantity || 1,
+        unitPrice: it.price || 0,
+        image: it.image || ''
+      };
+    });
+    var email = (document.getElementById('contact-email') || {}).value || '';
+    var phone = (document.getElementById('contact-phone') || {}).value || '';
+    var shipPhone = (document.getElementById('shipping-phone') || {}).value || '';
+    var shipping = {
+      recipient: (document.getElementById('shipping-name') || {}).value || '',
+      street: (document.getElementById('shipping-address') || {}).value || '',
+      city: (document.getElementById('shipping-city') || {}).value || '',
+      state: '',
+      zip: (document.getElementById('shipping-zip') || {}).value || '',
+      country: (document.getElementById('shipping-country') || {}).value || '',
+      phone: shipPhone || phone
+    };
+    return {
+      products: products,
+      customer: { name: shipping.recipient, email: email, phone: phone },
+      shipping: shipping,
+      payment: { method: method, amount: totalCents / 100, currency: 'USD', status: method === 'bank-transfer' ? 'pending' : 'paid' },
+      totalCents: totalCents,
+      shipping_phone: shipPhone || phone,
+      customer_email: email
+    };
+  }
+
+  // ===== Persist order to admin backend (public API, idempotent) =====
+  function persistOrder(orderData, paymentIntentId) {
+    if (!orderData || !paymentIntentId) return Promise.resolve(null);
+    try {
+      return fetch('/api/orders/online', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          paymentIntentId: paymentIntentId,
+          products: orderData.products || [],
+          customer: orderData.customer || {},
+          shipping: orderData.shipping || {},
+          payment: orderData.payment || {},
+          totalCents: orderData.totalCents || 0
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .catch(function() { return null; });
+    } catch(e) { return Promise.resolve(null); }
+  }
+
+  // ===== Token Management =====
+  var cachedToken = null;
+  var tokenExpiresAt = 0;
+
+  function getAccessToken(callback) {
+    var now = Date.now();
+    if (cachedToken && now < tokenExpiresAt) {
+      callback(null, cachedToken);
+      return;
+    }
+    fetch(AIRWALLEX_BASE_URL + '/api/v1/authentication/login', {
+      method: 'POST',
+      headers: {
+        'x-api-key': AIRWALLEX_API_KEY,
+        'x-client-id': AIRWALLEX_CLIENT_ID,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.token) {
+        cachedToken = data.token;
+        tokenExpiresAt = data.expires_at ? new Date(data.expires_at).getTime() - 60000 : now + 1740000;
+        callback(null, cachedToken);
+      } else {
+        callback(new Error('Authentication failed. Please check API credentials.'));
+      }
+    })
+    .catch(function(err) {
+      callback(err);
+    });
+  }
+
+  // ===== Load Order Summary =====
+  function loadOrderSummary() {
+    var el = document.getElementById('checkout-order-summary');
+    if (!el) return;
+    try {
+      if (window.Cart && typeof window.Cart.get === 'function') {
+        var cart = window.Cart.get();
+        var items = cart && cart.items ? cart.items : [];
+        renderOrderSummary(items);
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">Loading cart...</div>';
+        setTimeout(loadOrderSummary, 300);
+      }
+    } catch(e) {
+      el.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">Your cart is empty.</div>';
+    }
+  }
+
+  function renderOrderSummary(items) {
+    var el = document.getElementById('checkout-order-summary');
+    if (!items || !items.length) {
+      el.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">Your cart is empty.</div>';
+      return;
+    }
+    var subtotal = 0;
+    var html = '<div style="background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:24px;">';
+    html += '<h3 style="font-size:16px;font-weight:700;margin:0 0 16px;border-bottom:1px solid #eee;padding-bottom:12px;">Order Summary</h3>';
+    items.forEach(function(item){
+      var lineTotal = (item.price || 0) * (item.quantity || 1);
+      subtotal += lineTotal;
+      html += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f5f5f5;">';
+      if (item.image) {
+        html += '<img src="' + item.image + '" alt="' + (item.title || '') + '" style="width:64px;height:64px;object-fit:contain;border-radius:4px;background:#f9f9f9;" />';
+      }
+      html += '<div style="flex:1;">';
+      html += '<div style="font-weight:600;font-size:14px;">' + (item.title || 'Product') + '</div>';
+      if (item.variant) html += '<div style="font-size:12px;color:#888;">' + item.variant + '</div>';
+      html += '<div style="font-size:12px;color:#888;">Qty: ' + (item.quantity || 1) + '</div>';
+      html += '</div>';
+      html += '<div style="font-weight:600;font-size:14px;">$' + lineTotal.toFixed(2) + '</div>';
+      html += '</div>';
+    });
+    var shipping = subtotal > 0 ? 49.99 : 0;
+    var tax = subtotal * 0.08;
+    var total = subtotal + shipping + tax;
+    html += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid #eee;">';
+    html += '<div style="display:flex;justify-content:space-between;font-size:14px;color:#666;margin-bottom:4px;"><span>Subtotal</span><span>$' + subtotal.toFixed(2) + '</span></div>';
+    html += '<div style="display:flex;justify-content:space-between;font-size:14px;color:#666;margin-bottom:4px;"><span>Shipping</span><span>$' + shipping.toFixed(2) + '</span></div>';
+    html += '<div style="display:flex;justify-content:space-between;font-size:14px;color:#666;margin-bottom:8px;"><span>Tax (est.)</span><span>$' + tax.toFixed(2) + '</span></div>';
+    html += '<div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding-top:8px;border-top:1px solid #eee;"><span>Total</span><span id="order-total-amount">$' + total.toFixed(2) + '</span></div>';
+    html += '</div>';
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
+  // ===== Card Input Formatting =====
+  function formatCardNumber(value) {
+    var digits = value.replace(/\D/g, '').substring(0, 16);
+    return digits.replace(/(.{4})/g, '$1 ').trim();
+  }
+
+  function formatExpiry(value) {
+    var digits = value.replace(/\D/g, '').substring(0, 4);
+    if (digits.length >= 2) {
+      return digits.substring(0, 2) + '/' + digits.substring(2);
+    }
+    return digits;
+  }
+
+  function parseExpiry(value) {
+    var parts = value.split('/').map(function(s) { return s.trim(); });
+    if (parts.length === 2) return { month: parts[0], year: parts[1] };
+    var d = value.replace(/\D/g, '');
+    if (d.length >= 3) return { month: d.substring(0, 2), year: d.substring(2) };
+    return { month: '', year: '' };
+  }
+
+  // ===== Card Validation =====
+  function validateCardNumber(number) {
+    var digits = number.replace(/\s/g, '');
+    if (digits.length < 13 || digits.length > 19) return false;
+    var sum = 0;
+    var alt = false;
+    for (var i = digits.length - 1; i >= 0; i--) {
+      var n = parseInt(digits.charAt(i), 10);
+      if (alt) { n *= 2; if (n > 9) n -= 9; }
+      sum += n;
+      alt = !alt;
+    }
+    return sum % 10 === 0;
+  }
+
+  function validateExpiry(month, year) {
+    var m = parseInt(month, 10);
+    var y = parseInt(year, 10);
+    if (isNaN(m) || isNaN(y) || m < 1 || m > 12) return false;
+    if (y < 100) y += 2000;
+    var now = new Date();
+    var currentMonth = now.getMonth() + 1;
+    var currentYear = now.getFullYear();
+    if (y < currentYear) return false;
+    if (y === currentYear && m < currentMonth) return false;
+    return true;
+  }
+
+  // ===== Create PaymentIntent via REST API =====
+  function createPaymentIntent(amountCents, currency, callback) {
+    orderData = buildOrderData('airwallex', amountCents);
+    getAccessToken(function(tokenErr, token) {
+      if (tokenErr) {
+        callback(new Error('Payment service unavailable. Please try again later.'));
+        return;
+      }
+      var requestId = 'zeen-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      var merchantOrderId = 'ZN-' + Date.now().toString(36).toUpperCase();
+      fetch(AIRWALLEX_BASE_URL + '/api/v1/pa/payment_intents/create', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          amount: amountCents,
+          currency: currency || 'USD',
+          merchant_order_id: merchantOrderId,
+          request_id: requestId,
+          descriptor: 'Zeen Order',
+          return_url: window.location.href,
+          order: {
+            products: orderData.products,
+            shipping: orderData.shipping,
+            type: 'v_goods'
+          },
+          metadata: {
+            shipping_phone: orderData.shipping_phone,
+            customer_email: orderData.customer_email
+          }
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.id && data.client_secret) {
+          AIRWALLEX_INTENT_ID = data.id;
+          AIRWALLEX_CLIENT_SECRET = data.client_secret;
+          callback(null, { id: data.id, client_secret: data.client_secret });
+        } else {
+          callback(new Error(data.message || 'Failed to create payment intent'));
+        }
+      })
+      .catch(function(err) {
+        callback(new Error('Payment service unavailable. Please try again later.'));
+      });
+    });
+  }
+
+  // ===== Confirm PaymentIntent via REST API (direct card payment) =====
+  function confirmPayment(callback) {
+    if (!AIRWALLEX_INTENT_ID) {
+      callback(new Error('No payment intent'));
+      return;
+    }
+    var cardNumberRaw = (document.getElementById('card-number') ? document.getElementById('card-number').value.replace(/\s/g, '') : '');
+    var cardExpiryRaw = document.getElementById('card-expiry') ? document.getElementById('card-expiry').value : '';
+    var cardCvcRaw = document.getElementById('card-cvc') ? document.getElementById('card-cvc').value : '';
+    var billingName = document.getElementById('billing-name').value || 'Customer';
+    var expiry = parseExpiry(cardExpiryRaw);
+    var expYear = parseInt(expiry.year, 10);
+    if (expYear < 100) expYear += 2000;
+
+    getAccessToken(function(tokenErr, token) {
+      if (tokenErr) {
+        callback(new Error('Payment service unavailable. Please try again later.'));
+        return;
+      }
+      var requestId = 'confirm-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      fetch(AIRWALLEX_BASE_URL + '/api/v1/pa/payment_intents/' + AIRWALLEX_INTENT_ID + '/confirm', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          request_id: requestId,
+          payment_method: {
+            type: 'card',
+            card: {
+              number: cardNumberRaw,
+              expiry_month: expiry.month,
+              expiry_year: String(expYear),
+              cvc: cardCvcRaw
+            },
+            billing: {
+              name: billingName
+            }
+          },
+          return_url: window.location.href
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        callback(null, data);
+      })
+      .catch(function(err) {
+        callback(new Error('Payment service unavailable. Please try again later.'));
+      });
+    });
+  }
+
+  // ===== Card Input Event Handlers =====
+  var cardNumberInput = document.getElementById('card-number');
+  var cardExpiryInput = document.getElementById('card-expiry');
+  var cardCvcInput = document.getElementById('card-cvc');
+
+  if (cardNumberInput) {
+    cardNumberInput.addEventListener('input', function() {
+      var cursor = this.selectionStart;
+      var formatted = formatCardNumber(this.value);
+      this.value = formatted;
+      var added = 0;
+      var prev = this.value;
+      for (var i = 0; i < cursor && i < prev.length; i++) {
+        if (prev[i] === ' ') added++;
+      }
+      if (cursor + added <= formatted.length) {
+        this.setSelectionRange(cursor + added, cursor + added);
+      }
+    });
+  }
+
+  if (cardExpiryInput) {
+    cardExpiryInput.addEventListener('input', function() {
+      this.value = formatExpiry(this.value);
+      this.setSelectionRange(this.value.length, this.value.length);
+    });
+  }
+
+  if (cardCvcInput) {
+    cardCvcInput.addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').substring(0, 4);
+    });
+  }
+
+  // ===== Form Submit Handler =====
+  var form = document.getElementById('checkout-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var valid = true;
+      form.querySelectorAll('[required]').forEach(function(field) {
+        if (field.type === 'checkbox') return;
+        if (field.id === 'card-number' || field.id === 'card-expiry' || field.id === 'card-cvc') return;
+        var wrapper = field.closest('.form-field');
+        if (wrapper) wrapper.classList.remove('error');
+        if (!field.value.trim()) {
+          valid = false;
+          if (wrapper) wrapper.classList.add('error');
+        }
+      });
+
+      var emailField = document.getElementById('contact-email');
+      if (emailField && emailField.value.trim()) {
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(emailField.value.trim())) {
+          valid = false;
+          var ew = emailField.closest('.form-field');
+          if (ew) ew.classList.add('error');
+        }
+      }
+
+      var activeMethod = (paymentMethodInput && paymentMethodInput.value) || 'airwallex';
+
+      // Bank transfer: skip card validation & Airwallex, save order directly
+      if (activeMethod === 'bank-transfer') {
+        var submitBtn2 = document.getElementById('checkout-submit-btn');
+        var btnText2 = document.getElementById('submit-btn-text');
+        var btnLoading2 = document.getElementById('submit-btn-loading');
+        if (submitBtn2) { submitBtn2.disabled = true; submitBtn2.style.opacity = '0.7'; }
+        if (btnText2) btnText2.style.display = 'none';
+        if (btnLoading2) btnLoading2.style.display = 'inline';
+
+        var orderRef2 = 'ZN-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+        document.getElementById('order-ref').textContent = orderRef2;
+        var prEl = document.getElementById('payment-ref');
+        if (prEl) prEl.textContent = 'Bank Transfer - Pending';
+
+        try {
+          var totalEl2 = document.getElementById('order-total-amount');
+          var totalText2 = totalEl2 ? totalEl2.textContent.replace(/[^0-9.]/g, '') : '0';
+          var totalCents2 = Math.round(parseFloat(totalText2 || '0') * 100);
+          orderData = buildOrderData('bank-transfer', totalCents2);
+          orderData.order_ref = orderRef2;
+          orderData.payment = { method: 'bank-transfer', amount: totalCents2 / 100, currency: 'USD', status: 'pending', txnId: orderRef2 };
+          orderData.created_at = new Date().toISOString();
+          var existingOrders = JSON.parse(localStorage.getItem('zeen_orders') || '[]');
+          existingOrders.push(orderData);
+          localStorage.setItem('zeen_orders', JSON.stringify(existingOrders));
+          persistOrder(orderData, 'BT-' + orderRef2);
+        } catch(e) {}
+
+        document.getElementById('checkout-form-wrapper').style.display = 'none';
+        document.getElementById('checkout-success').style.display = 'block';
+        if (window.Cart) window.Cart.clear();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // Card validation
+      var cardNumberRaw = (cardNumberInput ? cardNumberInput.value.replace(/\s/g, '') : '');
+      var cardExpiryRaw = cardExpiryInput ? cardExpiryInput.value : '';
+      var cardCvcRaw = cardCvcInput ? cardCvcInput.value : '';
+
+      var cnWrapper = cardNumberInput ? cardNumberInput.closest('.form-field') : null;
+      var ceWrapper = cardExpiryInput ? cardExpiryInput.closest('.form-field') : null;
+      var ccWrapper = cardCvcInput ? cardCvcInput.closest('.form-field') : null;
+      if (cnWrapper) cnWrapper.classList.remove('error');
+      if (ceWrapper) ceWrapper.classList.remove('error');
+      if (ccWrapper) ccWrapper.classList.remove('error');
+
+      if (!cardNumberRaw || !validateCardNumber(cardNumberRaw)) {
+        valid = false;
+        if (cnWrapper) cnWrapper.classList.add('error');
+      }
+
+      var expiry = parseExpiry(cardExpiryRaw);
+      if (!expiry.month || !expiry.year || !validateExpiry(expiry.month, expiry.year)) {
+        valid = false;
+        if (ceWrapper) ceWrapper.classList.add('error');
+      }
+
+      if (!cardCvcRaw || cardCvcRaw.length < 3) {
+        valid = false;
+        if (ccWrapper) ccWrapper.classList.add('error');
+      }
+
+      if (!valid) return;
+
+      // Show loading state
+      var submitBtn = document.getElementById('checkout-submit-btn');
+      var btnText = document.getElementById('submit-btn-text');
+      var btnLoading = document.getElementById('submit-btn-loading');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.7'; }
+      if (btnText) btnText.style.display = 'none';
+      if (btnLoading) btnLoading.style.display = 'inline';
+
+      // Get order total in cents
+      var totalEl = document.getElementById('order-total-amount');
+      var totalText = totalEl ? totalEl.textContent.replace(/[^0-9.]/g, '') : '0';
+      var totalCents = Math.round(parseFloat(totalText || '0') * 100);
+
+      // Step 1: Get token, Step 2: Create PaymentIntent, Step 3: Confirm
+      createPaymentIntent(totalCents, 'USD', function(err, intentData) {
+        if (err) {
+          showPaymentError(err.message);
+          resetSubmitButton();
+          return;
+        }
+
+        confirmPayment(function(confirmErr, confirmation) {
+          if (confirmErr) {
+            var msg = confirmErr.message || 'Payment failed';
+            showPaymentError(msg);
+            resetSubmitButton();
+            return;
+          }
+
+          // Success
+          var orderRef = 'ZN-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+          document.getElementById('order-ref').textContent = orderRef;
+
+          var paymentId = confirmation.id || AIRWALLEX_INTENT_ID || '';
+          var paymentRefEl = document.getElementById('payment-ref');
+          if (paymentRefEl && paymentId) paymentRefEl.textContent = paymentId;
+
+          try {
+            orderData.payment = { method: 'airwallex', amount: orderData.totalCents / 100, currency: 'USD', status: 'paid', txnId: paymentId };
+            orderData.order_ref = orderRef;
+            orderData.payment_id = paymentId;
+            orderData.created_at = new Date().toISOString();
+            var existingOrders = JSON.parse(localStorage.getItem('zeen_orders') || '[]');
+            existingOrders.push(orderData);
+            localStorage.setItem('zeen_orders', JSON.stringify(existingOrders));
+            persistOrder(orderData, paymentId);
+          } catch(e) {}
+
+          document.getElementById('checkout-form-wrapper').style.display = 'none';
+          document.getElementById('checkout-success').style.display = 'block';
+          if (window.Cart) window.Cart.clear();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    });
+  }
+
+  function showPaymentError(msg) {
+    var errEl = document.getElementById('airwallex-card-error');
+    if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+  }
+
+  function resetSubmitButton() {
+    var submitBtn = document.getElementById('checkout-submit-btn');
+    var btnText = document.getElementById('submit-btn-text');
+    var btnLoading = document.getElementById('submit-btn-loading');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; }
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoading) btnLoading.style.display = 'none';
+  }
+
+  // ===== Handle Alternative Payment Method Selection =====
+  var bankTransferRadio = document.getElementById('pay-bank-transfer');
+  var bankTransferDetails = document.getElementById('bank-transfer-details');
+  var paymentMethodInput = document.getElementById('active-payment-method');
+  var cardFormContainer = document.getElementById('card-form-container');
+  var billingField = document.getElementById('billing-name') ? document.getElementById('billing-name').closest('.form-field') : null;
+
+  if (bankTransferRadio) {
+    bankTransferRadio.addEventListener('change', function() {
+      if (this.checked) {
+        if (bankTransferDetails) bankTransferDetails.style.display = 'block';
+        if (cardFormContainer) cardFormContainer.style.display = 'none';
+        if (billingField) billingField.style.display = 'none';
+        if (paymentMethodInput) paymentMethodInput.value = 'bank-transfer';
+        var errEl = document.getElementById('airwallex-card-error');
+        if (errEl) errEl.style.display = 'none';
+      }
+    });
+  }
+
+  function resetToAirwallex() {
+    if (cardFormContainer) cardFormContainer.style.display = 'block';
+    if (billingField) billingField.style.display = 'block';
+    if (bankTransferDetails) bankTransferDetails.style.display = 'none';
+    if (bankTransferRadio) bankTransferRadio.checked = false;
+    if (paymentMethodInput) paymentMethodInput.value = 'airwallex';
+  }
+
+  if (cardFormContainer) {
+    cardFormContainer.addEventListener('click', resetToAirwallex);
+  }
+
+  // ===== Initialize =====
+  loadOrderSummary();
+})();
+</script>
+<script src="./assets/js/zeen-support.js"></script>
+</body>
+</html>

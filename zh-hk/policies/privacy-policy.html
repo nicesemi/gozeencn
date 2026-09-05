@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <script>
+    window.performance.mark('debut:theme_stylesheet_loaded.start');
+
+    function onLoadStylesheet() {
+      performance.mark('debut:theme_stylesheet_loaded.end');
+      performance.measure('debut:theme_stylesheet_loaded', 'debut:theme_stylesheet_loaded.start', 'debut:theme_stylesheet_loaded.end');
+
+      var url = "/assets/cdn/shop/t/7/assets/theme.css";
+      var link = document.querySelector('link[href="' + url + '"]');
+      link.loaded = true;
+      link.dispatchEvent(new Event('load'));
+    }
+  </script>
+<script defer="defer" src="/assets/cdn/shop/t/7/assets/scripts.min.js"></script>
+<link href="/assets/cdn/shop/t/7/assets/fonts.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="/assets/cdn/shop/t/7/assets/stylesheet.css" media="all" rel="stylesheet" type="text/css"/>
+<link href="/assets/cdn/shop/t/7/assets/theme.css" media="all" onload="this.media='all';onLoadStylesheet()" rel="stylesheet" type="text/css"/>
+<style>
+body { background-color: #fff; color: #333; }
+.page-container { background-color: var(--color-body, #f9f9f9); }
+.list--inline{
+    padding:0;
+    margin:0
+}
+.list--inline>li{
+    display:inline-block;
+    margin-bottom:0;
+    vertical-align:middle
+}
+a{
+    color:var(--color-text);
+    text-decoration:none
+}
+/* .h1,.h2,h1,h2{
+    margin:0 0 17.5px;
+    font-weight:700
+} */
+.site-nav{
+    position:relative;
+    padding:0;
+    text-align:center;
+    margin:25px 0
+}
+.site-nav a{
+    padding:3px 10px
+}
+.site-nav__link{
+    display:block;
+    white-space:nowrap
+}
+.site-nav--centered .site-nav__link{
+    padding-top:0
+}
+.site-nav__link .icon-chevron-down{
+    width:calc(8em / 16);
+    height:calc(8em / 16);
+    margin-left:.5rem
+}
+.site-nav__label{
+    border-bottom:1px solid transparent
+}
+
+.shopify-policy__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+@media (min-width: 768px) {
+    .shopify-policy__container {
+        padding: 0 48px;
+    }
+}
+.shopify-policy__title h1 { text-align: center; }
+</style>
+
+</head>
+<body>
+<noscript></noscript>
+<a class="in-page-link visually-hidden skip-link" href="#MainContent">跳至內容</a>
+<style data-shopify="">
+
+  .cart-popup {
+    box-shadow: 1px 1px 10px 2px rgba(214, 214, 214, 0.5);
+  }</style>
+<div aria-labelledby="CartPopupHeading" aria-modal="true" class="cart-popup-wrapper cart-popup-wrapper--hidden critical-hidden" data-cart-popup-wrapper="" role="dialog">
+<div class="cart-popup" data-cart-popup="" tabindex="-1">
+<div class="cart-popup__header">
+<h2 class="cart-popup__heading" id="CartPopupHeading">已加入購物車</h2>
+<button aria-label="Close" class="cart-popup__close" data-cart-popup-close=""><svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg></button>
+</div>
+<div class="cart-popup-item">
+<div class="cart-popup-item__image-wrapper hide" data-cart-popup-image-wrapper="" data-image-loading-animation=""></div>
+<div class="cart-popup-item__description">
+<div>
+<h3 class="cart-popup-item__title" data-cart-popup-title=""></h3>
+<ul aria-label="Product details" class="product-details" data-cart-popup-product-details=""></ul>
+</div>
+<div class="cart-popup-item__quantity">
+<span class="visually-hidden" data-cart-popup-quantity-label=""></span>
+<span aria-hidden="true">數量：</span>
+<span aria-hidden="true" data-cart-popup-quantity=""></span>
+</div>
+</div>
+</div>
+<div class="flex justify-center my-4">
+<div>
+<a class="cart-popup__cta-link btn inline-block" href="/zh-hk/cart.html">
+          查看購物車（<span data-cart-popup-cart-quantity=""></span>)
+        </a>
+</div>
+</div>
+<div class="cart-popup__dismiss">
+<button class="cart-popup__dismiss-button text-link text-link--accent" data-cart-popup-dismiss="">
+        繼續購物
+      </button>
+</div>
+</div>
+</div>
+<div class="shopify-section" id="shopify-section-header">
+<style>
+    
+      .site-header__logo-image {
+        max-width: 100px;
+      }
+    
+
+    
+      .site-header__logo-image {
+        margin: 0;
+      }
+    
+  </style>
+<div aria-label="搜尋" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
+<div class="search-bar__interior">
+<div class="search-form__container" data-search-form-container="">
+<form action="/search" class="search-form search-bar__form" method="get" role="search">
+<div class="search-form__input-wrapper">
+<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="搜尋" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
+<input aria-hidden="true" name="options[prefix]" type="hidden" value="last"/>
+<div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
+</div>
+<button class="search-bar__submit search-form__submit" data-search-form-submit="" type="submit">
+<svg aria-hidden="true" class="icon icon-search" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path></svg>
+<span class="icon__fallback-text">提交</span>
+</button>
+</form>
+<div class="search-bar__actions">
+<button class="btn--link search-bar__close js-drawer-close" type="button">
+<svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
+<span class="icon__fallback-text">關閉搜尋</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="spacer h-[94px] xl:h-[117px]"></div>
+<div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
+<header class="site-header border-bottom logo--left bg-white" role="banner">
+<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/zh-hk/pages/contact-us.html"><p class="announcement-bar__message">立即致電 (00852) 3050-1862</p></a></div>
+<div class="site-header__mobile-nav relative z-10 bg-white">
+<div class="flex items-center justify-between px-8 w-full">
+<div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
+<div class="h2 site-header__logo">
+<a class="site-header__logo-image" data-image-loading-animation="" href="/zh-hk/">
+<img alt="Zeen Go" class="js" data-aspectratio="3.522314049586777" data-sizes="auto" data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" src="/assets/cdn/shop/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_100x.png" style="max-width: 100px"/>
+<noscript>
+<img alt="Zeen Go" src="/assets/cdn/shop/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_100x.png" srcset="/assets/cdn/shop/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_100x.png" style="max-width: 100px;"/>
+</noscript>
+</a>
+</div>
+</div>
+<nav class="grid__item lg:w-4/6 hidden lg:block" id="AccessibleNav" role="navigation">
+<ul class="site-nav list--inline" id="SiteNav">
+<li>
+<a class="site-nav__link site-nav__link--main" href="/zh-hk/pages/zeen.html">
+<span class="site-nav__label">訂購 Zeen</span>
+</a>
+</li>
+<li>
+<a class="site-nav__link site-nav__link--main" href="/zh-hk/collections/accessories.html">
+<span class="site-nav__label">配件</span>
+</a>
+</li>
+<li>
+<a class="site-nav__link site-nav__link--main" href="/zh-hk/pages/events.html">
+<span class="site-nav__label">Zeen 示範</span>
+</a>
+</li>
+<li>
+<a class="site-nav__link site-nav__link--main" href="/zh-hk/pages/help.html">
+<span class="site-nav__label">訓練</span>
+</a>
+</li>
+<li>
+<a class="site-nav__link site-nav__link--main" href="/zh-hk/pages/contact-us.html">
+<span class="site-nav__label">聯絡我們</span>
+</a>
+</li>
+
+</ul>
+</nav>
+<div class="grid__item lg:w-1/6 w-1/2 text-right site-header__icons site-header__icons--plus">
+<div class="site-header__icons-wrapper gap-4">
+<div class="site-header__lang-switcher" style="display:flex;align-items:center;margin-left:12px;gap:4px;font-size:14px;">
+<a href="/policies/privacy-policy.html" style="color:#666;text-decoration:none;" title="English">English</a>
+<span style="color:#999;">|</span>
+<span style="color:#be1e2d;font-weight:700;">繁中</span>
+</div>
+<a class="site-header__icon site-header__cart w-4" href="/zh-hk/cart.html">
+<svg aria-hidden="true" class="icon icon-cart" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
+<span class="icon__fallback-text">購物車</span>
+<div class="site-header__cart-count hide critical-hidden" data-cart-count-bubble="" id="CartCount">
+<span data-cart-count="">0</span>
+<span class="icon__fallback-text medium-up--hide">件</span>
+</div>
+</a>
+<button aria-controls="MobileNav" aria-expanded="false" aria-label="選單" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
+<svg aria-hidden="true" class="icon icon-hamburger" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M33.5 25h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0-11.5h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0 23h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
+<svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+<nav class="mobile-nav-wrapper critical-hidden top-full" role="navigation">
+<ul class="mobile-nav" id="MobileNav">
+<li class="mobile-nav__item border-bottom">
+<a class="mobile-nav__link" href="/zh-hk/pages/zeen.html">
+<span class="mobile-nav__label">訂購 Zeen</span>
+</a>
+</li>
+<li class="mobile-nav__item border-bottom">
+<a class="mobile-nav__link" href="/zh-hk/collections/accessories.html">
+<span class="mobile-nav__label">配件</span>
+</a>
+</li>
+<li class="mobile-nav__item border-bottom">
+<a class="mobile-nav__link" href="/zh-hk/pages/events.html">
+<span class="mobile-nav__label">Zeen 示範</span>
+</a>
+</li>
+<li class="mobile-nav__item border-bottom">
+<a class="mobile-nav__link" href="/zh-hk/pages/help.html">
+<span class="mobile-nav__label">訓練</span>
+</a>
+</li>
+<li class="mobile-nav__item">
+<a class="mobile-nav__link" href="/zh-hk/pages/contact-us.html">
+<span class="mobile-nav__label">聯絡我們</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+</div>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Zeen Go",
+  
+    
+    "logo": "assets/s/files/1/0555/0234/0277/files/EXO_Logo_Black_4x_ddf58d27-b2d6-4caf-b6c7-89db0c854b88_2131x.png",
+  
+  "sameAs": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "url": "."
+}
+</script>
+</div>
+<div class="page-container drawer-page-content transition" id="PageContainer">
+<main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+<div class="shopify-policy__container">
+<div class="shopify-policy__title">
+<h1>私隱政策</h1>
+</div>
+<div class="shopify-policy__body">
+<div class="rte">
+<p><span style="font-weight:400;">保護你的私人資訊是我們的首要任務。本私隱政策適用於 </span><a href="https://www.gozeen.hk"><span style="font-weight:400;">www.gozeen.hk</span></a><span style="font-weight:400;"> 及相關網頁（統稱「網站」），由 Exokinetics HK.（「Exokinetics」、「我們」、「我們的」）擁有和控制，並管轄網站上的數據收集和使用。通過使用本網站，即表示你同意本私隱政策中描述的數據做法。 </span></p>
+<p><b>收集你的個人資訊</b><span style="font-weight:400;"> </span><span style="font-weight:400;"><br/></span><span style="font-weight:400;">為了更好地向你提供產品和服務，Exokinetics 可能會收集個人身份資訊，例如你的： </span> </p>
+<p><span style="font-weight:400;"> -</span> <span style="font-weight:400;">姓名 </span></p>
+<p><span style="font-weight:400;"> -</span> <span style="font-weight:400;">郵寄地址 </span></p>
+<p><span style="font-weight:400;"> -</span> <span style="font-weight:400;">電郵地址 </span></p>
+<p><span style="font-weight:400;"> -</span> <span style="font-weight:400;">電話號碼 </span></p>
+<p><span style="font-weight:400;"> -</span> <span style="font-weight:400;">行動限制 <br/></span></p>
+<p><span style="font-weight:400;">如果你購買 Exokinetics 的產品和服務，我們會收集帳單和信用卡資訊。此資訊用於完成購買交易。 </span></p>
+<p><span style="font-weight:400;">除非你自願向我們提供，否則我們不會收集你的任何個人資訊。但是，當你選擇使用某些產品或服務時，你可能需要向我們提供資訊。這些情況可能包括：(a) 註冊帳戶；(b) 參加由我們或我們合作夥伴贊助的抽獎或比賽；(c) 註冊接收選定第三方的特別優惠；(d) 向我們發送電郵訊息；(e) 在訂購和購買產品及服務時提交你的信用卡或其他付款資訊。換言之，我們將使用你的資訊（包括但不限於）就你向我們要求的服務和/或產品與你溝通。我們未來也可能收集額外的個人或非個人資訊。 </span></p>
+<p><b>使用你的個人資訊 <br/></b>Exokinetics 收集和使用你的個人資訊以運營和提供你所要求的服務。 </p>
+<p>Exokinetics 也可能使用你的個人身份資訊，告知你 Exokinetics 及其附屬公司提供的其他產品或服務。 </p>
+<p><b>與第三方分享資訊</b><span style="font-weight:400;"> <br/></span><span style="font-weight:400;">Exokinetics 不會向第三方出售、出租或租賃其客戶名單。 </span> </p>
+<p><span style="font-weight:400;">Exokinetics 可能與可信賴的合作夥伴分享數據，以協助進行統計分析、向你發送電郵或郵寄郵件、提供客戶支援或安排送貨。所有此類第三方均不得將你的個人資訊用於向 Exokinetics 提供這些服務以外的用途，並且他們必須對你的資訊保密。 </span>  </p>
+<p><span style="font-weight:400;">如果法律要求，或出於善意相信此類行動是必要的，Exokinetics 可能會在無通知的情況下披露你的個人資訊，以：(a) 遵守法律規定或遵循向 Exokinetics 或本網站送達的法律程序；(b) 保護和維護 Exokinetics 的權利或財產；及/或 (c) 在緊急情況下採取行動以保護 Exokinetics 使用者或公眾的人身安全。 </span></p>
+<p><span style="font-weight:400;"><b>追蹤使用者行為</b><span style="font-weight:400;"> <br/></span></span>Exokinetics 可能會追蹤使用者在網站內訪問的網頁，以確定哪些 Exokinetics 服務最受歡迎。此數據用於向行為表明對特定主題領域感興趣的客戶提供網站內的定製內容和廣告。 </p>
+<p><b>自動收集的資訊</b><span style="font-weight:400;"> <br/></span>關於你的電腦硬體和軟體的資訊可能會被 Exokinetics 自動收集。此資訊可能包括：你的 IP 位址、瀏覽器類型、域名、存取時間和引薦網站地址。此資訊用於服務的運營、維持服務品質，以及提供有關網站使用情況的一般統計數據。 </p>
+<p><b>使用 Cookies</b><span style="font-weight:400;"> <br/></span>網站可能使用「cookies」來幫助你個性化你的線上體驗。cookie 是一個文字檔案，由網頁伺服器放置在你的硬碟上。Cookies 不能用於執行程式或向你的電腦傳送病毒。Cookies 是唯一分配給你的，只能由向你發出 cookie 的域中的網頁伺服器讀取。 </p>
+<p>cookies 的主要目的之一是提供便利功能以節省你的時間。cookie 的目的是告訴網頁伺服器你已返回特定頁面。例如，如果你個性化網站上的頁面，或在網站或服務上註冊，cookie 可幫助 Exokinetics 在你後續訪問時調用你的特定資訊。這簡化了記錄你個人資訊（如帳單地址、送貨地址等）的過程。當你返回網站上的同一頁面時，你之前提供的資訊可以被檢索，以便你輕鬆使用你自訂的 Exokinetics 功能。 </p>
+<p>你有權接受或拒絕 cookies。大多數網頁瀏覽器自動接受 cookies，但你通常可以修改你的瀏覽器設定以拒絕 cookies（如果你願意的話）。如果你選擇拒絕 cookies，你可能無法完全體驗 Exokinetics 服務或你訪問的網站的互動功能。 </p>
+<p><b>連結</b><span style="font-weight:400;"> <br/></span>本網站包含指向其他網站的連結。請注意，我們對此類其他網站的內容或私隱慣例不承擔責任。我們鼓勵使用者在離開我們的網站時保持警惕，並閱讀任何收集個人身份資訊的其他網站的私隱聲明。 </p>
+<p><b>你的個人資訊安全</b><span style="font-weight:400;"> <br/></span>Exokinetics 保護你的個人資訊免遭未經授權的存取、使用或披露。Exokinetics 使用以下方法來實現此目的： </p>
+<p><span style="font-weight:400;"> -</span> <span style="font-weight:400;">SSL 協議 </span></p>
+<p><span style="font-weight:400;">當個人資訊（如信用卡號碼）傳輸至其他網站時，透過使用加密技術予以保護，例如安全通訊端層 (SSL) 協議。 </span></p>
+<p><span style="font-weight:400;">我們努力採取適當的安全措施，以防止未經授權存取或更改你的個人資訊。遺憾的是，互聯網或任何無線網絡上的數據傳輸無法保證 100% 安全。因此，儘管我們努力保護你的個人資訊，你確認：(a) 互聯網存在我們無法控制的固有安全和私隱限制；以及 (b) 你與我們之間通過本網站交換的任何及所有資訊和數據的安全性、完整性和私隱性無法得到保證。 </span>  </p>
+<p><b>刪除權</b><span style="font-weight:400;"> <br/></span>除下列特定例外情況外，在收到你經核實的請求後，我們將： </p>
+<ul>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">從我們的記錄中刪除你的個人資訊；及 </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">指示任何服務提供者從其記錄中刪除你的個人資訊。 </span>
+</li>
+</ul>
+<p><span style="font-weight:400;">  </span>請注意，在以下必要情況下，我們可能無法遵守刪除你個人資訊的請求： </p>
+<ul>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">完成收集個人資訊的交易，履行書面保養或產品召回（根據聯邦法律進行），提供你要求的商品或服務，或在我們與你持續業務關係的範圍內合理預期的商品或服務，或以其他方式履行你與我們之間的合約； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">檢測安全事故，防範惡意、欺騙、欺詐或非法活動；或起訴對此類活動負責的人士； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">調試以識別和修復損害現有預期功能的錯誤； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">行使言論自由，確保其他消費者行使其言論自由的權利，或行使法律規定的另一項權利； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">遵守《2018 年加州電子通訊私隱法》、《2020 年加州私隱權法》和《維珍尼亞州消費者數據保護法》； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">從事符合公共利益且遵守所有其他適用道德和私隱法律的研究，前提是我們刪除資訊可能導致此類研究無法實現或嚴重受損，且我們已獲得你的知情同意； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">啟用僅限內部使用、且根據你與我們的關係合理符合你預期的用途； </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">遵守現有法律義務；或 </span>
+</li>
+<li>
+<span style="font-weight:400;"></span> <span style="font-weight:400;">以合法方式在內部使用你的個人資訊，且該方式與你提供資訊的上下文相容。 </span>
+</li>
+</ul>
+<p><b>十三歲以下兒童</b><span style="font-weight:400;"> <br/></span>Exokinetics 不會故意收集十三歲以下兒童的個人身份資訊。如果你未滿十三歲，你必須徵得父母或監護人的許可才能使用本網站。 </p>
+<p><b>電郵通訊</b><span style="font-weight:400;"> <br/></span>Exokinetics 可能不時透過電郵聯絡你，以提供公告、促銷優惠、提示、確認、調查和/或其他一般通訊。為了改善我們的服務，當你打開來自 Exokinetics 的電郵或點擊其中的連結時，我們可能會收到通知。 </p>
+<p>如果你想停止接收 Exokinetics 透過電郵發送的營銷或促銷通訊，你可以透過點擊取消訂閱按鈕來退出。 </p>
+<p><b>外部數據儲存網站</b><span style="font-weight:400;"> <br/></span>我們可能會將你的數據儲存在我們已簽約的第三方託管供應商提供的伺服器上。 </p>
+<p><b>本聲明的變更</b><span style="font-weight:400;"> <br/></span>Exokinetics 保留不時更改本私隱政策的權利。我們會就我們處理個人資訊方式的重大變更，透過向你帳戶中指定的主要電郵地址發送通知、在我們的網站上放置醒目通知，及/或更新任何私隱資訊的方式通知你。你在該等修改後繼續使用網站和/或服務，將構成你：(a) 確認經修改的私隱政策；及 (b) 同意遵守並受該政策約束。 </p>
+<p><b>聯絡資訊</b><span style="font-weight:400;"> <br/></span>Exokinetics 歡迎你對本私隱政策的問題或意見。如果你認為 Exokinetics 未遵守本私隱政策，請聯絡 Exokinetics：  </p>
+<p><span style="font-weight:400;">Exokinetics HK. <br/></span>香港九龍大角咀通州街111號雲之端12樓05室  </p>
+<p><span style="font-weight:400;">電郵地址： <br/></span>info@gozeen.hk  <br/><br/>電話號碼： <br/>(00852) 3050-1862 </p>
+<p>生效日期：2021 年 12 月 2 日 </p>
+</div>
+</div>
+</div>
+</main>
+<div class="shopify-section" id="shopify-section-footer"><style>
+  [data-id="footer"] {
+    
+      background-color: #000000;
+    
+    
+      color: #fff5e7;
+    
+  }
+</style>
+<footer data-id="footer" role="contentinfo">
+<div class="container">
+<div class="grid lg:grid-cols-5 gap-12 items-start py-12 lg:py-24">
+<div class="gap-4 lg:col-span-2">
+<div>
+<div class="w-24">
+<img alt="" class="" height="605" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/cdn/shop/files/exo_logowhite4x-1634651386754.webp" srcset="/assets/cdn/shop/files/exo_logowhite4x-1634651386754.webp" width="2131"/>
+</div>
+</div>
+<div>
+<ul class="grid gap-2">
+<li>
+<a href="/zh-hk/pages/zeen.html">
+                  訂購 Zeen
+                </a>
+</li>
+<li>
+<a href="/zh-hk/collections/accessories.html">
+                  配件
+                </a>
+</li>
+<li>
+<a href="/zh-hk/pages/events.html">
+                  Zeen 示範
+                </a>
+</li>
+<li>
+<a href="/zh-hk/pages/help.html">
+                  訓練指南
+                </a>
+</li>
+<li>
+<a href="/zh-hk/pages/contact-us.html">
+                  聯絡我們
+                </a>
+</li>
+</ul>
+</div>
+</div>
+<div class="gap-8 lg:col-span-1">
+<div class="font-bold">
+                Zeen
+              </div>
+<ul class="grid gap-2">
+<li>
+<a href="/zh-hk/pages/zeen.html">
+                      訂購 Zeen
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/collections/accessories.html">
+                      選購配件
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/distributors.html">
+                      經銷商
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/events.html">
+                      示範登記
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/contact-us.html">
+                      聯絡我們
+                    </a>
+</li>
+</ul>
+</div>
+<div class="gap-8 lg:col-span-1">
+<div class="font-bold">
+                了解更多
+              </div>
+<ul class="grid gap-2">
+<li>
+<a href="/zh-hk/pages/our-story.html">
+                      關於 Zeen 團隊
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/press.html">
+                      新聞報導
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/funding.html">
+                      Zeen 資助方案
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/faqs.html">
+                      常見問題
+                    </a>
+</li>
+<li>
+<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_CHT.pdf">
+                      產品手冊
+                    </a>
+</li>
+<li>
+<a href="/assets/s/files/1/0555/0234/0277/files/Zeen_Adjustment_Tables.png" target="_blank" rel="noopener">
+                      調整參數表
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/warranty-policy.html">
+                      有限保養
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/pages/international.html">
+                      國際政策
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/policies/refund-policy.html">
+                      退貨及退款政策
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/policies/privacy-policy.html">
+                      私隱政策
+                    </a>
+</li>
+<li>
+<a href="/zh-hk/policies/terms-of-service.html">
+                      服務條款
+                    </a>
+</li>
+</ul>
+</div>
+<div class="grid gap-8 col-span-2">
+<div class="grid gap-4">
+<div>
+            訂閱我們的電子報
+          </div>
+</div>
+<div class="grid gap-6">
+<div>
+<a class="btn inline-block w-full text-center" href="/zh-hk/pages/newsletter.html">訂閱</a>
+</div>
+<div>
+<div>
+<ul class="flex gap-4">
+<li>
+<a class="w-6 block fill-beige" href="https://www.facebook.com/gowithzeen">
+<svg aria-hidden="true" class="icon icon-facebook" focusable="false" role="presentation" viewbox="0 0 20 20"><path d="M18.05.811q.439 0 .744.305t.305.744v16.637q0 .439-.305.744t-.744.305h-4.732v-7.221h2.415l.342-2.854h-2.757v-1.83q0-.659.293-1t1.073-.342h1.488V3.762q-.976-.098-2.171-.098-1.634 0-2.635.964t-1 2.72V9.47H7.951v2.854h2.415v7.221H1.413q-.439 0-.744-.305t-.305-.744V1.859q0-.439.305-.744T1.413.81H18.05z" fill="currentColor"></path></svg>
+</a>
+</li>
+<li>
+<a class="w-6 block fill-beige" href="https://www.instagram.com/go_zeen/">
+<svg aria-hidden="true" class="icon icon-instagram" focusable="false" role="presentation" viewbox="0 0 512 512"><path d="M256 49.5c67.3 0 75.2.3 101.8 1.5 24.6 1.1 37.9 5.2 46.8 8.7 11.8 4.6 20.2 10 29 18.8s14.3 17.2 18.8 29c3.4 8.9 7.6 22.2 8.7 46.8 1.2 26.6 1.5 34.5 1.5 101.8s-.3 75.2-1.5 101.8c-1.1 24.6-5.2 37.9-8.7 46.8-4.6 11.8-10 20.2-18.8 29s-17.2 14.3-29 18.8c-8.9 3.4-22.2 7.6-46.8 8.7-26.6 1.2-34.5 1.5-101.8 1.5s-75.2-.3-101.8-1.5c-24.6-1.1-37.9-5.2-46.8-8.7-11.8-4.6-20.2-10-29-18.8s-14.3-17.2-18.8-29c-3.4-8.9-7.6-22.2-8.7-46.8-1.2-26.6-1.5-34.5-1.5-101.8s.3-75.2 1.5-101.8c1.1-24.6 5.2-37.9 8.7-46.8 4.6-11.8 10-20.2 18.8-29s17.2-14.3 29-18.8c8.9-3.4 22.2-7.6 46.8-8.7 26.6-1.3 34.5-1.5 101.8-1.5m0-45.4c-68.4 0-77 .3-103.9 1.5C125.3 6.8 107 11.1 91 17.3c-16.6 6.4-30.6 15.1-44.6 29.1-14 14-22.6 28.1-29.1 44.6-6.2 16-10.5 34.3-11.7 61.2C4.4 179 4.1 187.6 4.1 256s.3 77 1.5 103.9c1.2 26.8 5.5 45.1 11.7 61.2 6.4 16.6 15.1 30.6 29.1 44.6 14 14 28.1 22.6 44.6 29.1 16 6.2 34.3 10.5 61.2 11.7 26.9 1.2 35.4 1.5 103.9 1.5s77-.3 103.9-1.5c26.8-1.2 45.1-5.5 61.2-11.7 16.6-6.4 30.6-15.1 44.6-29.1 14-14 22.6-28.1 29.1-44.6 6.2-16 10.5-34.3 11.7-61.2 1.2-26.9 1.5-35.4 1.5-103.9s-.3-77-1.5-103.9c-1.2-26.8-5.5-45.1-11.7-61.2-6.4-16.6-15.1-30.6-29.1-44.6-14-14-28.1-22.6-44.6-29.1-16-6.2-34.3-10.5-61.2-11.7-27-1.1-35.6-1.4-104-1.4z"></path><path d="M256 126.6c-71.4 0-129.4 57.9-129.4 129.4s58 129.4 129.4 129.4 129.4-58 129.4-129.4-58-129.4-129.4-129.4zm0 213.4c-46.4 0-84-37.6-84-84s37.6-84 84-84 84 37.6 84 84-37.6 84-84 84z"></path><circle cx="390.5" cy="121.5" r="30.2"></circle></svg>
+</a>
+</li>
+<li>
+<a class="w-6 block fill-beige" href="https://vimeo.com/gowithzeen">
+<svg aria-hidden="true" class="icon icon-vimeo" focusable="false" role="presentation" viewbox="0 0 20 20"><path d="M.215 6.814l.899 1.203q1.249-.929 1.508-.929.99 0 1.843 3.153l.746 2.826q.517 1.958.807 3.009 1.127 3.153 2.833 3.153 2.712 0 6.581-5.21 3.793-4.951 3.93-7.83v-.335q0-3.504-2.803-3.595h-.213q-3.763 0-5.179 4.616.823-.35 1.432-.35 1.295 0 1.295 1.341 0 .168-.015.35-.091 1.082-1.28 2.955-1.219 1.965-1.813 1.965-.792 0-1.401-2.986-.183-.701-.777-4.524-.259-1.645-.96-2.437-.609-.686-1.523-.701-.122 0-.259.015-.96.091-2.849 1.752-.975.914-2.803 2.559z" fill="currentColor"></path></svg>
+</a>
+</li>
+<li>
+<a class="w-6 block fill-beige" href="https://www.youtube.com/channel/UCDLmV9wVULym-_pOtCKGglQ">
+<svg aria-hidden="true" class="icon icon-youtube" focusable="false" role="presentation" viewbox="0 0 21 20"><path d="M-.196 15.803q0 1.23.812 2.092t1.977.861h14.946q1.165 0 1.977-.861t.812-2.092V3.909q0-1.23-.82-2.116T17.539.907H2.593q-1.148 0-1.969.886t-.82 2.116v11.894zm7.465-2.149V6.058q0-.115.066-.18.049-.016.082-.016l.082.016 7.153 3.806q.066.066.066.164 0 .066-.066.131l-7.153 3.806q-.033.033-.066.033-.066 0-.098-.033-.066-.066-.066-.131z" fill="currentColor"></path></svg>
+</a>
+</li>
+<li>
+<a class="w-6 block fill-beige" href="https://www.tiktok.com/@zeenmobility">
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid lg:grid-cols-2 gap-12 items-start py-12 lg:py-24">
+<div class="paragraphs">
+<div>
+        2026 GoZeen.hk 版權所有。
+        <br/><br/>
+        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="後台登入">後台登入</a>
+</div>
+<p>Exokinetics HK.</p><p>香港九龍大角咀通州街111號雲之端12樓05室</p><p>(00852) 3050-1862</p>
+</div>
+<div>
+<div class="paragraphs">
+<p>Zeen 在美國自豪地設計和組裝。</p><p> </p>
+</div>
+<div class="w-24">
+<img alt="" class="" height="240" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/cdn/shop/files/American_Flag_-_footer.png" srcset="/assets/cdn/shop/files/American_Flag_-_footer.png" width="400"/>
+</div>
+<div class="paragraphs">
+<p> </p><p>我們的設計受國內及國際專利保護。</p><p></p><p><strong>Zeen 已獲 VA 認證</strong> --</p><p>公司：Exokinetics HK.</p><p>Unique Entity ID: ZF8UYSDQYJC1</p><p>CAGE code: 9G1G3</p>
+</div>
+</div>
+</div>
+<div>
+</div>
+</div>
+</footer>
+</div>
+<div aria-hidden="true" class="visually-hidden" id="slideshow-info">使用左右箭頭瀏覽幻燈片，如使用流動裝置則左右滑動</div>
+</div>
+<ul hidden="">
+<li id="a11y-refresh-page-message">選擇項目會導致頁面重新整理。</li>
+<li id="a11y-selection-message">按空格鍵然後使用箭頭鍵進行選擇。</li>
+</ul>
+<script>
+    if (window._wisepopsSkipShopifyDeprecatedSnippet !== true) {
+        document.addEventListener('wisepops.after-initialization', function (event) {
+            // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+            function getCookieValue(sKey) {
+                if (!sKey) { return null; }
+                return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+            };
+            function getTotalInventoryQuantity() {
+                var variants = null;
+                if (!variants) {
+                    return null;
+                }
+
+                var totalQuantity = 0;
+                for (var i in variants) {
+                    if (variants[i] && variants[i].inventory_quantity) {
+                        totalQuantity += variants[i].inventory_quantity;
+                    } else {
+                        return null;
+                    }
+                }
+                return totalQuantity;
+            }
+            event.detail.wisepops('properties', {
+                cart: {
+                    discount_code: getCookieValue('discount_code'),
+                    item_count: 0,
+                    total_price: 0 / 100,
+                },
+                customer: {
+                    accepts_marketing: null,
+                    is_logged_in:  false ,
+                    last_order: {
+                        created_at: null,
+                    },
+                    orders_count: null,
+                    total_spent: (isNaN(null) ? null : (null / 100)),
+                    tags:  null ,
+                    email: null,
+                    first_name: null,
+                    last_name: null,
+                },
+                product: {
+                    available: null,
+                    price:  null ,
+                    tags: null,
+                    total_inventory_quantity: getTotalInventoryQuantity(),
+                },
+            });
+        });
+    }
+</script>
+<script type="application/javascript">
+(function(){
+  window.fera = window.fera || [];  
+  window.fera.push({ action: "configure", data: { store_pk: "pk_3cca330005533c0c2659b41cd9ef6f47e325b9023a823f607ca99977155c6841"  }} );
+  window.fera.push({ action: "loadPlatformAdapter", code: "shopify" });
+  window.fera.push({ action: "setCart", cart: { note: null, attributes: {}, language: null, original_total_price: 0, total_price: 0, total_discount: 0, total_weight: 0.0, item_count: 0, items: [], requires_shipping: false, currency: "USD", items_subtotal_price: 0, cart_level_discount_applications: [] } }); 
+  
+  var headSrcUrls = document.getElementsByTagName("html")[0].innerHTML.match(/var urls = \[.*\]/);if (headSrcUrls && window.fera && headSrcUrls[0] && headSrcUrls[0].match(/\/((fera|bananastand)(\.placeholder)?|(placeholder)?(\.fera|bananastand))\.js/)) { if(typeof Shopify !== 'undefined' && Shopify.shop) window.feraJsUrl = "https://cdn.fera.ai/js/fera.js?shop=" + Shopify.shop;var FeraCachedAsset=function(r){var a=this;this.version="0.2.6";var o=r.name||r.url.split("?")[0].split("#")[0];var c="Fera.AssetCache."+o;var i=(new Date).getTime()/1e3;var n=r.type||(r.url.indexOf(".html")!==-1?"text/template":r.url.indexOf(".css")!==-1?"text/css":"text/javascript");a.load=function(t){t=t||function(){};if(a.content){return t(a.content)}e(function(){if(a.content){t(a.content)}else{l(r.url,function(e){a.content=e;s(function(){u(a.content);a.save(a.content);t(a.content)})})}});return true};a.save=function(e){var t=i+(r.expiresIn||900);if(!f()||!e){return false}var n={name:o,url:r.url,expires:t,content:e};window.localStorage.setItem(c,JSON.stringify(n));return true};a.clear=function(){window.localStorage.removeItem(c);return false};var e=function(e){if(!f())return e(false);var t=window.localStorage.getItem(c);if(!t||typeof t!=="string"){return e(false)}var n=JSON.parse(t);if(n.expires<i||n.url!==r.url){a.clear();return e(false)}a.content=n.content;s(function(){u(a.content);e(true)})};var s=function(e){if(document.readyState=="loading"){document.addEventListener("DOMContentLoaded",e)}else{e()}};var u=function(e){if(document.getElementById(c))return;var t=document.createElement(n==="text/css"?"style":"script");t.type=n;t.id=c;t.async=!0;t.innerHTML=e;document.body.appendChild(t)};var l=function(e,t){var n=new XMLHttpRequest;n.async=true;n.onreadystatechange=function(){if(n.readyState==4&&n.status<300){t(n.responseText)}};n.open("GET",e,true);n.send()};var f=function(){var e="test";try{window.localStorage.setItem(e,"t");window.localStorage.removeItem(e);return 1}catch(e){return 0}}};var BananaStandCachedAsset=FeraCachedAsset; new FeraCachedAsset({ name: 'ferajs', expiresIn: 900, url: window.feraJsUrl || "https://cdn.fera.ai/js/fera.js"}).load(); }
+})();
+</script>
+<script>
+  function setHeaderHeight() {
+    const header = document.querySelector('.site-header');
+    if (header) {
+      document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+    }
+  }
+
+  window.addEventListener('load', setHeaderHeight);
+  window.addEventListener('resize', setHeaderHeight);
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // This script targets all jump links on the page
+    const jumpLinks = document.querySelectorAll('a[href^="#"]');
+
+    jumpLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        let targetId = this.getAttribute('href');
+        // Ensure it's a link to an element on the page
+        if (targetId.length > 1 && document.querySelector(targetId)) {
+          e.preventDefault();
+
+          const targetElement = document.querySelector(targetId);
+
+          // Get the header height from our CSS variable
+          const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 0;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+          // Manually scroll to the calculated position
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  });
+</script>
+<script data-source-attribution="shopify.standard_actions" src="/assets/storefront/standard-actions.js" type="module"></script>
+<script src="../../assets/js/zeen-support.js"></script>
+
+<script>
+(function(){
+  var RATE = 7.8;
+  var priceSelectors = ['.price','.product__price','.money','.cart-item__price','.cart-subtotal__price','[data-price]'];
+
+  function formatHKD(amount) {
+    return 'HK$' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function convertPrices() {
+    priceSelectors.forEach(function(sel) {
+      var els = document.querySelectorAll(sel);
+      els.forEach(function(el) {
+        if (el.dataset.converted === 'hkd') return;
+        var text = el.textContent || '';
+        var match = text.match(/\$([\d,]+\.?\d*)/);
+        if (match) {
+          var usdStr = match[1].replace(/,/g, '');
+          var usd = parseFloat(usdStr);
+          if (!isNaN(usd) && usd > 0) {
+            var hkd = usd * RATE;
+            el.textContent = formatHKD(hkd);
+            el.dataset.converted = 'hkd';
+            var label = document.createElement('small');
+            label.style.cssText = 'font-size:12px;color:#888;margin-left:4px;font-weight:400;';
+            label.textContent = '(HKD)';
+            el.appendChild(label);
+          }
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', convertPrices);
+  } else {
+    convertPrices();
+  }
+})();
+</script>
+</body>
+</html>

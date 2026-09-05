@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>财务统计 - Zeen 客户管理后台</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="admin-container">
+  <div class="page-title">财务统计 / 对账</div>
+
+  <div class="filter-bar">
+    <label style="margin:0;font-weight:600;">开始</label>
+    <input type="date" id="f-from">
+    <label style="margin:0;font-weight:600;">结束</label>
+    <input type="date" id="f-to">
+    <select id="f-source">
+      <option value="">全部来源</option>
+      <option value="online">官网在线</option>
+      <option value="dealer">经销商录入</option>
+      <option value="manual">客服转账录入</option>
+    </select>
+    <select id="f-status">
+      <option value="">仅已收款</option>
+      <option value="paid">已收款</option>
+      <option value="pending">待支付</option>
+      <option value="refunded">已退款</option>
+    </select>
+    <button class="btn btn-secondary btn-sm" onclick="loadFinance()">查询</button>
+    <button class="btn btn-sm" onclick="exportCSV()">导出 CSV</button>
+  </div>
+
+  <div class="stat-grid" id="stat-grid"></div>
+
+  <div class="card">
+    <h3>按日收入趋势</h3>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>日期</th><th>币种</th><th>金额</th></tr></thead>
+        <tbody id="daily-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="daily-empty">暂无已收款记录</div>
+  </div>
+
+  <div class="card">
+    <h3>按月收入趋势</h3>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>月份</th><th>币种</th><th>金额</th></tr></thead>
+        <tbody id="monthly-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="monthly-empty">暂无已收款记录</div>
+  </div>
+
+  <div class="card">
+    <h3>流水明细（与银行流水一致）</h3>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>日期</th>
+            <th>交易流水号</th>
+            <th>订单号</th>
+            <th>来源</th>
+            <th>客户</th>
+            <th>支付方式</th>
+            <th>币种</th>
+            <th>金额</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody id="tx-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="tx-empty">暂无记录</div>
+  </div>
+</div>
+
+<script src="/admin/admin.js"></script>
+<script>
+  if (!ADMIN.requireLogin()) { /* 已跳转 */ }
+  document.getElementById('topbar').innerHTML = ADMIN.renderTopbar('finance');
+
+  function esc(s) { return ADMIN.esc(s); }
+  function money(v, c) { return ADMIN.money(v, c); }
+  function payStatusText(s) {
+    return { paid: '已收款', pending: '待支付', refunded: '已退款' }[s] || (s || '-');
+  }
+
+  function buildParams(includeStatus) {
+    var from = document.getElementById('f-from').value;
+    var to = document.getElementById('f-to').value;
+    var source = document.getElementById('f-source').value;
+    var status = document.getElementById('f-status').value;
+    var params = new URLSearchParams();
+    if (from) params.set('from', from);
+    if (to) params.set('to', to);
+    if (source) params.set('source', source);
+    if (includeStatus && status) params.set('status', status);
+    return params;
+  }
+
+  function renderSummary(summary) {
+    var html = '';
+    // 总收入（仅已收款）
+    html += '<div class="stat-card"><div class="stat-label">总收入（已收款）</div>';
+    if (!summary.totalRevenue.length) {
+      html += '<div class="stat-value">-</div>';
+    } else {
+      summary.totalRevenue.forEach(function (r) {
+        html += '<div class="stat-value">' + money(r.revenue, r.currency) + '</div>';
+      });
+    }
+    html += '</div>';
+
+    html += '<div class="stat-card"><div class="stat-label">订单总数</div><div class="stat-value">' + summary.totalOrders + '</div></div>';
+    html += '<div class="stat-card"><div class="stat-label">已收款订单数</div><div class="stat-value">' + summary.paidOrders + '</div></div>';
+    html += '<div class="stat-card"><div class="stat-label">取消订单数</div><div class="stat-value">' + summary.cancelledOrders + '</div></div>';
+
+    // 按来源收入
+    html += '<div class="stat-card"><div class="stat-label">按来源收入（已收款）</div>';
+    if (!summary.bySource.length) {
+      html += '<div class="stat-value sm">-</div>';
+    } else {
+      summary.bySource.forEach(function (r) {
+        html += '<div class="stat-value sm">' + esc(r.sourceLabel) + '：' + money(r.revenue, r.currency) + '</div>';
+      });
+    }
+    html += '</div>';
+
+    // 按币种收入
+    html += '<div class="stat-card"><div class="stat-label">按币种收入（已收款）</div>';
+    if (!summary.byCurrency.length) {
+      html += '<div class="stat-value sm">-</div>';
+    } else {
+      summary.byCurrency.forEach(function (r) {
+        html += '<div class="stat-value sm">' + esc(r.currency) + '：' + money(r.revenue, r.currency) + '</div>';
+      });
+    }
+    html += '</div>';
+
+    document.getElementById('stat-grid').innerHTML = html;
+  }
+
+  function renderDaily(daily) {
+    var tbody = document.getElementById('daily-tbody');
+    var empty = document.getElementById('daily-empty');
+    if (!daily.length) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    var html = '';
+    daily.forEach(function (d) {
+      d.rows.forEach(function (r) {
+        html += '<tr><td>' + esc(d.date) + '</td><td>' + esc(r.currency) + '</td><td><strong>' + money(r.revenue, r.currency) + '</strong></td></tr>';
+      });
+    });
+    tbody.innerHTML = html;
+  }
+
+  function renderMonthly(monthly) {
+    var tbody = document.getElementById('monthly-tbody');
+    var empty = document.getElementById('monthly-empty');
+    if (!monthly.length) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    var html = '';
+    monthly.forEach(function (m) {
+      m.rows.forEach(function (r) {
+        html += '<tr><td>' + esc(m.month) + '</td><td>' + esc(r.currency) + '</td><td><strong>' + money(r.revenue, r.currency) + '</strong></td></tr>';
+      });
+    });
+    tbody.innerHTML = html;
+  }
+
+  function renderTx(transactions) {
+    var tbody = document.getElementById('tx-tbody');
+    var empty = document.getElementById('tx-empty');
+    if (!transactions.length) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    var html = '';
+    transactions.forEach(function (t) {
+      html += '<tr>';
+      html += '<td>' + esc(t.date) + '</td>';
+      html += '<td>' + esc(t.txnId) + '</td>';
+      html += '<td><strong>' + esc(t.orderId) + '</strong></td>';
+      html += '<td>' + esc(t.sourceLabel) + '</td>';
+      html += '<td>' + esc(t.customer) + '</td>';
+      html += '<td>' + esc(t.method || '-') + '</td>';
+      html += '<td>' + esc(t.currency) + '</td>';
+      html += '<td><strong>' + money(t.amount, t.currency) + '</strong></td>';
+      html += '<td>' + esc(payStatusText(t.paymentStatus)) + '</td>';
+      html += '</tr>';
+    });
+    tbody.innerHTML = html;
+  }
+
+  function loadFinance() {
+    ADMIN.get('/api/finance?' + buildParams(true).toString()).then(function (data) {
+      renderSummary(data.summary);
+      renderDaily(data.daily);
+      renderMonthly(data.monthly);
+      renderTx(data.transactions);
+    }).catch(function (e) {
+      alert(e.message || '加载失败');
+    });
+  }
+
+  // 导出 CSV：仅含已收款记录，按日期升序，UTF-8 BOM（Excel 打开不乱码）
+  function exportCSV() {
+    // 为保证导出的是纯已收款，重新请求时不带 status 筛选（API 默认返回已收款）
+    ADMIN.get('/api/finance?' + buildParams(false).toString()).then(function (data) {
+      var rows = (data.transactions || []).filter(function (t) { return t.paymentStatus === 'paid'; });
+      var header = ['日期', '交易流水号', '订单号', '来源', '客户', '支付方式', '币种', '金额', '状态'];
+      var lines = [header];
+      rows.forEach(function (t) {
+        lines.push([t.date, t.txnId, t.orderId, t.sourceLabel, t.customer, t.method, t.currency, Number(t.amount).toFixed(2), '已收款']);
+      });
+      var csv = lines.map(function (row) {
+        return row.map(function (c) {
+          var s = String(c == null ? '' : c);
+          if (/[",\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+          return s;
+        }).join(',');
+      }).join('\r\n');
+      var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'finance_' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }).catch(function (e) {
+      alert(e.message || '导出失败');
+    });
+  }
+
+  loadFinance();
+</script>
+</body>
+</html>

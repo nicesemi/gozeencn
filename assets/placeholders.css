@@ -1,0 +1,329 @@
+/**********************************************************************************************************************
+ General styles - apply to any widgets
+ */
+.fera-placeholder.fera-stars {
+    background: rgb(222 222 222);
+    background: linear-gradient(90deg, rgb(138, 138, 138) 0%, rgba(255, 255, 255, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-position: 0% 0%;
+    background-size: 200% 100%;
+    animation: fera-placeholder-animation 1.5s ease-out -1.5s infinite alternate forwards;
+    letter-spacing: 0.15em;
+    min-height: 16px;
+    font-size: 16px;
+}
+
+.fera-placeholder.fera-stars.fera-stars-placeholder {
+    --rating-percent: calc(var(--rating-value, 5) / 5 * 100);
+    background: linear-gradient(90deg, var(--star-color, black) 0%, var(--star-color, black) var(--rating-percent, 100%), var(--star-bg-color, #D1D1D1) var(--rating-percent, 100%));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: none;
+}
+
+@keyframes fera-placeholder-animation {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+.fera-widget-placeholder h2,
+.fera-widget-placeholder span,
+.fera-widget-placeholder a,
+.fera-widget-placeholder .circle {
+    display: block;
+    background: rgb(222, 222, 222);
+    background: linear-gradient(90deg, rgb(215, 215, 215) 0%, rgba(255, 255, 255, 1) 100%);
+    background-position: 0% 0%;
+    background-size: 200% 100%;
+    animation: fera-placeholder-animation 1.5s ease-out -1.5s infinite alternate forwards;
+}
+
+
+
+
+
+/**********************************************************************************************************************
+ Reviews Widgets
+ */
+
+.fera-reviews-widget-placeholder {
+    margin-bottom: 72px;
+    margin-top: 72px;
+}
+
+.fera-reviews-widget-placeholder *:empty {
+    display: block;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-header {
+    display: table;
+    width: 100%;
+    margin-bottom: 42px;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-header-left {
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-header-right {
+    display: table-cell;
+    text-align: right;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review {
+    display: table;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-left,
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-right {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-customer {
+    display: table !important;
+    width: 100%;
+}
+
+.fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-customer-left, .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-customer-right {
+    display: table-cell !important;
+    vertical-align: middle;
+}
+
+.fera-reviews-widget-placeholder-review-left {
+    width: 270px;
+    min-width: 270px;
+}
+
+.fera-reviews-widget-placeholder-review-content-row1 {
+    display: table !important;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.fera-reviews-widget-placeholder-review-content-row1-left, .fera-reviews-widget-placeholder-review-content-row1-right {
+    display: table-cell !important;
+    vertical-align: top;
+}
+
+.fera-reviews-widget-placeholder-review-content {
+    padding-left: 0;
+    width: 100%;
+}
+
+.fera-reviews-widget-placeholder-review-right {
+    width: 100%;
+}
+
+.fera-reviews-widget-placeholder-header-left h2 {
+    width: 270px;
+    height: 37px;
+    margin-bottom: 12px;
+}
+
+.fera-reviews-widget-placeholder-header-link {
+    width: 120px;
+    height: 10px;
+}
+
+.fera-reviews-widget-placeholder-header-right .fera-stars {
+    font-size: 30px;
+    margin-bottom: 12px;
+    letter-spacing: 4px;
+}
+
+.fera-reviews-widget-placeholder-header-right-reviewCount {
+    width: 120px;
+    height: 10px;
+    margin-left: auto;
+}
+
+.fera-reviews-widget-placeholder-review {
+    margin-bottom: 42px;
+}
+
+.fera-reviews-widget-placeholder-review-customer-left {
+    width: 40px;
+}
+
+.fera-reviews-widget-placeholder-review-customer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.fera-reviews-widget-placeholder-review-customer-right {
+    padding-left: 24px;
+}
+
+.fera-reviews-widget-placeholder-review-customer-name {
+    width: 160px;
+    height: 14px;
+    margin-bottom: 10px;
+}
+
+.fera-reviews-widget-placeholder-review-customer-location {
+    width: 80px;
+    height: 5px;
+}
+
+.fera-reviews-widget-placeholder-review-content .fera-stars {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.fera-reviews-widget-placeholder-review-content-row1-right {
+    text-align: right;
+}
+
+.fera-reviews-widget-placeholder-review-content-location {
+    width: 80px;
+    height: 5px;
+    margin-left: auto;
+}
+
+.fera-reviews-widget-placeholder-review-content-summary {
+    width: 160px;
+    height: 14px;
+    margin-bottom: 18px;
+}
+
+.fera-reviews-widget-placeholder-review-content-body-line1 {
+    width: 100%;
+    height: 8px;
+    margin-bottom: 18px;
+}
+
+.fera-reviews-widget-placeholder-review-content-body-line2 {
+    width: 50%;
+    height: 8px;
+}
+
+
+
+@media (max-width: 550px) {
+    .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-header {
+        display: block;
+    }
+
+    .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-header-left {
+        display: block;
+        margin-bottom: 12px;
+    }
+
+    .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-header-right {
+        display: block;
+        text-align: left;
+    }
+
+    .fera-reviews-widget-placeholder-header-right-reviewCount {
+        margin-left: 0;
+    }
+
+    .fera-reviews-widget-placeholder-review-left {
+        display: none !important;
+    }
+
+    .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-left, .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review-right {
+        display: block;
+    }
+
+    .fera-reviews-widget-placeholder .fera-reviews-widget-placeholder-review {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+/**********************************************************************************************************************
+ Media Widgets
+ */
+.fera-media-widget-placeholder {
+    margin-bottom: 72px;
+    margin-top: 72px;
+}
+
+.fera-media-widget-placeholder-header-title {
+    width: 300px;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 28px;
+}
+
+.fera-media-widget-placeholder-content {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.fera-media-widget-placeholder .fera-media-widget-placeholder-content-media {
+    height: 240px;
+    display: inline-block;
+}
+
+
+@media (max-width: 550px) {
+    .fera-media-widget-placeholder-content {
+        display: block;
+    }
+
+    .fera-media-widget-placeholder .fera-media-widget-placeholder-content-media {
+        height: 240px;
+        width: 100%;
+    }
+
+    .fera-media-widget-placeholder .fera-media-widget-placeholder-content-media:nth-child(n+2) {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+/**********************************************************************************************************************
+ Store Rating Widgets
+ */
+
+.fera-storeRating-widget-placeholder {
+    height: 100px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 72px;
+    margin-top: 72px;
+}
+
+.fera-storeRating-widget-placeholder .fera-storeRating-widget-placeholder-left,
+.fera-storeRating-widget-placeholder .fera-storeRating-widget-placeholder-right {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+.fera-storeRating-widget-placeholder .fera-stars {
+    font-size: 26px;
+    margin: 48px;
+    letter-spacing: 8px;
+}
+
+@media (max-width: 550px) {
+    .fera-storeRating-widget-placeholder .fera-stars {
+        margin: 24px;
+        letter-spacing: 4px;
+    }
+}

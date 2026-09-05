@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>订单列表 - Zeen 客户管理后台</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="admin-container">
+  <div class="page-title">订单列表</div>
+
+  <div class="filter-bar">
+    <select id="f-source">
+      <option value="">全部来源</option>
+      <option value="online">官网在线</option>
+      <option value="dealer">经销商录入</option>
+      <option value="manual">客服转账录入</option>
+    </select>
+    <select id="f-status">
+      <option value="">全部状态</option>
+      <option value="new">新订单</option>
+      <option value="processing">处理中</option>
+      <option value="shipped">已发货</option>
+      <option value="completed">已完成</option>
+      <option value="cancelled">已取消</option>
+    </select>
+    <input type="text" id="f-q" placeholder="搜索订单号/客户/产品编码...">
+    <button class="btn btn-secondary btn-sm" onclick="loadOrders()">搜索</button>
+    <button class="btn btn-sm" onclick="location.href='/admin/order-new.html'">+ 录入订单</button>
+  </div>
+
+  <div class="card" style="padding:8px 0;">
+    <table>
+      <thead>
+        <tr>
+          <th>订单号</th>
+          <th>下单时间</th>
+          <th>来源</th>
+          <th>客户</th>
+          <th>产品</th>
+          <th>金额</th>
+          <th>支付</th>
+          <th>物流</th>
+          <th>状态</th>
+        </tr>
+      </thead>
+      <tbody id="order-tbody"></tbody>
+    </table>
+    <div class="empty hidden" id="empty-hint">暂无订单</div>
+  </div>
+</div>
+
+<script src="/admin/admin.js"></script>
+<script>
+  if (!ADMIN.requireLogin()) { /* 已跳转 */ }
+  document.getElementById('topbar').innerHTML = ADMIN.renderTopbar('dashboard');
+
+  function esc(s) { return ADMIN.esc(s); }
+  function money(v, c) { return ADMIN.money(v, c); }
+
+  var role = ADMIN.user ? ADMIN.user.role : '';
+  if (role === 'dealer') {
+    document.getElementById('f-source').disabled = true;
+  }
+
+  function loadOrders() {
+    var source = role === 'dealer' ? 'dealer' : document.getElementById('f-source').value;
+    var status = document.getElementById('f-status').value;
+    var q = document.getElementById('f-q').value.trim();
+    var params = new URLSearchParams();
+    if (source) params.set('source', source);
+    if (status) params.set('status', status);
+    if (q) params.set('q', q);
+    params.set('limit', '500');
+
+    ADMIN.get('/api/orders?' + params.toString()).then(function (data) {
+      var tbody = document.getElementById('order-tbody');
+      var empty = document.getElementById('empty-hint');
+      var orders = data.orders || [];
+      if (!orders.length) {
+        tbody.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      var html = '';
+      orders.forEach(function (o) {
+        var prodSummary = (o.products || []).map(function (p) {
+          return esc(p.name || '') + (p.code ? ' <span class="muted">[' + esc(p.code) + ']</span>' : '') + ' ×' + (p.quantity || 1);
+        }).join('<br>') || '-';
+        var customerName = o.customer ? esc(o.customer.name || '') : '';
+        var customerEmail = o.customer ? esc(o.customer.email || '') : '';
+        var pay = o.payment || {};
+        var logi = o.logistics || {};
+        html += '<tr class="clickable" onclick="location.href=\'/admin/order-detail.html?id=' + encodeURIComponent(o.id) + '\'">';
+        html += '<td><strong>' + esc(o.id) + '</strong></td>';
+        html += '<td>' + esc((o.createdAt || '').replace('T', ' ').slice(0, 16)) + '</td>';
+        html += '<td>' + esc(o.sourceLabel || o.source || '') + '</td>';
+        html += '<td>' + customerName + (customerEmail ? '<br><span class="muted">' + customerEmail + '</span>' : '') + '</td>';
+        html += '<td style="max-width:220px;">' + prodSummary + '</td>';
+        html += '<td><strong>' + money(pay.amount, pay.currency) + '</strong></td>';
+        html += '<td>' + ADMIN.payBadge(pay) + '</td>';
+        html += '<td>' + esc(logi.status === 'shipped' ? (logi.carrier || '已发货') : (logi.status || '-')) + '</td>';
+        html += '<td>' + ADMIN.statusBadge(o.status) + '</td>';
+        html += '</tr>';
+      });
+      tbody.innerHTML = html;
+    }).catch(function (e) {
+      alert(e.message || '加载失败');
+    });
+  }
+
+  // Enter 触发搜索
+  document.getElementById('f-q').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') loadOrders();
+  });
+
+  loadOrders();
+</script>
+</body>
+</html>

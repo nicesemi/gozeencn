@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>订单详情 - Zeen 客户管理后台</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="admin-container">
+  <div class="page-title">
+    <a href="/admin/dashboard.html">&larr; 返回列表</a>
+    <span id="order-title" style="margin-left:12px;"></span>
+  </div>
+
+  <!-- 状态栏 -->
+  <div class="card" id="status-card">
+    <div class="detail-grid">
+      <div class="detail-item"><span class="k">订单状态</span><span class="v" id="d-status"></span></div>
+      <div class="detail-item"><span class="k">来源</span><span class="v" id="d-source"></span></div>
+      <div class="detail-item"><span class="k">下单时间</span><span class="v" id="d-created"></span></div>
+      <div class="detail-item"><span class="k">支付状态</span><span class="v" id="d-paystatus"></span></div>
+    </div>
+    <div class="mt16">
+      <label>更新订单状态</label>
+      <select id="edit-status" style="max-width:200px;">
+        <option value="new">新订单</option>
+        <option value="processing">处理中</option>
+        <option value="shipped">已发货</option>
+        <option value="completed">已完成</option>
+        <option value="cancelled">已取消</option>
+      </select>
+      <button class="btn btn-sm" onclick="saveStatus()">保存状态</button>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <!-- 产品明细 -->
+    <div class="card">
+      <h3>产品明细</h3>
+      <table>
+        <thead><tr><th>产品名称</th><th>产品编码</th><th>数量</th><th>单价</th><th>小计</th></tr></thead>
+        <tbody id="d-products"></tbody>
+      </table>
+    </div>
+
+    <!-- 客户与支付 -->
+    <div class="card">
+      <h3>客户信息</h3>
+      <div class="detail-item"><span class="k">姓名</span><span class="v" id="d-cname"></span></div>
+      <div class="detail-item"><span class="k">邮箱</span><span class="v" id="d-cemail"></span></div>
+      <div class="detail-item"><span class="k">电话</span><span class="v" id="d-cphone"></span></div>
+      <h3 style="margin-top:16px;">支付信息</h3>
+      <div class="detail-item"><span class="k">方式</span><span class="v" id="d-paymethod"></span></div>
+      <div class="detail-item"><span class="k">金额</span><span class="v" id="d-payamount"></span></div>
+      <div class="detail-item"><span class="k">流水号</span><span class="v" id="d-paytxn"></span></div>
+      <div class="detail-item"><span class="k">备注</span><span class="v" id="d-note"></span></div>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <!-- 邮寄信息 -->
+    <div class="card">
+      <h3>邮寄信息</h3>
+      <div class="detail-item"><span class="k">收件人</span><span class="v" id="d-srecipient"></span></div>
+      <div class="detail-item"><span class="k">地址</span><span class="v" id="d-sstreet"></span></div>
+      <div class="detail-item"><span class="k">城市/省</span><span class="v" id="d-scity"></span></div>
+      <div class="detail-item"><span class="k">邮编</span><span class="v" id="d-szip"></span></div>
+      <div class="detail-item"><span class="k">国家</span><span class="v" id="d-scountry"></span></div>
+      <div class="detail-item"><span class="k">电话</span><span class="v" id="d-sphone"></span></div>
+    </div>
+
+    <!-- 物流与后续服务 -->
+    <div class="card">
+      <h3>物流信息</h3>
+      <div class="detail-item"><span class="k">承运商</span><span class="v" id="d-lcarrier"></span></div>
+      <div class="detail-item"><span class="k">运单号</span><span class="v" id="d-ltracking"></span></div>
+      <div class="detail-item"><span class="k">物流状态</span><span class="v" id="d-lstatus"></span></div>
+      <div class="detail-item"><span class="k">备注</span><span class="v" id="d-lnote"></span></div>
+      <div class="mt16">
+        <label>更新物流</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input type="text" id="edit-carrier" placeholder="承运商（如 DHL）" style="flex:1;min-width:120px;">
+          <input type="text" id="edit-tracking" placeholder="运单号" style="flex:1;min-width:140px;">
+          <select id="edit-logi-status" style="width:auto;">
+            <option value="unshipped">未发货</option>
+            <option value="shipped">已发货</option>
+            <option value="in_transit">运输中</option>
+            <option value="delivered">已签收</option>
+          </select>
+        </div>
+        <button class="btn btn-sm mt8" onclick="saveLogistics()">保存物流</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 后续服务追踪 -->
+  <div class="card">
+    <h3>后续服务追踪</h3>
+    <ul class="timeline" id="d-timeline"></ul>
+    <div class="mt16" style="border-top:1px solid #eee;padding-top:12px;">
+      <label>添加服务记录</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;">
+        <select id="edit-svc-type" style="width:auto;">
+          <option value="物流更新">物流更新</option>
+          <option value="售后">售后</option>
+          <option value="退款">退款</option>
+          <option value="咨询">咨询</option>
+          <option value="其他">其他</option>
+        </select>
+        <textarea id="edit-svc-content" placeholder="服务内容..." style="flex:1;min-width:200px;"></textarea>
+        <button class="btn btn-sm" onclick="addServiceTrack()">添加</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/admin/admin.js"></script>
+<script>
+  if (!ADMIN.requireLogin()) { /* 已跳转 */ }
+  document.getElementById('topbar').innerHTML = ADMIN.renderTopbar('dashboard');
+
+  function esc(s) { return ADMIN.esc(s); }
+  function money(v, c) { return ADMIN.money(v, c); }
+
+  var orderId = new URLSearchParams(location.search).get('id');
+  var currentOrder = null;
+
+  function loadDetail() {
+    ADMIN.get('/api/orders/' + encodeURIComponent(orderId)).then(function (data) {
+      var o = data.order;
+      currentOrder = o;
+      document.getElementById('order-title').textContent = o.id;
+
+      document.getElementById('d-status').innerHTML = ADMIN.statusBadge(o.status);
+      document.getElementById('d-source').textContent = o.sourceLabel || o.source || '';
+      document.getElementById('d-created').textContent = (o.createdAt || '').replace('T', ' ').slice(0, 19);
+      document.getElementById('d-paystatus').innerHTML = ADMIN.payBadge(o.payment);
+
+      // 产品
+      var prods = o.products || [];
+      var ph = '';
+      var total = 0;
+      prods.forEach(function (p) {
+        var line = (Number(p.unitPrice) || 0) * (Number(p.quantity) || 1);
+        total += line;
+        ph += '<tr><td>' + esc(p.name) + '</td><td><strong>' + esc(p.code || '-') + '</strong></td>' +
+              '<td>' + (p.quantity || 1) + '</td><td>' + money(p.unitPrice, o.payment && o.payment.currency) + '</td>' +
+              '<td>' + money(line, o.payment && o.payment.currency) + '</td></tr>';
+      });
+      if (prods.length) {
+        ph += '<tr><td colspan="4" style="text-align:right;font-weight:700;">合计</td><td><strong>' + money(total, o.payment && o.payment.currency) + '</strong></td></tr>';
+      }
+      document.getElementById('d-products').innerHTML = ph || '<tr><td colspan="5" class="muted">无产品</td></tr>';
+
+      // 客户
+      var c = o.customer || {};
+      document.getElementById('d-cname').textContent = c.name || '-';
+      document.getElementById('d-cemail').textContent = c.email || '-';
+      document.getElementById('d-cphone').textContent = c.phone || '-';
+
+      // 支付
+      var p = o.payment || {};
+      document.getElementById('d-paymethod').textContent = p.method || '-';
+      document.getElementById('d-payamount').textContent = money(p.amount, p.currency) + ' ' + (p.currency || '');
+      document.getElementById('d-paytxn').textContent = p.txnId || '-';
+      document.getElementById('d-note').textContent = o.note || '-';
+
+      // 邮寄
+      var s = o.shipping || {};
+      document.getElementById('d-srecipient').textContent = s.recipient || '-';
+      document.getElementById('d-sstreet').textContent = s.street || '-';
+      document.getElementById('d-scity').textContent = [s.city, s.state].filter(Boolean).join(', ') || '-';
+      document.getElementById('d-szip').textContent = s.zip || '-';
+      document.getElementById('d-scountry').textContent = s.country || '-';
+      document.getElementById('d-sphone').textContent = s.phone || '-';
+
+      // 物流
+      var l = o.logistics || {};
+      document.getElementById('d-lcarrier').textContent = l.carrier || '-';
+      document.getElementById('d-ltracking').textContent = l.trackingNo || '-';
+      document.getElementById('d-lstatus').textContent = l.status || '-';
+      document.getElementById('d-lnote').textContent = l.note || '-';
+
+      // 状态/物流下拉回填
+      document.getElementById('edit-status').value = o.status || 'new';
+      document.getElementById('edit-carrier').value = l.carrier || '';
+      document.getElementById('edit-tracking').value = l.trackingNo || '';
+      document.getElementById('edit-logi-status').value = l.status || 'unshipped';
+
+      // 服务追踪时间线
+      var tracks = o.serviceTracks || [];
+      var th = '';
+      tracks.slice().reverse().forEach(function (t) {
+        th += '<li><span class="t-type">' + esc(t.type) + '</span><span class="t-time">' + esc((t.time || '').replace('T', ' ').slice(0, 16)) + ' · ' + esc(t.handler || '') + '</span>' +
+              '<div class="t-content">' + esc(t.content || '') + '</div></li>';
+      });
+      document.getElementById('d-timeline').innerHTML = th || '<li class="muted">暂无服务记录</li>';
+    }).catch(function (e) {
+      alert(e.message || '加载失败');
+    });
+  }
+
+  function saveStatus() {
+    var status = document.getElementById('edit-status').value;
+    ADMIN.put('/api/orders/' + encodeURIComponent(orderId), { status: status }).then(function (data) {
+      document.getElementById('d-status').innerHTML = ADMIN.statusBadge(data.order.status);
+      alert('状态已更新');
+    }).catch(function (e) { alert(e.message || '保存失败'); });
+  }
+
+  function saveLogistics() {
+    var body = {
+      logistics: {
+        carrier: document.getElementById('edit-carrier').value.trim(),
+        trackingNo: document.getElementById('edit-tracking').value.trim(),
+        status: document.getElementById('edit-logi-status').value
+      }
+    };
+    ADMIN.put('/api/orders/' + encodeURIComponent(orderId), body).then(function (data) {
+      var l = data.order.logistics || {};
+      document.getElementById('d-lcarrier').textContent = l.carrier || '-';
+      document.getElementById('d-ltracking').textContent = l.trackingNo || '-';
+      document.getElementById('d-lstatus').textContent = l.status || '-';
+      alert('物流已保存');
+    }).catch(function (e) { alert(e.message || '保存失败'); });
+  }
+
+  function addServiceTrack() {
+    var type = document.getElementById('edit-svc-type').value;
+    var content = document.getElementById('edit-svc-content').value.trim();
+    if (!content) { alert('请填写服务内容'); return; }
+    ADMIN.put('/api/orders/' + encodeURIComponent(orderId), { serviceTrack: { type: type, content: content } })
+      .then(function () {
+        document.getElementById('edit-svc-content').value = '';
+        loadDetail();
+      })
+      .catch(function (e) { alert(e.message || '保存失败'); });
+  }
+
+  loadDetail();
+</script>
+</body>
+</html>

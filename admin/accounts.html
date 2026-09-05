@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>账号管理 - Zeen 客户管理后台</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    .acct-form { max-width: 640px; }
+    .acct-form .form-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .acct-actions { display: flex; gap: 8px; }
+    .btn-link { background: none; border: none; color: #f73437; cursor: pointer; font-size: 13px; padding: 0; }
+    .btn-link:hover { text-decoration: underline; }
+    .btn-link.danger { color: #c0392b; }
+    .hint { color: #888; font-size: 12px; margin-top: 4px; }
+    .role-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .role-admin { background: #fdeaea; color: #c0392b; }
+    .role-dealer { background: #e8f1fd; color: #2471c4; }
+    .role-support { background: #fef4e6; color: #d88918; }
+    @media (max-width: 768px) { .acct-form .form-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="topbar"></div>
+<div class="admin-container">
+  <div class="page-title">账号管理</div>
+
+  <div class="card">
+    <h3>账号列表</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>用户名</th>
+          <th>姓名</th>
+          <th>角色</th>
+          <th>创建时间</th>
+          <th style="width:140px;">操作</th>
+        </tr>
+      </thead>
+      <tbody id="acct-tbody"></tbody>
+    </table>
+    <div class="empty hidden" id="empty-hint">暂无账号</div>
+  </div>
+
+  <div class="card acct-form">
+    <h3 id="form-title">新增账号</h3>
+    <div class="form-grid">
+      <div>
+        <label>用户名 *</label>
+        <input type="text" id="a-username" placeholder="字母数字，2-32 位">
+      </div>
+      <div>
+        <label>姓名</label>
+        <input type="text" id="a-name" placeholder="显示名称">
+      </div>
+      <div>
+        <label>角色 *</label>
+        <select id="a-role">
+          <option value="dealer">经销商</option>
+          <option value="support">客服</option>
+        </select>
+      </div>
+      <div class="full">
+        <label>密码 *</label>
+        <input type="password" id="a-password" placeholder="至少 6 位">
+        <div class="hint" id="password-hint">编辑时留空表示不修改密码</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn" onclick="saveAccount()">保存</button>
+      <button class="btn btn-secondary" onclick="resetForm()" id="cancel-btn" style="display:none;">取消</button>
+    </div>
+  </div>
+</div>
+
+<script src="/admin/admin.js"></script>
+<script>
+  if (!ADMIN.requireLogin()) { /* 已跳转 */ }
+  document.getElementById('topbar').innerHTML = ADMIN.renderTopbar('accounts');
+
+  var editingUsername = null; // null 表示新增
+
+  function esc(s) { return ADMIN.esc(s); }
+
+  function roleBadge(r) {
+    var cls = r === 'admin' ? 'role-admin' : (r === 'dealer' ? 'role-dealer' : 'role-support');
+    return '<span class="role-badge ' + cls + '">' + esc(ADMIN.roleLabel(r)) + '</span>';
+  }
+
+  function loadAccounts() {
+    ADMIN.get('/api/accounts').then(function (data) {
+      var tbody = document.getElementById('acct-tbody');
+      var empty = document.getElementById('empty-hint');
+      var accounts = data.accounts || [];
+      if (!accounts.length) {
+        tbody.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      var html = '';
+      accounts.forEach(function (a) {
+        var isAdmin = a.role === 'admin';
+        var btns = '';
+        if (isAdmin) {
+          btns = '<span class="muted">系统内置</span>';
+        } else {
+          btns = '<div class="acct-actions">' +
+            '<button class="btn-link" onclick="editAccount(\'' + esc(a.username) + '\')">编辑</button>' +
+            '<button class="btn-link danger" onclick="delAccount(\'' + esc(a.username) + '\')">删除</button>' +
+            '</div>';
+        }
+        html += '<tr>' +
+          '<td><strong>' + esc(a.username) + '</strong></td>' +
+          '<td>' + esc(a.name || '-') + '</td>' +
+          '<td>' + roleBadge(a.role) + '</td>' +
+          '<td>' + esc((a.createdAt || '').replace('T', ' ').slice(0, 16)) + '</td>' +
+          '<td>' + btns + '</td>' +
+          '</tr>';
+      });
+      tbody.innerHTML = html;
+    }).catch(function (e) {
+      alert(e.message || '加载失败');
+    });
+  }
+
+  function resetForm() {
+    editingUsername = null;
+    document.getElementById('form-title').textContent = '新增账号';
+    document.getElementById('a-username').value = '';
+    document.getElementById('a-name').value = '';
+    document.getElementById('a-role').value = 'dealer';
+    document.getElementById('a-password').value = '';
+    document.getElementById('a-username').disabled = false;
+    document.getElementById('password-hint').textContent = '';
+    document.getElementById('cancel-btn').style.display = 'none';
+  }
+
+  function editAccount(username) {
+    editingUsername = username;
+    ADMIN.get('/api/accounts').then(function (data) {
+      var acct = (data.accounts || []).filter(function (a) { return a.username === username; })[0];
+      if (!acct) { alert('账号不存在'); return; }
+      document.getElementById('form-title').textContent = '编辑账号：' + acct.username;
+      document.getElementById('a-username').value = acct.username;
+      document.getElementById('a-username').disabled = true;
+      document.getElementById('a-name').value = acct.name || '';
+      document.getElementById('a-role').value = acct.role;
+      document.getElementById('a-password').value = '';
+      document.getElementById('password-hint').textContent = '留空表示不修改密码';
+      document.getElementById('cancel-btn').style.display = '';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }).catch(function (e) { alert(e.message || '加载失败'); });
+  }
+
+  function saveAccount() {
+    var username = document.getElementById('a-username').value.trim();
+    var name = document.getElementById('a-name').value.trim();
+    var role = document.getElementById('a-role').value;
+    var password = document.getElementById('a-password').value;
+
+    if (!/^[A-Za-z0-9_.-]{2,32}$/.test(username)) { alert('用户名需为 2-32 位字母、数字或 _.-'); return; }
+    if (!password && !editingUsername) { alert('请填写初始密码（至少 6 位）'); return; }
+    if (password && password.length < 6) { alert('密码至少 6 位'); return; }
+
+    var body = { username: username, name: name, role: role };
+    if (password) body.password = password;
+
+    var req = editingUsername
+      ? ADMIN.put('/api/accounts', body)
+      : ADMIN.post('/api/accounts', body);
+
+    req.then(function () {
+      alert(editingUsername ? '账号已更新' : '账号已创建');
+      resetForm();
+      loadAccounts();
+    }).catch(function (e) { alert(e.message || '保存失败'); });
+  }
+
+  function delAccount(username) {
+    if (!confirm('确定删除账号「' + username + '」？此操作不可撤销。')) return;
+    ADMIN.del('/api/accounts?username=' + encodeURIComponent(username)).then(function () {
+      alert('账号已删除');
+      loadAccounts();
+    }).catch(function (e) { alert(e.message || '删除失败'); });
+  }
+
+  loadAccounts();
+</script>
+</body>
+</html>

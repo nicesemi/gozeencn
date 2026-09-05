@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Backups (covers: .bak, .bak2, .bak3, .bak_*, .bak.*, .backup_*, etc.)
+*.bak*
+*backup*
+backups/
+
+# Temp / Debug
+debug_modal.html
+customer_authentication/
+
+# Old Cloudflare Worker (now Vercel)
+workers/
+
+# Build artifact
+cart
+
+# Dependencies
+node_modules/

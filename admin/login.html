@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 - Zeen 客户管理后台</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-box">
+    <h1>Zeen 客户管理后台</h1>
+    <div class="sub">请登录后访问订单数据</div>
+    <form id="login-form">
+      <label>用户名</label>
+      <input type="text" id="username" autocomplete="username" required>
+      <label>密码</label>
+      <input type="password" id="password" autocomplete="current-password" required>
+      <div class="mt16">
+        <button type="submit" class="btn" style="width:100%;" id="btn">登 录</button>
+      </div>
+      <div class="login-error" id="login-error"></div>
+    </form>
+  </div>
+</div>
+<script src="/admin/admin.js"></script>
+<script>
+  // 已登录直接进入
+  if (ADMIN.token) { window.location.href = '/admin/dashboard.html'; }
+
+  document.getElementById('login-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('btn');
+    var errEl = document.getElementById('login-error');
+    errEl.textContent = '';
+    btn.disabled = true;
+    btn.textContent = '登录中...';
+    var username = document.getElementById('username').value.trim();
+    var password = document.getElementById('password').value;
+    fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username, password: password })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.token) {
+        ADMIN.login(data.token, { username: data.username, name: data.name, role: data.role });
+        window.location.href = '/admin/dashboard.html';
+      } else {
+        errEl.textContent = data.error === 'invalid_credentials' ? '用户名或密码错误' : '登录失败：' + (data.error || 'unknown');
+        btn.disabled = false;
+        btn.textContent = '登 录';
+      }
+    })
+    .catch(function () {
+      errEl.textContent = '网络错误，请重试';
+      btn.disabled = false;
+      btn.textContent = '登 录';
+    });
+  });
+</script>
+</body>
+</html>

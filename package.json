@@ -1,0 +1,8 @@
+{
+  "name": "gozeen-clone",
+  "private": true,
+  "dependencies": {
+    "@upstash/redis": "^1.34.3",
+    "resend": "^4.0.0"
+  }
+}

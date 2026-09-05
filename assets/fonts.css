@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Gellix';
+    font-weight: 400;
+    src: url(//gozeen.com/cdn/shop/t/7/assets/Gellix-Regular.woff2?v=922398673416500781711045961) format('woff2'),
+         url(//gozeen.com/cdn/shop/t/7/assets/Gellix-Regular.woff?v=178812496917172685871711045961) format('woff');
+}
+
+@font-face {
+    font-family: 'Gellix';
+    font-weight: 500;
+    src: url(//gozeen.com/cdn/shop/t/7/assets/Gellix-Medium.woff2?v=22084118791114514431711045961) format('woff2'),
+         url(//gozeen.com/cdn/shop/t/7/assets/Gellix-Medium.woff?v=78181953421100991341711045961) format('woff');
+}

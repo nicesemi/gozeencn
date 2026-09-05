@@ -1,0 +1,103 @@
+/**
+ * GET  /api/orders?source=&status=&q=&limit=&offset=  订单列表（需登录）
+ * POST /api/orders                                   手动录入订单（经销商/客服/管理员）
+ * body: { source: 'dealer'|'manual', products:[], customer:{}, payment:{}, shipping:{}, logistics:{} }
+ */
+const { requireAuth } = require('./_auth');
+const { saveOrder, listOrders, genOrderId } = require('./_orders');
+
+const SOURCES = {
+  online: '官网在线支付',
+  dealer: '经销商录入',
+  manual: '客服转账录入',
+};
+
+function normalizeManualOrder(body, user) {
+  const now = new Date().toISOString();
+  // 强制来源逻辑：dealer -> dealer，support -> manual，仅 admin 可依 body.source 选择（非 dealer 即 manual）
+  let source;
+  if (user.role === 'dealer') {
+    source = 'dealer';
+  } else if (user.role === 'support') {
+    source = 'manual';
+  } else {
+    source = body.source === 'dealer' ? 'dealer' : 'manual';
+  }
+  return {
+    source,
+    sourceLabel: SOURCES[source],
+    enteredBy: user ? user.username : null,
+    products: (body.products || []).map((p) => ({
+      name: (p.name || '').trim(),
+      code: (p.code || '').trim(),
+      quantity: parseInt(p.quantity, 10) || 1,
+      unitPrice: parseFloat(p.unitPrice) || 0,
+    })),
+    customer: {
+      name: (body.customer && body.customer.name) || '',
+      email: (body.customer && body.customer.email) || '',
+      phone: (body.customer && body.customer.phone) || '',
+    },
+    payment: {
+      method: (body.payment && body.payment.method) || '',
+      amount: parseFloat(body.payment && body.payment.amount) || 0,
+      currency: (body.payment && body.payment.currency) || 'USD',
+      status: (body.payment && body.payment.status) || 'paid',
+      txnId: (body.payment && body.payment.txnId) || '',
+    },
+    shipping: {
+      recipient: (body.shipping && body.shipping.recipient) || '',
+      street: (body.shipping && body.shipping.street) || '',
+      city: (body.shipping && body.shipping.city) || '',
+      state: (body.shipping && body.shipping.state) || '',
+      zip: (body.shipping && body.shipping.zip) || '',
+      country: (body.shipping && body.shipping.country) || '',
+      phone: (body.shipping && body.shipping.phone) || '',
+    },
+    logistics: {
+      carrier: (body.logistics && body.logistics.carrier) || '',
+      trackingNo: (body.logistics && body.logistics.trackingNo) || '',
+      status: (body.logistics && body.logistics.status) || 'unshipped',
+      note: (body.logistics && body.logistics.note) || '',
+    },
+    status: 'new',
+    createdAt: now,
+  };
+}
+
+module.exports = async function handler(req, res) {
+  const session = await requireAuth(req, res);
+  if (!session) return;
+
+  try {
+    if (req.method === 'GET') {
+      // dealer 只能查看自己录入的订单
+      const enteredBy = session.role === 'dealer' ? session.username : null;
+      const orders = await listOrders({
+        source: req.query.source || null,
+        status: req.query.status || null,
+        q: req.query.q || null,
+        enteredBy,
+        limit: parseInt(req.query.limit, 10) || 100,
+        offset: parseInt(req.query.offset, 10) || 0,
+      });
+      return res.status(200).json({ orders, total: orders.length });
+    }
+
+    if (req.method === 'POST') {
+      const body = req.body || {};
+      const order = normalizeManualOrder(body, session);
+      if (!order.products.length) {
+        return res.status(400).json({ error: 'products_required' });
+      }
+      order.id = await genOrderId();
+      await saveOrder(order);
+      return res.status(201).json({ order });
+    }
+
+    return res.status(405).json({ error: 'method_not_allowed' });
+  } catch (err) {
+    console.error('orders error:', err);
+    return res.status(500).json({ error: 'internal_error' });
+  }
+};
