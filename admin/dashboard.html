@@ -43,6 +43,7 @@
           <th>金额</th>
           <th>支付</th>
           <th>物流</th>
+          <th>租赁进度</th>
           <th>状态</th>
         </tr>
       </thead>
@@ -103,6 +104,17 @@
         html += '<td><strong>' + money(pay.amount, pay.currency) + '</strong></td>';
         html += '<td>' + ADMIN.payBadge(pay) + '</td>';
         html += '<td>' + esc(logi.status === 'shipped' ? (logi.carrier || '已发货') : (logi.status || '-')) + '</td>';
+        // 租赁进度：月租 / 已收期数 / 剩余押金
+        var l = o.lease || {};
+        var dep = Number(l.depositAmount != null ? l.depositAmount : pay.amount || 0);
+        var history = Array.isArray(l.payHistory) ? l.payHistory : [];
+        var paidTotal = history.reduce(function (s, h) { return s + (Number(h.amount) || 0); }, 0);
+        var remaining = Math.max(Number((dep - paidTotal).toFixed(2)), 0);
+        if (o.type === 'lease') {
+          html += '<td>' + (l.depositRefunded ? '<span class="muted">已退押</span>' : '') + esc(l.monthlyRent ? money(l.monthlyRent, 'CNY') + '/月' : '') + ' · ' + history.length + '/' + (Number(l.termMonths) || 0) + '期 · 余' + money(remaining, 'CNY') + '</td>';
+        } else {
+          html += '<td class="muted">-</td>';
+        }
         html += '<td>' + ADMIN.statusBadge(o.status) + '</td>';
         html += '</tr>';
       });

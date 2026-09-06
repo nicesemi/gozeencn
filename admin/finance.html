@@ -35,7 +35,31 @@
   <div class="stat-grid" id="stat-grid"></div>
 
   <div class="card">
-    <h3>按日收入趋势</h3>
+    <h3>租金实收（押金内按月抵扣，为真实服务收入口径）</h3>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>月份</th><th>租金实收（CNY）</th></tr></thead>
+        <tbody id="rent-monthly-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="rent-monthly-empty">暂无租金扣费记录</div>
+  </div>
+
+  <div class="card">
+    <h3>租金扣费流水</h3>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr><th>实收日</th><th>订单号</th><th>期数</th><th>金额（CNY）</th><th>方式</th><th>流水号</th><th>登记人</th></tr>
+        </thead>
+        <tbody id="rent-tx-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty hidden" id="rent-tx-empty">暂无租金扣费记录</div>
+  </div>
+
+  <div class="card">
+    <h3>按日收入趋势（押金入账）</h3>
     <div style="overflow-x:auto;">
       <table>
         <thead><tr><th>日期</th><th>币种</th><th>金额</th></tr></thead>
@@ -106,8 +130,10 @@
 
   function renderSummary(summary) {
     var html = '';
-    // 总收入（仅已收款）
-    html += '<div class="stat-card"><div class="stat-label">总收入（已收款）</div>';
+    // 租金实收（真实服务收入，必填主口径）
+    html += '<div class="stat-card highlight"><div class="stat-label">租金实收（押金内抵扣）</div><div class="stat-value">' + money(summary.rentCollected || 0, 'CNY') + '</div></div>';
+    // 总收入（仅已收款）——押金（暂收）
+    html += '<div class="stat-card"><div class="stat-label">押金入账（已收款，暂收）</div>';
     if (!summary.totalRevenue.length) {
       html += '<div class="stat-value">-</div>';
     } else {
@@ -208,9 +234,51 @@
     tbody.innerHTML = html;
   }
 
+  function renderRentMonthly(rentMonthly) {
+    var tbody = document.getElementById('rent-monthly-tbody');
+    var empty = document.getElementById('rent-monthly-empty');
+    if (!rentMonthly.length) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    var html = '';
+    rentMonthly.forEach(function (m) {
+      html += '<tr><td>' + esc(m.month) + '</td><td><strong>' + money(m.revenue, 'CNY') + '</strong></td></tr>';
+    });
+    tbody.innerHTML = html;
+  }
+
+  function renderRentTx(rentTransactions) {
+    var tbody = document.getElementById('rent-tx-tbody');
+    var empty = document.getElementById('rent-tx-empty');
+    if (!rentTransactions.length) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    var html = '';
+    rentTransactions.forEach(function (t) {
+      html += '<tr>';
+      html += '<td>' + esc(t.paidDate) + '</td>';
+      html += '<td><strong>' + esc(t.orderId) + '</strong></td>';
+      html += '<td>第 ' + esc(t.period) + ' 期</td>';
+      html += '<td><strong>' + money(t.amount, 'CNY') + '</strong></td>';
+      html += '<td>' + esc({ bank_transfer: '银行转账', airwallex: '在线支付', other: '其他' }[t.method] || t.method || '-') + '</td>';
+      html += '<td>' + esc(t.txn || '-') + '</td>';
+      html += '<td>' + esc(t.handler || '-') + '</td>';
+      html += '</tr>';
+    });
+    tbody.innerHTML = html;
+  }
+
   function loadFinance() {
     ADMIN.get('/api/finance?' + buildParams(true).toString()).then(function (data) {
       renderSummary(data.summary);
+      renderRentMonthly(data.rentMonthly || []);
+      renderRentTx(data.rentTransactions || []);
       renderDaily(data.daily);
       renderMonthly(data.monthly);
       renderTx(data.transactions);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
@@ -16,8 +17,7 @@
 <link as="script" href="/assets/cdn/shop/t/7/assets/lazysizes.js" rel="preload"/>
 <link href="/assets/pages/events" rel="canonical"/>
 <link href="/assets/cdn/shop/files/Z-Icon-smallercanvas_32x32.png" rel="shortcut icon" type="image/png"/>
-<title>Zeen Demos
-– Zeen Go</title>
+<title>活动 – Zeen Go</title>
 <meta content="Where to try the Zeen before you buy! Don't forget we offer a trial with each purchase of a Zeen." name="description"/>
 <meta content="Zeen Go" property="og:site_name"/>
 <!-- Meta removed: external URL -->
@@ -509,27 +509,27 @@ p:last-child{
         widescreen: 1400
       },
       strings: {
-        addToCart: "Add to cart",
-        soldOut: "Sold out",
-        unavailable: "Unavailable",
-        regularPrice: "Regular price",
-        salePrice: "Sale price",
-        sale: "Sale",
+        addToCart: "加入购物车",
+        soldOut: "售罄",
+        unavailable: "暂不提供",
+        regularPrice: "原价",
+        salePrice: "优惠价",
+        sale: "优惠",
         fromLowestPrice: "from [price]",
-        vendor: "Vendor",
-        showMore: "Show More",
-        showLess: "Show Less",
-        searchFor: "Search for",
+        vendor: "品牌",
+        showMore: "显示更多",
+        showLess: "显示较少",
+        searchFor: "搜寻",
         addressError: "Error looking up that address",
         addressNoResults: "No results for that address",
         addressQueryLimit: "You have exceeded the Google API usage limit. Consider upgrading to a \u003ca href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\"\u003ePremium Plan\u003c\/a\u003e.",
         authError: "There was a problem authenticating your Google Maps account.",
-        newWindow: "Opens in a new window.",
-        external: "Opens external website.",
+        newWindow: "在新视窗中开启。",
+        external: "开启外部网站。",
         newWindowExternal: "Opens external website in a new window.",
         removeLabel: "Remove [product]",
         update: "Update",
-        quantity: "Quantity",
+        quantity: "数量",
         discountedTotal: "Discounted total",
         regularTotal: "Regular total",
         priceColumn: "See Price column for discount details.",
@@ -541,14 +541,14 @@ p:last-child{
         oneCartCount: "1 item",
         otherCartCount: "[count] items",
         quantityLabel: "Quantity: [count]",
-        products: "Products",
-        loading: "Loading",
+        products: "产品",
+        loading: "载入中",
         number_of_results: "[result_number] of [results_count]",
         number_of_results_found: "[results_count] results found",
         one_result_found: "1 result found"
       },
-      moneyFormat: "$",
-      moneyFormatWithCurrency: "$ USD",
+      moneyFormat: "¥",
+      moneyFormatWithCurrency: "¥ CNY",
       settings: {
         predictiveSearchEnabled: false,
         predictiveSearchShowPrice: false,
@@ -1158,7 +1158,7 @@ first.parentNode.insertBefore(script, first);
 <link as="style" crossorigin="" fetchpriority="low" href="/cdn/shopifycloud/checkout-web/assets/c1/assets/StackedMerchandisePreview.D6OuIVjc.css" rel="prefetch"/>
 
 <noscript></noscript>
-<a class="in-page-link visually-hidden skip-link" href="#MainContent">Skip to content</a>
+<a class="in-page-link visually-hidden skip-link" href="#MainContent">跳至内容</a>
 <style data-shopify="">
 
   .cart-popup {
@@ -1167,7 +1167,7 @@ first.parentNode.insertBefore(script, first);
 <div aria-labelledby="CartPopupHeading" aria-modal="true" class="cart-popup-wrapper cart-popup-wrapper--hidden critical-hidden" data-cart-popup-wrapper="" role="dialog">
 <div class="cart-popup" data-cart-popup="" tabindex="-1">
 <div class="cart-popup__header">
-<h2 class="cart-popup__heading" id="CartPopupHeading">Just added to your cart</h2>
+<h2 class="cart-popup__heading" id="CartPopupHeading">已加入购物车</h2>
 <button aria-label="Close" class="cart-popup__close" data-cart-popup-close=""><svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg></button>
 </div>
 <div class="cart-popup-item">
@@ -1179,7 +1179,7 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div class="cart-popup-item__quantity">
 <span class="visually-hidden" data-cart-popup-quantity-label=""></span>
-<span aria-hidden="true">Qty:</span>
+<span aria-hidden="true">数量：</span>
 <span aria-hidden="true" data-cart-popup-quantity=""></span>
 </div>
 </div>
@@ -1187,13 +1187,13 @@ first.parentNode.insertBefore(script, first);
 <div class="flex justify-center my-4">
 <div>
 <a class="cart-popup__cta-link btn inline-block" href="/cart.html">
-          View cart (<span data-cart-popup-cart-quantity=""></span>)
+          查看购物车（<span data-cart-popup-cart-quantity=""></span>)
         </a>
 </div>
 </div>
 <div class="cart-popup__dismiss">
 <button class="cart-popup__dismiss-button text-link text-link--accent" data-cart-popup-dismiss="">
-        Continue shopping
+        继续购物
       </button>
 </div>
 </div>
@@ -1212,24 +1212,24 @@ first.parentNode.insertBefore(script, first);
       }
     
   </style>
-<div aria-label="Search" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
+<div aria-label="搜寻" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
 <div class="search-bar__interior">
 <div class="search-form__container" data-search-form-container="">
 <form action="/search" class="search-form search-bar__form" data-hs-cf-bound="true" method="get" role="search">
 <div class="search-form__input-wrapper">
-<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="Search" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
+<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="搜寻" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
 <input aria-hidden="true" name="options[prefix]" type="hidden" value="last"/>
 <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
 </div>
 <button class="search-bar__submit search-form__submit" data-search-form-submit="" type="submit">
 <svg aria-hidden="true" class="icon icon-search" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path></svg>
-<span class="icon__fallback-text">Submit</span>
+<span class="icon__fallback-text">提交</span>
 </button>
 </form>
 <div class="search-bar__actions">
 <button class="btn--link search-bar__close js-drawer-close" type="button">
 <svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
-<span class="icon__fallback-text">Close search</span>
+<span class="icon__fallback-text">关闭搜寻</span>
 </button>
 </div>
 </div>
@@ -1238,7 +1238,7 @@ first.parentNode.insertBefore(script, first);
 <div class="spacer h-[94px] xl:h-[117px]"></div>
 <div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
 <header class="site-header border-bottom logo--left bg-white" role="banner">
-<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">Call us today at (00852) 3050-1862</p></a></div>
+<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">立即致电 (00852) 3050-1862</p></a></div>
 <div class="site-header__mobile-nav relative z-10 bg-white">
 <div class="flex items-center justify-between px-8 w-full">
 <div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
@@ -1255,48 +1255,45 @@ first.parentNode.insertBefore(script, first);
 <ul class="site-nav list--inline" id="SiteNav">
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/zeen.html">
-<span class="site-nav__label">Order Your Zeen</span>
+<span class="site-nav__label">订购 Zeen</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/collections/accessories.html">
-<span class="site-nav__label">Accessories</span>
+<span class="site-nav__label">配件</span>
 </a>
 </li>
 <li class="site-nav--active">
 <a aria-current="page" class="site-nav__link site-nav__link--main site-nav__link--active" href="/pages/events.html">
-<span class="site-nav__label">Zeen Demos</span>
+<span class="site-nav__label">Zeen 示范</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/help.html">
-<span class="site-nav__label">Training</span>
+<span class="site-nav__label">训练</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/contact-us.html">
-<span class="site-nav__label">Contact Us</span>
+<span class="site-nav__label">联络我们</span>
 </a>
 </li>
-
 </ul>
 </nav>
 <div class="grid__item lg:w-1/6 w-1/2 text-right site-header__icons site-header__icons--plus">
 <div class="site-header__icons-wrapper gap-4">
 <div class="site-header__lang-switcher" style="display:flex;align-items:center;margin-left:12px;gap:4px;font-size:14px;">
-<a href="/zh-hk/pages/events.html" style="color:#666;text-decoration:none;" title="繁中">繁中</a>
-<span style="color:#999;">|</span>
-<span style="color:#be1e2d;font-weight:700;">English</span>
+
 </div>
 <a class="site-header__icon site-header__cart w-4" href="/cart.html">
 <svg aria-hidden="true" class="icon icon-cart" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
-<span class="icon__fallback-text">Cart</span>
+<span class="icon__fallback-text">购物车</span>
 <div class="site-header__cart-count hide critical-hidden" data-cart-count-bubble="" id="CartCount">
 <span data-cart-count="">0</span>
-<span class="icon__fallback-text medium-up--hide">items</span>
+<span class="icon__fallback-text medium-up--hide">件</span>
 </div>
 </a>
-<button aria-controls="MobileNav" aria-expanded="false" aria-label="Menu" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
+<button aria-controls="MobileNav" aria-expanded="false" aria-label="选单" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
 <svg aria-hidden="true" class="icon icon-hamburger" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M33.5 25h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0-11.5h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0 23h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
 <svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
 </button>
@@ -1308,30 +1305,29 @@ first.parentNode.insertBefore(script, first);
 <ul class="mobile-nav" id="MobileNav">
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/zeen.html">
-<span class="mobile-nav__label">Order Your Zeen</span>
+<span class="mobile-nav__label">订购 Zeen</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/collections/accessories.html">
-<span class="mobile-nav__label">Accessories</span>
+<span class="mobile-nav__label">配件</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a aria-current="page" class="mobile-nav__link mobile-nav__link--active" href="/pages/events.html">
-<span class="mobile-nav__label">Zeen Demos</span>
+<span class="mobile-nav__label">Zeen 示范</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/help.html">
-<span class="mobile-nav__label">Training</span>
+<span class="mobile-nav__label">训练</span>
 </a>
 </li>
 <li class="mobile-nav__item">
 <a class="mobile-nav__link" href="/pages/contact-us.html">
-<span class="mobile-nav__label">Contact Us</span>
+<span class="mobile-nav__label">联络我们</span>
 </a>
 </li>
-<li class="mobile-nav__item"><span class="mobile-nav__link" style="color:#be1e2d;font-weight:700;">English</span></li><li class="mobile-nav__item"><a class="mobile-nav__link" href="/zh-hk/pages/events.html">繁中</a></li>
 </ul>
 </nav>
 </header>
@@ -1375,34 +1371,34 @@ first.parentNode.insertBefore(script, first);
 <div class="container">
 <div class="lg:w-2/3 mx-auto">
 <div class="mb-4 text-center h1">
-              Demos with the Zeen Team
+              与 Zeen 团队的示范
           </div>
 <div class="text-center paragraphs">
-<p>Join us by phone, online, or in-person to learn about the Zeen.</p>
+<p>透过电话、线上或亲身加入我们，了解 Zeen。</p>
 </div>
 <div class="grid gap-4 mt-8">
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      Daily LIVE Zeen Demonstrations
+                      每日 Zeen 现场示范
                     </div>
 </div>
 <div>
 <div>
-<p>One hour group session:</p>
+<p>一小时小组环节：</p>
 </div>
 <div>
-<p>• Zeen Demo</p><p>• Q&amp;A session</p>
+<p>• Zeen 示范</p><p>• 问答环节</p>
 </div>
 <div>
-<a class="text-red underline" href="https://calendly.com/webinar-exokinetics/zeen-webinar" target="_blank">Zeen Demo Registration LINK</a>
+<a class="text-red underline" href="https://calendly.com/webinar-exokinetics/zeen-webinar">Zeen 示范登记连结</a>
 </div>
 </div>
 </div>
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      In-Person Zeen Demonstration  in West Chester, PA
+                      亲身 Zeen 示范 — 宾夕法尼亚州西切斯特
                     </div>
 <div>
 <img alt="" class="w-full" height="750" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp" srcset="/assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 165w, /assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 360w, /assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 533w, /assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 720w, /assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 1000w, /assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 1500w, /assets/s/files/1/0555/0234/0277/files/exokinetics_eventlogo.webp 2700w" width="2700"/>
@@ -1410,25 +1406,25 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div>
 <div>
-<p><strong>Exokinetics Headquarters Showroom</strong></p>
+<p><strong>Exokinetics 总部陈列室</strong></p>
 </div>
 <div>
-<p>UNIT 05, 12/F, THE CLOUD, NO.111 TUNG CHAU STREET, TAI KOK TSUI, HONG KONG</p><p><em>(</em><a href="https://goo.gl/maps/EmeHh3cuocefhFVEA" target="_blank" title="https://goo.gl/maps/EmeHh3cuocefhFVEA"><em>Directions)</em></a></p>
+<p>香港九龙大角咀通州街111号云之端12楼05室</p><p><em>(</em><a href="https://goo.gl/maps/EmeHh3cuocefhFVEA" target="_blank" title="https://goo.gl/maps/EmeHh3cuocefhFVEA"><em>路线）</em></a></p>
 </div>
 <div>
-<a class="text-red underline" href="https://calendly.com/d/cp59-36c-zkt/zeen-hq-visit" target="_blank">West Chester Appointment LINK</a>
+<a class="text-red underline" href="https://calendly.com/d/cp59-36c-zkt/zeen-hq-visit">西切斯特预约连结</a>
 </div>
 </div>
 </div>
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      Pre-recorded Zeen Video Demo
+                      预录 Zeen 影片示范
                     </div>
 </div>
 <div>
 <div>
-<a class="text-red underline" href="https://20583515.fs1.hubspotusercontent-na1.net/hubfs/20583515/zeen_demo_video_v.3%20(2160p).mp4" target="_blank">Watch our 8-minute demo video</a>
+<a class="text-red underline" href="https://20583515.fs1.hubspotusercontent-na1.net/hubfs/20583515/zeen_demo_video_v.3%20(2160p).mp4" target="_blank">观看我们 8 分钟示范影片</a>
 </div>
 </div>
 </div>
@@ -1460,10 +1456,10 @@ first.parentNode.insertBefore(script, first);
 <div class="container aos-init" data-aos="fade">
 <div class="lg:w-1/2 mx-auto text-center">
 <div class="custom-text__title h1">
-          Call us at (00852) 3050-1862
+          致电我们：(00852) 3050-1862
         </div>
 <div class="custom-text__content mt-4 paragraphs">
-<p>We're available for support!</p>
+<p>我们随时为你提供支援！</p>
 </div>
 </div>
 </div>
@@ -1482,16 +1478,16 @@ first.parentNode.insertBefore(script, first);
 <div class="container">
 <div class="lg:w-2/3 mx-auto">
 <div class="mb-4 text-center h1">
-              Demos with Zeen Partners
+              与 Zeen 合作伙伴的示范
           </div>
 <div class="text-center paragraphs">
-<p>Try a Zeen for yourself at one of our demo locations.</p>
+<p>在我们的示范地点亲自试用 Zeen。</p>
 </div>
 <div class="grid gap-4 mt-8">
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      TechOWL Demo Space
+                      TechOWL 示范空间
                     </div>
 <div>
 <img alt="" class="w-full" height="288" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/s/files/1/0555/0234/0277/files/TechOWL_ZeenWebsite_f5207a08-7236-40d3-ac0c-b742aa729d86.webp" srcset="/assets/s/files/1/0555/0234/0277/files/TechOWL_ZeenWebsite_f5207a08-7236-40d3-ac0c-b742aa729d86.webp 165w, /assets/s/files/1/0555/0234/0277/files/TechOWL_ZeenWebsite_f5207a08-7236-40d3-ac0c-b742aa729d86.webp 360w, /assets/s/files/1/0555/0234/0277/files/TechOWL_ZeenWebsite_f5207a08-7236-40d3-ac0c-b742aa729d86.webp 533w, /assets/s/files/1/0555/0234/0277/files/TechOWL_ZeenWebsite_f5207a08-7236-40d3-ac0c-b742aa729d86.webp 576w" width="576"/>
@@ -1499,10 +1495,10 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div>
 <div>
-<p><strong>Institute on Disabilities at Temple University</strong></p>
+<p><strong>天普大学残疾研究所</strong></p>
 </div>
 <div>
-<p>1392 Cecil B. Moore Ave, Philadelphia, PA 19122<em><br/><br/>PA residents may (1) Request to borrow the Zeen for a free 5-week trial or (2) Come to the Philadelphia office for a 1-on-1 demo of the device.<br/></em>*There may be a wait before a Zeen is available for demo.</p>
+<p>1392 Cecil B. Moore Ave, Philadelphia, PA 19122<em><br/><br/>宾夕法尼亚州居民可以（1）申请借用 Zeen 进行 5 周免费试用，或（2）前来费城办事处进行一对一装置示范。<br/></em>*Zeen 可能需轮候才能进行示范。</p>
 </div>
 <div>
 <a class="text-red underline" href="https://techowlpa.org/" target="_blank">techowlpa.org</a>
@@ -1512,7 +1508,7 @@ first.parentNode.insertBefore(script, first);
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      AL - APTAT
+                      阿拉巴马州 - APTAT
                     </div>
 <div>
 <img alt="" class="w-full" height="1500" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp" srcset="/assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 165w, /assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 360w, /assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 533w, /assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 720w, /assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 1000w, /assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 1500w, /assets/s/files/1/0555/0234/0277/files/APTAT-AL-website_3a2e6956-5e7a-4065-9735-fca72dfd5c88.webp 2400w" width="2400"/>
@@ -1520,10 +1516,10 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div>
 <div>
-<p><strong>Accessing Potential Through Assistive Technology – ADRS</strong></p>
+<p><strong>透过辅助科技发掘潜能 – ADRS</strong></p>
 </div>
 <div>
-<p>236 Goodwin Crest Drive, Birmingham, AL 35209<br/><br/>APTAT’s Short-Term Device Loan Program is a service that allows Alabama residents with disabilities and older adults with functional needs the opportunity to test assistive technology for 30 days. Individuals, family members, and professionals may also access the service for their family members or clients. There is no cost to borrow equipment from Accessing Potential Through Assistive Technology (APTAT) Short Term Device Loan Program!<br/>*There may be a wait before a Zeen is available for demo.</p>
+<p>236 Goodwin Crest Drive, Birmingham, AL 35209<br/><br/>APTAT 的短期装置借用计划是一项服务，容许阿拉巴马州的残疾居民同有功能需求的长者，有机会试用辅助科技设备长达 30 日。个人、家庭成员及专业人士亦可为其家庭成员或服务对象使用此服务。从「透过辅助科技发掘潜能（APTAT）」短期装置借用计划借用设备完全免费！<br/>*Zeen 可能需轮候才能进行示范。</p>
 </div>
 <div>
 <a class="text-red underline" href="http://www.accessingpotential.org/" target="_blank">accessingpotential.org</a>
@@ -1533,7 +1529,7 @@ first.parentNode.insertBefore(script, first);
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      AR - iCAN
+                      阿肯色州 - iCAN
                     </div>
 <div>
 <img alt="" class="w-full" height="360" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/s/files/1/0555/0234/0277/files/ICAN_logo_website.png" srcset="/assets/s/files/1/0555/0234/0277/files/ICAN_logo_website.png 165w, /assets/s/files/1/0555/0234/0277/files/ICAN_logo_website.png 360w, /assets/s/files/1/0555/0234/0277/files/ICAN_logo_website.png 533w, /assets/s/files/1/0555/0234/0277/files/ICAN_logo_website.png 648w" width="648"/>
@@ -1541,10 +1537,10 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div>
 <div>
-<p><strong>Arkansas - Increasing Capabilities Access Network</strong></p>
+<p><strong>阿肯色州 - 提升能力获取网络</strong></p>
 </div>
 <div>
-<p>900 West 7th Street,  Little Rock, AR 72201</p><p>P: 1-800-828-2799</p><p>E: <a href="mailto:ICAN@Arkansas.gov">ICAN@Arkansas.gov</a></p><p><em>Notes on operation: We allow people to borrow items for six weeks at a time and they will have to pick it up from one of our locations, but they will need to coordinate that through our main number. The candidate will need to have a note or RX from a Dr, PT, OT or Assistive Technology Professional (ATP) stating that it is okay for them to try it. We do not go against medical advice.</em></p>
+<p>900 West 7th Street, Little Rock, AR 72201</p><p>电话：1-800-828-2799</p><p>电邮：<a href="mailto:ICAN@Arkansas.gov">ICAN@Arkansas.gov</a></p><p><em>运作备注：我们允许人们每次借用物品六周，他们需从我们其中一个 地点取货，但需要透过我们的总机号码进行协调。申请人需提供医生、物理治疗师、职业治疗师或辅助科技专业人员 (ATP) 的证明或处方，确认其适合试用。我们不会违反医疗建议。</em></p>
 </div>
 <div>
 <a class="text-red underline" href="https://ar-ican.org/" target="_blank">ar-ican.org</a>
@@ -1554,7 +1550,7 @@ first.parentNode.insertBefore(script, first);
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      IATP Demonstration Center
+                      IATP 示范中心
                     </div>
 <div>
 <img alt="" class="w-full" height="375" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/s/files/1/0555/0234/0277/files/IATP_Circle_logo_color_sm_-website_454daff4-fc4f-4866-89bc-70ddd1d0c9fd.webp" srcset="/assets/s/files/1/0555/0234/0277/files/IATP_Circle_logo_color_sm_-website_454daff4-fc4f-4866-89bc-70ddd1d0c9fd.webp 165w, /assets/s/files/1/0555/0234/0277/files/IATP_Circle_logo_color_sm_-website_454daff4-fc4f-4866-89bc-70ddd1d0c9fd.webp 360w, /assets/s/files/1/0555/0234/0277/files/IATP_Circle_logo_color_sm_-website_454daff4-fc4f-4866-89bc-70ddd1d0c9fd.webp 533w, /assets/s/files/1/0555/0234/0277/files/IATP_Circle_logo_color_sm_-website_454daff4-fc4f-4866-89bc-70ddd1d0c9fd.webp 720w, /assets/s/files/1/0555/0234/0277/files/IATP_Circle_logo_color_sm_-website_454daff4-fc4f-4866-89bc-70ddd1d0c9fd.webp 750w" width="750"/>
@@ -1562,10 +1558,10 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div>
 <div>
-<p><strong>Illinois Assistive Technology Program</strong></p>
+<p><strong>伊利诺伊州辅助科技计划</strong></p>
 </div>
 <div>
-<p>1720 North Walnut St., Springfield, Il, 62702</p><p>P: (217) 522-7985</p><p>E: <a href="mailto:iatp@iltech.org">iatp@iltech.org</a><br/><br/></p><p>Free hands-on exploration of assistive technology with an assistive technology specialist at our Demonstration Center, virtually, or an alternate location (such as your home).</p>
+<p>1720 North Walnut St., Springfield, IL, 62702</p><p>电话：(217) 522-7985</p><p>电邮：<a href="mailto:iatp@iltech.org">iatp@iltech.org</a><br/><br/></p><p>在我们的示范中心与辅助科技专家免费亲身体验辅助科技，，亦可选择虚拟方式或在你选择的其他地点（例如你的家中）进行。</p>
 </div>
 <div>
 <a class="text-red underline" href="https://www.iltech.org" target="_blank">iltech.org</a>
@@ -1575,7 +1571,7 @@ first.parentNode.insertBefore(script, first);
 <div class="border-red border-2 p-8 grid grid-cols-2 gap-4">
 <div>
 <div class="h3">
-                      UATP Demo Library
+                      UATP 示范库
                     </div>
 <div>
 <img alt="" class="w-full" height="400" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/s/files/1/0555/0234/0277/files/uatp-logo-illustration64.webp" srcset="/assets/s/files/1/0555/0234/0277/files/uatp-logo-illustration64.webp 165w, /assets/s/files/1/0555/0234/0277/files/uatp-logo-illustration64.webp 360w, /assets/s/files/1/0555/0234/0277/files/uatp-logo-illustration64.webp 533w, /assets/s/files/1/0555/0234/0277/files/uatp-logo-illustration64.webp 600w" width="600"/>
@@ -1583,10 +1579,10 @@ first.parentNode.insertBefore(script, first);
 </div>
 <div>
 <div>
-<p><strong>Utah Assistive Technology<br/></strong><em><strong>Program within the Institute for Disability Research, Policy, and Practice at Utah State University</strong></em></p>
+<p><strong>犹他州辅助科技<br/></strong><em><strong>犹他州立大学残疾研究、政策与实践研究所辖下计划</strong></em></p>
 </div>
 <div>
-<p>Physical Address: 950 E 700 N, Logan UT, 84322<br/><br/><em>One-on-One hands-on demonstrations at our facility or your home for free! Contact your local UATP office to schedule.</em></p>
+<p>实际地址： 950 E 700 N, Logan UT, 84322<br/><br/><em>在我们的设施或你的家提供一对一亲身示范，完全免费！联络你当地的 UATP 办事处预约。</em></p>
 </div>
 <div>
 <a class="text-red underline" href="https://www.usu.edu/uatp/demo-loan/library" target="_blank">usu.edu/uatp/demo-loan/library</a>
@@ -1622,27 +1618,27 @@ first.parentNode.insertBefore(script, first);
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                  Order Your Zeen
+                  订购 Zeen
                 </a>
 </li>
 <li>
 <a href="/collections/accessories.html">
-                  Accessories
+                  配件
                 </a>
 </li>
 <li>
 <a href="/pages/events.html">
-                  Zeen Demos
+                  Zeen 示范
                 </a>
 </li>
 <li>
 <a href="/pages/help.html">
-                  Training
+                  训练指南
                 </a>
 </li>
 <li>
 <a href="/pages/contact-us.html">
-                  Contact Us
+                  联络我们
                 </a>
 </li>
 </ul>
@@ -1655,89 +1651,89 @@ first.parentNode.insertBefore(script, first);
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                      Order Your Zeen
+                      订购 Zeen
                     </a>
 </li>
 <li>
 <a href="/collections/accessories.html">
-                      Shop Accessories
+                      选购配件
                     </a>
 </li>
 <li>
 <a href="/pages/distributors.html">
-                      Distributors
+                      经销商
                     </a>
 </li>
 <li>
 <a href="/pages/events.html">
-                      Demo Sign-Up
+                      示范登记
                     </a>
 </li>
 <li>
 <a href="/pages/contact-us.html">
-                      Contact Us
+                      联络我们
                     </a>
 </li>
 </ul>
 </div>
 <div class="gap-8 lg:col-span-1">
 <div class="font-bold">
-                Learn
+                了解更多
               </div>
 <ul class="grid gap-2">
 <li>
 <a href="/pages/our-story.html">
-                      About the Zeen Team
+                      关于 Zeen 团队
                     </a>
 </li>
 <li>
 <a href="/pages/press.html">
-                      Press &amp; News
+                      新闻报导
                     </a>
 </li>
 <li>
 <a href="/pages/funding.html">
-                      Funding your Zeen
+                      Zeen 资助方案
                     </a>
 </li>
 <li>
 <a href="/pages/faqs.html">
-                      FAQs
+                      常见问题
                     </a>
 </li>
 <li>
-<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_EN.pdf">
-                      Product Manual
+<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_CHT.pdf">
+                      产品手册
                     </a>
 </li>
 <li>
 <a href="/assets/s/files/1/0555/0234/0277/files/Zeen_Adjustment_Tables.png" target="_blank" rel="noopener">
-                      Adjustment Tables
+                      调整参数表
                     </a>
 </li>
 <li>
 <a href="/pages/warranty-policy.html">
-                      Limited Warranty
+                      有限保养
                     </a>
 </li>
 <li>
 <a href="/pages/international.html">
-                      International Policy
+                      国际政策
                     </a>
 </li>
 <li>
 <a href="/policies/refund-policy.html">
-                      Return &amp; Refund Policy
+                      退货及退款政策
                     </a>
 </li>
 <li>
 <a href="/policies/privacy-policy.html">
-                      Privacy Policy
+                      私隐政策
                     </a>
 </li>
 <li>
 <a href="/policies/terms-of-service.html">
-                      Terms of Service
+                      服务条款
                     </a>
 </li>
 </ul>
@@ -1745,12 +1741,12 @@ first.parentNode.insertBefore(script, first);
 <div class="grid gap-8 col-span-2">
 <div class="grid gap-4">
 <div>
-            Sign up for our newsletter
+            订阅我们的电子报
           </div>
 </div>
 <div class="grid gap-6">
 <div>
-<a class="btn inline-block w-full text-center" href="/pages/newsletter.html">Sign up</a>
+<a class="btn inline-block w-full text-center" href="/pages/newsletter.html">订阅</a>
 </div>
 <div>
 <div>
@@ -1788,21 +1784,21 @@ first.parentNode.insertBefore(script, first);
 <div class="grid lg:grid-cols-2 gap-12 items-start py-12 lg:py-24">
 <div class="paragraphs">
 <div>
-        2026 GoZeen.hk All rights reserved.
+        2026 GoZeen.hk 版权所有。
         <br/><br/>
-        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="Admin Login">Admin Login</a>
+        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="后台登入">后台登入</a>
 </div>
-<p>Exokinetics HK.</p><p>UNIT 05, 12/F, THE CLOUD, NO.111 TUNG CHAU STREET, TAI KOK TSUI, HONG KONG</p><p>(00852) 3050-1862</p>
+<p>Exokinetics HK.</p><p>香港九龙大角咀通州街111号云之端12楼05室</p><p>(00852) 3050-1862</p>
 </div>
 <div>
 <div class="paragraphs">
-<p>Zeen is proudly designed and assembled in the United States.</p><p> </p>
+<p>Zeen 在美国自豪地设计和组装。</p><p> </p>
 </div>
 <div class="w-24">
 <img alt="" class="" height="240" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/cdn/shop/files/American_Flag_-_footer.png" srcset="/assets/cdn/shop/files/American_Flag_-_footer.png" width="400"/>
 </div>
 <div class="paragraphs">
-<p> </p><p>Our designs are protected by both domestic and international patents.</p><p></p><p><strong>The Zeen is VA approved</strong> --</p><p>Company: Exokinetics HK.</p><p>Unique Entity ID: ZF8UYSDQYJC1</p><p>CAGE code: 9G1G3</p>
+<p> </p><p>我们的设计受国内及国际专利保护。</p><p></p><p><strong>Zeen 已获退伍军人事务部 (VA) 认证</strong> --</p><p>公司：Exokinetics HK.</p><p>统一实体编号： ZF8UYSDQYJC1</p><p>CAGE 编码： 9G1G3</p>
 </div>
 </div>
 </div>
@@ -1811,11 +1807,11 @@ first.parentNode.insertBefore(script, first);
 </div>
 </footer>
 </div>
-<div aria-hidden="true" class="visually-hidden" id="slideshow-info">Use left/right arrows to navigate the slideshow or swipe left/right if using a mobile device</div>
+<div aria-hidden="true" class="visually-hidden" id="slideshow-info">使用左右箭头浏览幻灯片，如使用流动装置则左右滑动</div>
 </div>
 <ul hidden="">
-<li id="a11y-refresh-page-message">Choosing a selection results in a full page refresh.</li>
-<li id="a11y-selection-message">Press the space key then arrow keys to make a selection.</li>
+<li id="a11y-refresh-page-message">选择项目会导致页面重新整理。</li>
+<li id="a11y-selection-message">按空格键然后使用箭头键进行选择。</li>
 </ul>
 <script>
     if (window._wisepopsSkipShopifyDeprecatedSnippet !== true) {
@@ -2075,4 +2071,19 @@ Dawn, Studio and Refresh are extremely similar, but Boost is a bit different.
   --productRating-widget-alignment: center;
 }
 
-.wrapper .fer
+.wrapper .fera--brooklyn-theme {
+  --block-widget-padding-x: 0px;
+}
+
+.fera--debut-theme {
+  --theme-font: "Helvetica", "Assistant", "Helvetica Neue", "Arial", "Lucida Grande", sans-serif;
+  --heading-base-size--1: 28px;
+  --block-widget-padding-x: 22px;
+}
+@media (min-width: 750px) {
+  .fera--debut-theme {
+    --block-widget-padding-x: 55px;
+    --heading-base-size--1: calc(32px / var(--wide-font-scale));
+  }
+}
+.fera--debut-theme.

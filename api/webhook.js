@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
 
     const id = paymentIntent.id || 'N/A';
     const amount = money(paymentIntent.amount);
-    const currency = paymentIntent.currency || 'USD';
+    const currency = paymentIntent.currency || 'CNY';
     const status = paymentIntent.status || 'unknown';
     const metadata = paymentIntent.metadata || {};
     const order = paymentIntent.order || {};
@@ -64,11 +64,29 @@ module.exports = async function handler(req, res) {
           quantity: p.quantity || 1,
           unitPrice: Number(p.unit_price || 0) / 100,
         }));
+        const depositAmount = Number(amount) || 0;
+        const termMonths = Number(metadata.term_months) || 36;
+        const monthlyRent =
+          Number(metadata.monthly_rent) > 0
+            ? Number(metadata.monthly_rent)
+            : termMonths > 0 ? Number((depositAmount / termMonths).toFixed(2)) : 0;
         const newOrder = {
           id: await genOrderId(),
           paymentIntentId: id,
           source: 'online',
           sourceLabel: '官网在线支付',
+          type: 'lease',
+          lease: {
+            depositAmount,
+            monthlyRent,
+            termMonths,
+            startDate: null,
+            paidPeriods: 0,
+            remainingDeposit: depositAmount,
+            depositRefunded: false,
+            refundTime: null,
+            payHistory: [],
+          },
           products,
           customer: {
             name: [shipping.first_name, shipping.last_name].filter(Boolean).join(' ') || '',

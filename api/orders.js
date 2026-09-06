@@ -23,7 +23,31 @@ function normalizeManualOrder(body, user) {
   } else {
     source = body.source === 'dealer' ? 'dealer' : 'manual';
   }
+  // 租赁参数（押金=payment.amount，月租/租期/计租起始可前台覆盖）
+  const leaseIn = body.lease || {};
+  const depositAmount = Number(
+    (body.payment && body.payment.amount) || leaseIn.depositAmount || 0
+  );
+  const termMonths = Number(leaseIn.termMonths) || 36;
+  const monthlyRent =
+    Number(leaseIn.monthlyRent) > 0
+      ? Number(leaseIn.monthlyRent)
+      : termMonths > 0
+        ? Number((depositAmount / termMonths).toFixed(2))
+        : 0;
   return {
+    type: 'lease',
+    lease: {
+      depositAmount,
+      monthlyRent,
+      termMonths,
+      startDate: leaseIn.startDate || null,
+      paidPeriods: 0,
+      remainingDeposit: depositAmount,
+      depositRefunded: false,
+      refundTime: null,
+      payHistory: [],
+    },
     source,
     sourceLabel: SOURCES[source],
     enteredBy: user ? user.username : null,
@@ -41,7 +65,7 @@ function normalizeManualOrder(body, user) {
     payment: {
       method: (body.payment && body.payment.method) || '',
       amount: parseFloat(body.payment && body.payment.amount) || 0,
-      currency: (body.payment && body.payment.currency) || 'USD',
+      currency: (body.payment && body.payment.currency) || 'CNY',
       status: (body.payment && body.payment.status) || 'paid',
       txnId: (body.payment && body.payment.txnId) || '',
     },

@@ -25,6 +25,7 @@
           <input type="radio" name="source" value="manual"> 客服转账录入
         </label>
       </div>
+      <div style="margin-top:10px;font-size:13px;color:#8b7355;">订单类型：租赁（押金）· 币种：CNY</div>
     </div>
 
     <div class="card">
@@ -55,9 +56,7 @@
         </div>
         <div><label>币种</label>
           <select id="p-currency">
-            <option value="USD">USD</option>
-            <option value="HKD">HKD</option>
-            <option value="CNY">CNY</option>
+            <option value="CNY" selected>CNY (人民币)</option>
           </select>
         </div>
         <div><label>金额 *</label><input type="number" id="p-amount" step="0.01" min="0" required></div>
@@ -101,6 +100,15 @@
           </select>
         </div>
         <div class="full"><label>备注</label><input type="text" id="l-note"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>租赁参数（押金=支付金额，月租默认=押金÷36）</h3>
+      <div class="form-grid">
+        <div><label>月租（元/月）</label><input type="number" id="l-monthly" step="0.01" min="0" placeholder="留空自动=押金÷36"></div>
+        <div><label>租期（月）</label><input type="number" id="l-term" value="36" min="1"></div>
+        <div><label>计租起始日</label><input type="date" id="l-start"></div>
       </div>
     </div>
 
@@ -165,6 +173,12 @@
 
     var body = {
       source: source,
+      type: 'lease',
+      lease: {
+        monthlyRent: parseFloat(document.getElementById('l-monthly').value) || 0,
+        termMonths: parseInt(document.getElementById('l-term').value, 10) || 36,
+        startDate: document.getElementById('l-start').value || null
+      },
       customer: {
         name: document.getElementById('c-name').value.trim(),
         email: document.getElementById('c-email').value.trim(),

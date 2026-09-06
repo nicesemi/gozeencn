@@ -18,6 +18,7 @@
   <div class="card" id="status-card">
     <div class="detail-grid">
       <div class="detail-item"><span class="k">订单状态</span><span class="v" id="d-status"></span></div>
+      <div class="detail-item"><span class="k">订单类型</span><span class="v" id="d-type"></span></div>
       <div class="detail-item"><span class="k">来源</span><span class="v" id="d-source"></span></div>
       <div class="detail-item"><span class="k">下单时间</span><span class="v" id="d-created"></span></div>
       <div class="detail-item"><span class="k">支付状态</span><span class="v" id="d-paystatus"></span></div>
@@ -95,6 +96,60 @@
     </div>
   </div>
 
+  <!-- 租赁进度 -->
+  <div class="card" id="lease-card" style="margin-top:16px;">
+    <h3>租赁进度 <span class="muted" style="font-weight:400;">（押金非收入，按月在押金内抵扣租金）</span></h3>
+    <div class="detail-grid" id="lease-summary" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
+      <div class="detail-item"><span class="k">押金</span><span class="v" id="ls-deposit"></span></div>
+      <div class="detail-item"><span class="k">月租</span><span class="v" id="ls-monthly"></span></div>
+      <div class="detail-item"><span class="k">租期</span><span class="v" id="ls-term"></span></div>
+      <div class="detail-item"><span class="k">计租起始</span><span class="v" id="ls-start"></span></div>
+      <div class="detail-item"><span class="k">已收期数</span><span class="v" id="ls-periods"></span></div>
+      <div class="detail-item"><span class="k">累计已收租金</span><span class="v" id="ls-paidtotal"></span></div>
+      <div class="detail-item"><span class="k">剩余押金</span><span class="v" id="ls-remaining"></span></div>
+      <div class="detail-item"><span class="k">押金状态</span><span class="v" id="ls-refunded"></span></div>
+    </div>
+
+    <!-- 登记收租 -->
+    <div class="mt16 rent-ops" style="border-top:1px solid #eee;padding-top:12px;">
+      <label><strong>登记一期租金</strong></label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
+        <div><label style="display:block;font-size:12px;">期数</label><input type="number" id="rent-period" style="width:70px;" min="1" placeholder="自动"></div>
+        <div><label style="display:block;font-size:12px;">金额 *</label><input type="number" id="rent-amount" style="width:100px;" step="0.01" min="0"></div>
+        <div><label style="display:block;font-size:12px;">实收日期</label><input type="date" id="rent-paiddate" style="width:auto;"></div>
+        <div><label style="display:block;font-size:12px;">方式</label>
+          <select id="rent-method" style="width:auto;">
+            <option value="bank_transfer">银行转账</option>
+            <option value="airwallex">在线支付</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        <div><label style="display:block;font-size:12px;">流水号</label><input type="text" id="rent-txn" style="width:120px;"></div>
+        <button class="btn btn-sm" onclick="addRent()">登记收租</button>
+      </div>
+    </div>
+
+    <!-- 退押金 -->
+    <div class="mt16 rent-ops" style="border-top:1px solid #eee;padding-top:12px;">
+      <label><strong>提前结束并退剩余押金</strong></label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
+        <div><label style="display:block;font-size:12px;">退押金额 *</label><input type="number" id="refund-amount" style="width:100px;" step="0.01" min="0"></div>
+        <div><label style="display:block;font-size:12px;">原因</label><input type="text" id="refund-reason" style="width:140px;"></div>
+        <div><label style="display:block;font-size:12px;">退款流水</label><input type="text" id="refund-txn" style="width:120px;"></div>
+        <button class="btn btn-sm" onclick="refundDeposit()">确认退押金</button>
+      </div>
+    </div>
+
+    <!-- 扣费明细 -->
+    <div class="mt16">
+      <label><strong>扣费记录</strong></label>
+      <table style="margin-top:6px;">
+        <thead><tr><th>期数</th><th>金额</th><th>应扣日</th><th>实收日</th><th>方式</th><th>流水号</th><th>登记人</th></tr></thead>
+        <tbody id="ls-history"></tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- 后续服务追踪 -->
   <div class="card">
     <h3>后续服务追踪</h3>
@@ -126,6 +181,14 @@
 
   var orderId = new URLSearchParams(location.search).get('id');
   var currentOrder = null;
+  var role = ADMIN.user ? ADMIN.user.role : '';
+  // 仅 admin 可见租赁登记/退押操作
+  if (role !== 'admin') {
+    document.addEventListener('DOMContentLoaded', function () {
+      var ops = document.querySelectorAll('#lease-card .rent-ops');
+      ops.forEach(function (el) { el.style.display = 'none'; });
+    });
+  }
 
   function loadDetail() {
     ADMIN.get('/api/orders/' + encodeURIComponent(orderId)).then(function (data) {
@@ -134,6 +197,7 @@
       document.getElementById('order-title').textContent = o.id;
 
       document.getElementById('d-status').innerHTML = ADMIN.statusBadge(o.status);
+      document.getElementById('d-type').textContent = o.type === 'lease' ? '租赁（押金）' : (o.type === 'sale' ? '销售' : (o.type || '租赁（押金）'));
       document.getElementById('d-source').textContent = o.sourceLabel || o.source || '';
       document.getElementById('d-created').textContent = (o.createdAt || '').replace('T', ' ').slice(0, 19);
       document.getElementById('d-paystatus').innerHTML = ADMIN.payBadge(o.payment);
@@ -163,7 +227,7 @@
       // 支付
       var p = o.payment || {};
       document.getElementById('d-paymethod').textContent = p.method || '-';
-      document.getElementById('d-payamount').textContent = money(p.amount, p.currency) + ' ' + (p.currency || '');
+      document.getElementById('d-payamount').textContent = money(p.amount, p.currency) + ' CNY';
       document.getElementById('d-paytxn').textContent = p.txnId || '-';
       document.getElementById('d-note').textContent = o.note || '-';
 
@@ -197,9 +261,78 @@
               '<div class="t-content">' + esc(t.content || '') + '</div></li>';
       });
       document.getElementById('d-timeline').innerHTML = th || '<li class="muted">暂无服务记录</li>';
+
+      renderLease(o);
     }).catch(function (e) {
       alert(e.message || '加载失败');
     });
+  }
+
+  // ---- 租赁进度渲染与操作 ----
+  function renderLease(o) {
+    var l = o.lease || {};
+    var deposit = Number(l.depositAmount != null ? l.depositAmount : (o.payment && o.payment.amount) || 0);
+    var monthly = Number(l.monthlyRent || 0);
+    var term = Number(l.termMonths) || 36;
+    var history = Array.isArray(l.payHistory) ? l.payHistory : [];
+    var paidTotal = history.reduce(function (s, h) { return s + (Number(h.amount) || 0); }, 0);
+    var remaining = Math.max(Number((deposit - paidTotal).toFixed(2)), 0);
+    document.getElementById('ls-deposit').innerHTML = '<strong>' + money(deposit, 'CNY') + '</strong>';
+    document.getElementById('ls-monthly').textContent = monthly ? money(monthly, 'CNY') + ' /月' : '-';
+    document.getElementById('ls-term').textContent = term ? term + ' 期' : '-';
+    document.getElementById('ls-start').textContent = l.startDate || '待设置';
+    document.getElementById('ls-periods').textContent = (history.length || 0) + ' / ' + term;
+    document.getElementById('ls-paidtotal').textContent = money(paidTotal, 'CNY');
+    document.getElementById('ls-remaining').innerHTML = '<strong>' + money(remaining, 'CNY') + '</strong>';
+    document.getElementById('ls-refunded').textContent = l.depositRefunded ? ('已退押金' + (l.refundTime ? ' ' + String(l.refundTime).slice(0, 10) : '')) : '未退';
+
+    var th = '';
+    history.slice().reverse().forEach(function (h) {
+      th += '<tr><td>第 ' + (h.period || '-') + ' 期</td><td>' + money(h.amount, 'CNY') + '</td><td>' + esc((h.dueDate || '').slice(0, 10) || '-') + '</td>' +
+        '<td>' + esc((h.paidDate || '').slice(0, 10)) + '</td><td>' + esc({ bank_transfer: '银行转账', airwallex: '在线支付', other: '其他' }[h.method] || h.method || '-') + '</td>' +
+        '<td>' + esc(h.txn || '-') + '</td><td>' + esc(h.handler || '-') + '</td></tr>';
+    });
+    document.getElementById('ls-history').innerHTML = th || '<tr><td colspan="7" class="muted">暂无扣费记录</td></tr>';
+
+    // 默认填入后续期数
+    var nextPeriod = history.length + 1;
+    var rp = document.getElementById('rent-period');
+    if (rp && !rp.value) rp.value = nextPeriod;
+  }
+
+  function addRent() {
+    if (!currentOrder) return;
+    var body = {
+      addRent: {
+        period: parseInt(document.getElementById('rent-period').value, 10),
+        amount: parseFloat(document.getElementById('rent-amount').value),
+        paidDate: document.getElementById('rent-paiddate').value,
+        method: document.getElementById('rent-method').value,
+        txn: document.getElementById('rent-txn').value.trim()
+      }
+    };
+    ADMIN.put('/api/orders/' + encodeURIComponent(orderId), body).then(function () {
+      document.getElementById('rent-amount').value = '';
+      document.getElementById('rent-txn').value = '';
+      alert('已登记本期租金');
+      loadDetail();
+    }).catch(function (e) { alert(e.message || '登记失败'); });
+  }
+
+  function refundDeposit() {
+    if (!currentOrder) return;
+    if (!confirm('确认提前结束租赁并退剩余押金？此操作不可撤销。')) return;
+    var body = {
+      refundDeposit: {
+        amount: parseFloat(document.getElementById('refund-amount').value),
+        reason: document.getElementById('refund-reason').value.trim(),
+        txn: document.getElementById('refund-txn').value.trim()
+      }
+    };
+    ADMIN.put('/api/orders/' + encodeURIComponent(orderId), body).then(function () {
+      alert('押金已退，租赁结束');
+      loadDetail();
+    }).catch(function (e) { alert(e.message || '退押金失败'); });
   }
 
   function saveStatus() {

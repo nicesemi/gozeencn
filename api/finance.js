@@ -71,10 +71,30 @@ module.exports = async function handler(req, res) {
     // 2) 已收款子集（财务口径）
     const paid = filtered.filter((o) => o.payment && o.payment.status === 'paid');
 
+    // 2.1) 租金实收子集（来自各订单 lease.payHistory，按月/按流水）
+    const rentRows = [];
+    filtered.forEach((o) => {
+      const l = o.lease;
+      if (!l || !Array.isArray(l.payHistory)) return;
+      l.payHistory.forEach((h) => {
+        rentRows.push({
+          orderId: o.id,
+          period: Number(h.period) || 0,
+          amount: Number(h.amount) || 0,
+          paidDate: (h.paidDate || (o.createdAt || '').slice(0, 10)).slice(0, 10),
+          dueDate: (h.dueDate || '').slice(0, 10) || null,
+          method: h.method || '',
+          txn: h.txn || '',
+          handler: h.handler || '',
+        });
+      });
+    });
+    const rentCollected = rentRows.reduce((s, h) => s + h.amount, 0);
+
     // 3) summary
     const currencyTotals = {};
     paid.forEach((o) => {
-      const c = o.payment.currency || 'USD';
+      const c = o.payment.currency || 'CNY';
       currencyTotals[c] = (currencyTotals[c] || 0) + (Number(o.payment.amount) || 0);
     });
     const byCurrency = sortCurrencies(
@@ -87,7 +107,7 @@ module.exports = async function handler(req, res) {
     const sourceTotals = {};
     paid.forEach((o) => {
       const s = o.source || 'online';
-      const c = o.payment.currency || 'USD';
+      const c = o.payment.currency || 'CNY';
       const key = `${s}|${c}`;
       if (!sourceTotals[key]) {
         sourceTotals[key] = {
@@ -113,7 +133,7 @@ module.exports = async function handler(req, res) {
     paid.forEach((o) => {
       const dk = dayKey(o.createdAt);
       const mk = monthKey(o.createdAt);
-      const c = o.payment.currency || 'USD';
+      const c = o.payment.currency || 'CNY';
       const amt = Number(o.payment.amount) || 0;
       if (!dailyMap[dk]) dailyMap[dk] = {};
       dailyMap[dk][c] = (dailyMap[dk][c] || 0) + amt;
@@ -154,7 +174,7 @@ module.exports = async function handler(req, res) {
           sourceLabel: SOURCES[o.source] || o.sourceLabel || o.source,
           customer: o.customer ? o.customer.name || o.customer.email || '' : '',
           method: pay.method || '',
-          currency: pay.currency || 'USD',
+          currency: pay.currency || 'CNY',
           amount: Number(pay.amount) || 0,
           paymentStatus: pay.status || '',
           orderStatus: o.status || '',
@@ -162,9 +182,29 @@ module.exports = async function handler(req, res) {
       })
       .sort((a, b) => (a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0));
 
+    // 6) 租金实收：按月 / 按日 汇总 + 流水（供对账与投资人展示）
+    const rentMonthlyMap = {};
+    const rentDailyMap = {};
+    rentRows.forEach((h) => {
+      const mk = h.paidDate.slice(0, 7);
+      const dk = h.paidDate;
+      rentMonthlyMap[mk] = (rentMonthlyMap[mk] || 0) + h.amount;
+      rentDailyMap[dk] = (rentDailyMap[dk] || 0) + h.amount;
+    });
+    const rentMonthly = Object.keys(rentMonthlyMap)
+      .sort()
+      .map((m) => ({ month: m, revenue: Number(rentMonthlyMap[m].toFixed(2)) }));
+    const rentDaily = Object.keys(rentDailyMap)
+      .sort()
+      .map((d) => ({ date: d, revenue: Number(rentDailyMap[d].toFixed(2)) }));
+    const rentTransactions = rentRows
+      .sort((a, b) => (a.paidDate < b.paidDate ? -1 : a.paidDate > b.paidDate ? 1 : 0));
+
     return res.status(200).json({
       summary: {
-        totalRevenue: byCurrency, // 总收入（按币种），仅已收款
+        totalRevenue: byCurrency, // 押金（暂收）收入，按币种，仅已收款
+        rentCollected, // 租金（实收）总额，按 CNY
+        depositCollected: byCurrency,
         totalOrders: filtered.length,
         paidOrders: paid.length,
         cancelledOrders: filtered.filter((o) => o.status === 'cancelled').length,
@@ -174,6 +214,9 @@ module.exports = async function handler(req, res) {
       daily,
       monthly,
       transactions,
+      rentDaily,
+      rentMonthly,
+      rentTransactions,
     });
   } catch (err) {
     console.error('finance error:', err);

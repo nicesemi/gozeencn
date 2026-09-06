@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
@@ -23,6 +24,10 @@
 <style>
 body { background-color: #fff; color: #333; }
 .page-container { background-color: var(--color-body, #f9f9f9); }
+</style>
+
+
+<style>
 .shopify-policy__container {
   max-width: 800px;
   margin: 0 auto;
@@ -52,7 +57,7 @@ body { background-color: #fff; color: #333; }
 </head>
 <body>
 <noscript></noscript>
-<a class="in-page-link visually-hidden skip-link" href="#MainContent">Skip to content</a>
+<a class="in-page-link visually-hidden skip-link" href="#MainContent">跳至内容</a>
 <style data-shopify="">
 
   .cart-popup {
@@ -61,7 +66,7 @@ body { background-color: #fff; color: #333; }
 <div aria-labelledby="CartPopupHeading" aria-modal="true" class="cart-popup-wrapper cart-popup-wrapper--hidden critical-hidden" data-cart-popup-wrapper="" role="dialog">
 <div class="cart-popup" data-cart-popup="" tabindex="-1">
 <div class="cart-popup__header">
-<h2 class="cart-popup__heading" id="CartPopupHeading">Just added to your cart</h2>
+<h2 class="cart-popup__heading" id="CartPopupHeading">已加入购物车</h2>
 <button aria-label="Close" class="cart-popup__close" data-cart-popup-close=""><svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg></button>
 </div>
 <div class="cart-popup-item">
@@ -73,7 +78,7 @@ body { background-color: #fff; color: #333; }
 </div>
 <div class="cart-popup-item__quantity">
 <span class="visually-hidden" data-cart-popup-quantity-label=""></span>
-<span aria-hidden="true">Qty:</span>
+<span aria-hidden="true">数量：</span>
 <span aria-hidden="true" data-cart-popup-quantity=""></span>
 </div>
 </div>
@@ -81,13 +86,13 @@ body { background-color: #fff; color: #333; }
 <div class="flex justify-center my-4">
 <div>
 <a class="cart-popup__cta-link btn inline-block" href="/cart.html">
-          View cart (<span data-cart-popup-cart-quantity=""></span>)
+          查看购物车（<span data-cart-popup-cart-quantity=""></span>)
         </a>
 </div>
 </div>
 <div class="cart-popup__dismiss">
 <button class="cart-popup__dismiss-button text-link text-link--accent" data-cart-popup-dismiss="">
-        Continue shopping
+        继续购物
       </button>
 </div>
 </div>
@@ -104,7 +109,7 @@ body { background-color: #fff; color: #333; }
       .site-header__logo-image {
         margin: 0;
       }
-    
+
     /* Tailwind utility fallback — fixes header layout */
     .flex { display: flex; }
     .items-center { align-items: center; }
@@ -124,24 +129,24 @@ body { background-color: #fff; color: #333; }
     }
 
   </style>
-<div aria-label="Search" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
+<div aria-label="搜寻" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
 <div class="search-bar__interior">
 <div class="search-form__container" data-search-form-container="">
 <form action="/search" class="search-form search-bar__form" method="get" role="search">
 <div class="search-form__input-wrapper">
-<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="Search" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
+<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="搜寻" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
 <input aria-hidden="true" name="options[prefix]" type="hidden" value="last"/>
 <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
 </div>
 <button class="search-bar__submit search-form__submit" data-search-form-submit="" type="submit">
 <svg aria-hidden="true" class="icon icon-search" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path></svg>
-<span class="icon__fallback-text">Submit</span>
+<span class="icon__fallback-text">提交</span>
 </button>
 </form>
 <div class="search-bar__actions">
 <button class="btn--link search-bar__close js-drawer-close" type="button">
 <svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
-<span class="icon__fallback-text">Close search</span>
+<span class="icon__fallback-text">关闭搜寻</span>
 </button>
 </div>
 </div>
@@ -150,7 +155,7 @@ body { background-color: #fff; color: #333; }
 <div class="spacer h-[94px] xl:h-[117px]"></div>
 <div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
 <header class="site-header border-bottom logo--left bg-white" role="banner">
-<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">Call us today at (00852) 3050-1862</p></a></div>
+<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">立即致电 (00852) 3050-1862</p></a></div>
 <div class="site-header__mobile-nav relative z-10 bg-white">
 <div class="flex items-center justify-between px-8 w-full">
 <div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
@@ -167,49 +172,46 @@ body { background-color: #fff; color: #333; }
 <ul class="site-nav list--inline" id="SiteNav">
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/zeen.html">
-<span class="site-nav__label">Order Your Zeen</span>
+<span class="site-nav__label">订购 Zeen</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/collections/accessories.html">
-<span class="site-nav__label">Accessories</span>
+<span class="site-nav__label">配件</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/events.html">
-<span class="site-nav__label">Zeen Demos</span>
+<span class="site-nav__label">Zeen 示范</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/help.html">
-<span class="site-nav__label">Training</span>
+<span class="site-nav__label">训练</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/contact-us.html">
-<span class="site-nav__label">Contact Us</span>
+<span class="site-nav__label">联络我们</span>
 </a>
 </li>
-
 
 </ul>
 </nav>
 <div class="grid__item lg:w-1/6 w-1/2 text-right site-header__icons site-header__icons--plus">
 <div class="site-header__icons-wrapper gap-4">
 <div class="site-header__lang-switcher" style="display:flex;align-items:center;margin-left:12px;gap:4px;font-size:14px;">
-<a href="/zh-hk/policies/refund-policy.html" style="color:#666;text-decoration:none;" title="繁中">繁中</a>
-<span style="color:#999;">|</span>
-<span style="color:#be1e2d;font-weight:700;">English</span>
+
 </div>
 <a class="site-header__icon site-header__cart w-4" href="/cart.html">
 <svg aria-hidden="true" class="icon icon-cart" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
-<span class="icon__fallback-text">Cart</span>
+<span class="icon__fallback-text">购物车</span>
 <div class="site-header__cart-count hide critical-hidden" data-cart-count-bubble="" id="CartCount">
 <span data-cart-count="">0</span>
-<span class="icon__fallback-text medium-up--hide">items</span>
+<span class="icon__fallback-text medium-up--hide">件</span>
 </div>
 </a>
-<button aria-controls="MobileNav" aria-expanded="false" aria-label="Menu" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
+<button aria-controls="MobileNav" aria-expanded="false" aria-label="选单" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
 <svg aria-hidden="true" class="icon icon-hamburger" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M33.5 25h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0-11.5h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0 23h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
 <svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
 </button>
@@ -221,31 +223,29 @@ body { background-color: #fff; color: #333; }
 <ul class="mobile-nav" id="MobileNav">
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/zeen.html">
-<span class="mobile-nav__label">Order Your Zeen</span>
+<span class="mobile-nav__label">订购 Zeen</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/collections/accessories.html">
-<span class="mobile-nav__label">Accessories</span>
+<span class="mobile-nav__label">配件</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/events.html">
-<span class="mobile-nav__label">Zeen Demos</span>
+<span class="mobile-nav__label">Zeen 示范</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/help.html">
-<span class="mobile-nav__label">Training</span>
+<span class="mobile-nav__label">训练</span>
 </a>
 </li>
 <li class="mobile-nav__item">
 <a class="mobile-nav__link" href="/pages/contact-us.html">
-<span class="mobile-nav__label">Contact Us</span>
+<span class="mobile-nav__label">联络我们</span>
 </a>
 </li>
-
-<li class="mobile-nav__item"><span class="mobile-nav__link" style="color:#be1e2d;font-weight:700;">English</span></li><li class="mobile-nav__item"><a class="mobile-nav__link" href="/zh-hk/policies/refund-policy.html">繁中</a></li>
 </ul>
 </nav>
 </header>
@@ -277,23 +277,23 @@ body { background-color: #fff; color: #333; }
 <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
 <div class="shopify-policy__container">
 <div class="shopify-policy__title">
-<h1>Refund policy</h1>
+<h1>退款政策</h1>
 </div>
 <div class="shopify-policy__body">
 <div class="rte">
-<p>The Zeen is a device unlike any other on the market. We know that the Zeen will let many people facing mobility limitations do more for longer and increase their enjoyment of life. But like a new bicycle or an unfamiliar exercise machine, it will take some time for you to feel completely comfortable and natural with the Zeen. We humbly ask that new Zeen customers take at least two weeks of regular use to learn and become accustomed to the Zeen. During that time, you should watch our tutorial videos that explain how to adjust the Zeen and how to use it in different situations and environments. If you still have questions or any concerns, reach out to us. Our team is available to you to make the experience as enjoyable and successful as possible.</p>
-<p>The Zeen Team offers a session of up to one hour that we encourage all users to take advantage of early in their trial period. We also offer a second session of up to thirty (30) minutes for extended training and adjustment. Any additional training is offered at $200/hour charged up front. Please speak with our support team with any questions or to schedule.</p>
-<p><br/>If within the initial 21 days of receiving the Zeen and after your orientation process, you are not fully satisfied with the product, you may return the Zeen to us for a refund (excluding a $275 restocking fee and two-way shipping fees) by following the steps described here.</p>
-<p><br/><strong>Process for Returns</strong></p>
-<p><br/>1. Contact customer service at (00852) 3050-1862 or support@gozeen.hk. If you meet the requirements, we will give you a Return Authorization number (RA number) and send written instructions for returning the Zeen. Please note that returns must be authorized by Exokinetics and assigned an RA number before shipping the product. Returned Zeens that do not have an associated RA number will not be accepted.</p>
-<p><br/>2. Please keep your original packaging during this 21-day evaluation period, as the Zeen MUST be returned in its original packaging. If the primary packaging is not available, request new packaging to be sent to you. <span class="NormalTextRun SCXW225709159 BCX0">If a replacement box </span><span class="NormalTextRun SCXW225709159 BCX0">is </span><span class="NormalTextRun SCXW225709159 BCX0">required</span><span class="NormalTextRun SCXW225709159 BCX0">, a $325 charge will be due. You can choose to be charged or have the fee deducted from the refund.</span></p>
-<p><br/>3. The Zeen must be clean and in "like new" condition, allowing for reasonable wear and tear under normal conditions during the 21-day trial period. <strong>Please take photographs to document the current condition before packing</strong>. Please capture all sides of the Zeen as this will help determine any liability regarding shipping damages. Exokinetics reserves the right to charge a sanitation fee if a Zeen is returned with filth or bodily fluids.</p>
-<p><br/>4. Exokinetics will send a prepaid shipping label for the Zeen return with the provided RA number. Please attach this label to the packaging and schedule your box pickup for return shipment/or deliver the box directly to the shipping vendor selected by Exokinetics.</p>
-<p><br/>All returns must originate from within the United States and US territories. Return shipping fee is $275 for shipments using the original Zeen packaging within the continental United States. Additional fees will be incurred from shipments originating outside of the continental United States. Please contact our team for further details.</p>
-<p><br/>5. Upon receipt of the returned Zeen, the Exokinetics team will assess the Zeen for damage. If your Zeen is damaged, either during use or shipment, your refund may be reduced accordingly. Our team will notify you once the product is received and fully inspected for refund details. Please expect the refund to take 4–6 weeks for completion.</p>
-<p><br/>Exokinetics will extend the return period for your Zeen to 31-days from receipt if:<br/>• The Zeen being returned is in unopened condition inside the original shipping box.<br/>• A manufacturing defect exists and is confirmed by Exokinetics customer service.<br/>• No Zeen replacement parts are available to bring the Zeen to working condition.</p>
-<p><br/>We hope you enjoy your Zeen! If there is any help you need with the product, please review our library of training videos or reach out to us at any time.</p>
-<p><br/>You may contact customer service in any of the following ways:<br/>• Call (00852) 3050-1862 Monday through Friday 9 AM–5:00 PM EST. If we are closed, you can leave a message, and someone will respond as soon as possible.<br/>•Email us at support@gozeen.hk<br/>2026 Zeen® / All rights reserved</p>
+<p>Zeen 是一款与市场上任何其他设备不同的装置。我们知道 Zeen 将让许多面临行动限制的人士能够做得更多更持久，并提升生活乐趣。但就像一架新单车或不熟悉的健身器材一样，你需要一段时间先能够完全适应并自然地使用 Zeen。我们恳请新的 Zeen 客户至少花两周时间定期使用，以学习和熟悉 Zeen。在此期间，你应观看我们的教学影片，了解如何调整 Zeen 以及如何在不同的情境和环境中使用它。如果你仍有疑问或任何疑虑，请联络我们。我们的团队随时为你服务，让你的体验尽可能愉快和成功。</p>
+<p>Zeen 团队提供长达一小时的环节，我们鼓励所有使用者在试用期早期善用此服务。试用期内。我们还提供第二次最多三十分钟的延伸培训和调整环节。任何额外培训按每小时 ¥1,560.00 港币预先收费。如有任何问题或需要安排，请与我们的支援团队联络。</p>
+<p><br/>如果在收到 Zeen 后最初 21 天内、并完成你的引导流程后，你对 Zeen 不完全满意 该产品，你可以按照此处所述步骤将 Zeen 退还给您我们以获得退款（扣除 ¥2,145.00 补货费及双向运费）。</p>
+<p><br/><strong>退货流程</strong></p>
+<p><br/>1. 联络客服，致电 (00852) 3050-1862 或电邮 support@gozeen.cn。如果你符合要求，我们将为你提供退货授权编号（RA 编号）并发送退货 Zeen 的书面说明。请注意，退货必须经 Exokinetics 授权并在运送产品前获派 RA 编号。没有相关 RA 编号的退回 Zeen 将不被接受。</p>
+<p><br/>2. 请在 21 天评估期间保留原装包装，因为 Zeen 必须以原装包装退回。原装包装。如果没有原装包装，请向我们申请寄送新包装。 <span class="NormalTextRun SCXW225709159 BCX0">如需更换包装盒 </span><span class="NormalTextRun SCXW225709159 BCX0">且 </span><span class="NormalTextRun SCXW225709159 BCX0">有此需要</span><span class="NormalTextRun SCXW225709159 BCX0">，将收取 ¥2,535.00 费用。你可以选择支付此费用，或从退款中扣除。</span></p>
+<p><br/>3. Zeen 必须保持清洁并处于「如新」状态，允许在正常情况下于试用期间的合理磨损。在 21 天试用期内。 <strong>请在包装前拍摄照片记录当前状况</strong>。请拍摄 Zeen 的所有侧面，这将有助确定任何运送损坏的责任。Exokinetics 保留对退回的 Zeen 存在污垢或体液时收取清洁费的权利。</p>
+<p><br/>4. Exokinetics 将发送预付运费标签以供 Zeen 退货，并提供 RA 编号。请将此标签贴在标签贴在包装上，并安排上门收件 / 或将包裹直接送至 Exokinetics 指定的运输商。</p>
+<p><br/>所有退货必须来自美国境内及美国领土。退货运费为 ¥2,145.00，适用于使用原装 Zeen 包装，适用于美国本土。来自美国本土以外的运输将产生额外费用。请联络我们的团队了解更多详情。</p>
+<p><br/>5. 收到退回的 Zeen 后，Exokinetics 团队将会评估 Zeen 有无损坏。如果你的 Zeen 在使用或运送过程中有损坏，你的退款可能会相应扣减。我们团队会在收到产品并全面检查后通知你退款详情。请预计退款需要 4 至 6 周才能完成。</p>
+<p><br/>在以下情况下，Exokinetics 将把你的 Zeen 退货期延长至收到后 31 天：<br/>• 退回的 Zeen 在原装运送箱内处于未开封状态。<br/>• 存在制造缺陷并经 Exokinetics 客服确认。<br/>• 没有可用的 Zeen 替换零件使 Zeen 恢复正常工作状态。</p>
+<p><br/>我们希望你喜欢你的 Zeen！如果你需要任何产品上的协助，请查阅我们的训练影片库，或者随时联络我们。</p>
+<p><br/>你可以透过以下任何方式联络客服：<br/>• 致电 (00852) 3050-1862，星期一至五东岸时间上午 9 点至下午 5 点。如果我们休息紧，你可以留低口讯，会有人尽快回复你。<br/>• 电邮我们：support@gozeen.cn<br/>2026 Zeen® / 版权所有</p>
 </div>
 </div>
 </div>
@@ -321,27 +321,27 @@ body { background-color: #fff; color: #333; }
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                  Order Your Zeen
+                  订购 Zeen
                 </a>
 </li>
 <li>
 <a href="/collections/accessories.html">
-                  Accessories
+                  配件
                 </a>
 </li>
 <li>
 <a href="/pages/events.html">
-                  Zeen Demos
+                  Zeen 示范
                 </a>
 </li>
 <li>
 <a href="/pages/help.html">
-                  Training
+                  训练指南
                 </a>
 </li>
 <li>
 <a href="/pages/contact-us.html">
-                  Contact Us
+                  联络我们
                 </a>
 </li>
 </ul>
@@ -354,89 +354,89 @@ body { background-color: #fff; color: #333; }
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                      Order Your Zeen
+                      订购 Zeen
                     </a>
 </li>
 <li>
 <a href="/collections/accessories.html">
-                      Shop Accessories
+                      选购配件
                     </a>
 </li>
 <li>
 <a href="/pages/distributors.html">
-                      Distributors
+                      经销商
                     </a>
 </li>
 <li>
 <a href="/pages/events.html">
-                      Demo Sign-Up
+                      示范登记
                     </a>
 </li>
 <li>
 <a href="/pages/contact-us.html">
-                      Contact Us
+                      联络我们
                     </a>
 </li>
 </ul>
 </div>
 <div class="gap-8 lg:col-span-1">
 <div class="font-bold">
-                Learn
+                了解更多
               </div>
 <ul class="grid gap-2">
 <li>
 <a href="/pages/our-story.html">
-                      About the Zeen Team
+                      关于 Zeen 团队
                     </a>
 </li>
 <li>
 <a href="/pages/press.html">
-                      Press &amp; News
+                      新闻报导
                     </a>
 </li>
 <li>
 <a href="/pages/funding.html">
-                      Funding your Zeen
+                      Zeen 资助方案
                     </a>
 </li>
 <li>
 <a href="/pages/faqs.html">
-                      FAQs
+                      常见问题
                     </a>
 </li>
 <li>
-<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_EN.pdf">
-                      Product Manual
+<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_CHT.pdf">
+                      产品手册
                     </a>
 </li>
 <li>
 <a href="/assets/s/files/1/0555/0234/0277/files/Zeen_Adjustment_Tables.png" target="_blank" rel="noopener">
-                      Adjustment Tables
+                      调整参数表
                     </a>
 </li>
 <li>
 <a href="/pages/warranty-policy.html">
-                      Limited Warranty
+                      有限保养
                     </a>
 </li>
 <li>
 <a href="/pages/international.html">
-                      International Policy
+                      国际政策
                     </a>
 </li>
 <li>
 <a href="/policies/refund-policy.html">
-                      Return &amp; Refund Policy
+                      退货及退款政策
                     </a>
 </li>
 <li>
 <a href="/policies/privacy-policy.html">
-                      Privacy Policy
+                      私隐政策
                     </a>
 </li>
 <li>
 <a href="/policies/terms-of-service.html">
-                      Terms of Service
+                      服务条款
                     </a>
 </li>
 </ul>
@@ -444,12 +444,12 @@ body { background-color: #fff; color: #333; }
 <div class="grid gap-8 col-span-2">
 <div class="grid gap-4">
 <div>
-            Sign up for our newsletter
+            订阅我们的电子报
           </div>
 </div>
 <div class="grid gap-6">
 <div>
-<a class="btn inline-block w-full text-center" href="/pages/newsletter.html">Sign up</a>
+<a class="btn inline-block w-full text-center" href="/pages/newsletter.html">订阅</a>
 </div>
 <div>
 <div>
@@ -487,21 +487,21 @@ body { background-color: #fff; color: #333; }
 <div class="grid lg:grid-cols-2 gap-12 items-start py-12 lg:py-24">
 <div class="paragraphs">
 <div>
-        2026 GoZeen.hk All rights reserved.
+        2026 GoZeen.hk 版权所有。
         <br/><br/>
-        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="Admin Login">Admin Login</a>
+        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="后台登入">后台登入</a>
 </div>
-<p>Exokinetics HK.</p><p>UNIT 05, 12/F, THE CLOUD, NO.111 TUNG CHAU STREET, TAI KOK TSUI, HONG KONG</p><p>(00852) 3050-1862</p>
+<p>Exokinetics HK.</p><p>香港九龙大角咀通州街111号云之端12楼05室</p><p>(00852) 3050-1862</p>
 </div>
 <div>
 <div class="paragraphs">
-<p>Zeen is proudly designed and assembled in the United States.</p><p> </p>
+<p>Zeen 在美国自豪地设计和组装。</p><p> </p>
 </div>
 <div class="w-24">
 <img alt="" class="" height="240" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/cdn/shop/files/American_Flag_-_footer.png" srcset="/assets/cdn/shop/files/American_Flag_-_footer.png" width="400"/>
 </div>
 <div class="paragraphs">
-<p> </p><p>Our designs are protected by both domestic and international patents.</p><p></p><p><strong>The Zeen is VA approved</strong> --</p><p>Company: Exokinetics HK.</p><p>Unique Entity ID: ZF8UYSDQYJC1</p><p>CAGE code: 9G1G3</p>
+<p> </p><p>我们的设计受国内及国际专利保护。</p><p></p><p><strong>Zeen 已获 VA 认证</strong> --</p><p>公司：Exokinetics HK.</p><p>Unique Entity ID: ZF8UYSDQYJC1</p><p>CAGE code: 9G1G3</p>
 </div>
 </div>
 </div>
@@ -510,11 +510,11 @@ body { background-color: #fff; color: #333; }
 </div>
 </footer>
 </div>
-<div aria-hidden="true" class="visually-hidden" id="slideshow-info">Use left/right arrows to navigate the slideshow or swipe left/right if using a mobile device</div>
+<div aria-hidden="true" class="visually-hidden" id="slideshow-info">使用左右箭头浏览幻灯片，如使用流动装置则左右滑动</div>
 </div>
 <ul hidden="">
-<li id="a11y-refresh-page-message">Choosing a selection results in a full page refresh.</li>
-<li id="a11y-selection-message">Press the space key then arrow keys to make a selection.</li>
+<li id="a11y-refresh-page-message">选择项目会导致页面重新整理。</li>
+<li id="a11y-selection-message">按空格键然后使用箭头键进行选择。</li>
 </ul>
 <script>
     if (window._wisepopsSkipShopifyDeprecatedSnippet !== true) {
@@ -620,6 +620,47 @@ body { background-color: #fff; color: #333; }
   });
 </script>
 <script data-source-attribution="shopify.standard_actions" src="/assets/storefront/standard-actions.js" type="module"></script>
-<script src="../assets/js/zeen-support.js"></script>
+<script src="/assets/js/zeen-support.js"></script>
+
+<script>
+(function(){
+  var RATE = 7.8;
+  var priceSelectors = ['.price','.product__price','.money','.cart-item__price','.cart-subtotal__price','[data-price]'];
+
+  function formatCNY(amount) {
+    return '¥' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function convertPrices() {
+    priceSelectors.forEach(function(sel) {
+      var els = document.querySelectorAll(sel);
+      els.forEach(function(el) {
+        if (el.dataset.converted === 'hkd') return;
+        var text = el.textContent || '';
+        var match = text.match(/\$([\d,]+\.?\d*)/);
+        if (match) {
+          var usdStr = match[1].replace(/,/g, '');
+          var usd = parseFloat(usdStr);
+          if (!isNaN(usd) && usd > 0) {
+            var hkd = usd * RATE;
+            el.textContent = formatCNY(hkd);
+            el.dataset.converted = 'hkd';
+            var label = document.createElement('small');
+            label.style.cssText = 'font-size:12px;color:#888;margin-left:4px;font-weight:400;';
+            label.textContent = '(CNY)';
+            el.appendChild(label);
+          }
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', convertPrices);
+  } else {
+    convertPrices();
+  }
+})();
+</script>
 </body>
 </html>

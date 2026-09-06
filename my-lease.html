@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>我的租赁 - Zeen 轮椅出租</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f7f8fa; color: #2b2b2b; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  .brand { text-align: center; margin-bottom: 24px; }
+  .brand h1 { font-size: 24px; font-weight: 700; }
+  .brand p { color: #888; font-size: 14px; margin-top: 4px; }
+  .card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 6px rgba(0,0,0,.06); margin-bottom: 20px; }
+  .card h2 { font-size: 17px; font-weight: 700; margin-bottom: 14px; }
+  label { display: block; font-size: 13px; color: #666; margin-bottom: 4px; }
+  input { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; margin-bottom: 14px; }
+  input:focus { outline: none; border-color: #4a90e2; }
+  button { width: 100%; padding: 12px; background: #2b6cb0; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: not-allowed; }
+  .kv { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+  .kv:last-child { border-bottom: none; }
+  .kv .k { color: #888; }
+  .kv .v { font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #f0f0f0; }
+  th { color: #888; font-weight: 500; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 12px; background: #e8f0fe; color: #2b6cb0; }
+  .tag.done { background: #e6f6ec; color: #1a7f4b; }
+  .tag.warn { background: #fdeaea; color: #c0392b; }
+  .err { color: #c0392b; font-size: 14px; display: none; }
+  .hint { font-size: 13px; color: #888; margin-top: 12px; text-align: center; }
+  .back { display: block; text-align: center; margin-top: 24px; font-size: 14px; color: #2b6cb0; text-decoration: none; }
+  #result { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <h1>我的租赁</h1>
+    <p>Zeen 轮椅出租 · 押金租满 36 期即赠机</p>
+  </div>
+
+  <div class="card" id="query-card">
+    <h2>查询租赁状态</h2>
+    <form id="qform" autocomplete="off">
+      <label>订单号</label>
+      <input type="text" id="q-order" placeholder="订单号（如 GZ-XXXX）" required>
+      <label>收件手机号</label>
+      <input type="tel" id="q-phone" placeholder="下单时填写的手机号" required>
+      <button type="submit" id="qbtn">查询</button>
+    </form>
+    <div class="err" id="errbox"></div>
+    <div class="hint">用于查租赁进度与剩余押金，信息不会公开。</div>
+  </div>
+
+  <div class="card" id="result">
+    <h2>租赁信息 <span class="tag" id="r-status"></span></h2>
+    <div id="r-prod"></div>
+    <div id="r-kv"></div>
+    <h2 style="margin-top:18px;">扣费记录</h2>
+    <div style="overflow-x:auto;"><table>
+      <thead><tr><th>期数</th><th>金额</th><th>应扣日</th><th>实收日</th><th>方式</th></tr></thead>
+      <tbody id="r-history"></tbody>
+    </table></div>
+  </div>
+
+  <a class="back" href="/">返回 Zeen 首页</a>
+</div>
+
+<script>
+  var API_BASE = '';
+  var $ = function (id) { return document.getElementById(id); };
+
+  function money(v) { return '¥' + Number(v == null ? 0 : v).toFixed(2); }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  document.getElementById('qform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var orderId = $('q-order').value.trim();
+    var phone = $('q-phone').value.trim();
+    $('errbox').style.display = 'none';
+    if (!orderId || !phone) { $('errbox').textContent = '请填写订单号与手机号'; $('errbox').style.display = 'block'; return; }
+    var btn = $('qbtn');
+    btn.disabled = true; btn.textContent = '查询中…';
+    var url = API_BASE + '/api/lease-status?orderId=' + encodeURIComponent(orderId) + '&phone=' + encodeURIComponent(phone);
+    fetch(url).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (res) {
+      btn.disabled = false; btn.textContent = '查询';
+      if (!res.ok) {
+        var msg = '';
+        if (res.j && res.j.error === 'order_not_found') msg = '未找到该订单，请核对订单号';
+        else if (res.j && res.j.error === 'phone_mismatch') msg = '手机号与订单不匹配，请核对';
+        else if (res.j && res.j.error === 'orderId_and_phone_required') msg = '请填写订单号与手机号';
+        else msg = (res.j && res.j.error) || '查询失败，请稍后再试';
+        $('errbox').textContent = msg; $('errbox').style.display = 'block';
+        return;
+      }
+      render(res.j.lease);
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = '查询';
+      $('errbox').textContent = '网络异常，请稍后再试'; $('errbox').style.display = 'block';
+    });
+  });
+
+  function render(l) {
+    $('r-status').textContent = l.orderStatusLabel || '-';
+    $('r-status').className = 'tag' + (l.status === 'completed' ? ' done' : (l.status === 'cancelled' ? ' warn' : ''));
+    var prod = (l.products || []).map(function (p) {
+      return '<div class="kv"><span class="k">' + esc(p.name) + '</span><span class="v">×' + (p.quantity || 1) + '</span></div>';
+    }).join('');
+    $('r-prod').innerHTML = prod || '<div class="kv"><span class="k">产品</span><span class="v">-</span></div>';
+    var rows = [
+      ['押金（已付）', money(l.depositAmount)],
+      ['月租', money(l.monthlyRent) + ' / 月'],
+      ['租期', l.termMonths + ' 个月'],
+      ['计租起始日', l.startDate || '待确认'],
+      ['已收期数', l.paidPeriods + ' / ' + l.termMonths],
+      ['累计已收租金', money(l.paidTotal)],
+      ['剩余押金', money(l.remainingDeposit)],
+      ['押金状态', l.depositRefunded ? ('已退还' + (l.refundTime ? '（' + String(l.refundTime).slice(0, 10) + '）' : '')) : '未退还']
+    ];
+    $('r-kv').innerHTML = rows.map(function (r) {
+      return '<div class="kv"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
+    }).join('');
+    var history = (l.payHistory || []).slice().reverse();
+    var hh = '';
+    history.forEach(function (h) {
+      hh += '<tr><td>第 ' + h.period + ' 期</td><td>' + money(h.amount) + '</td><td>' + esc(h.dueDate || '-') + '</td><td>' + esc(h.paidDate || '-') + '</td><td>' + esc(h.method || '-') + '</td></tr>';
+    });
+    document.getElementById('r-history').innerHTML = hh || '<tr><td colspan="5" style="color:#888;text-align:center;">暂无扣费记录</td></tr>';
+    $('result').style.display = 'block';
+    $('result').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

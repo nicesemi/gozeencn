@@ -7,20 +7,15 @@
 
   var STORAGE_KEY = 'zeen_cart';
 
-  // Locale detection
-  var isZhHk = window.location.pathname.indexOf('/zh-hk/') !== -1;
-  var CURRENCY_SYMBOL = isZhHk ? 'HK$' : '$';
-  var CURRENCY_CODE = isZhHk ? 'HKD' : 'USD';
-  var RATE = isZhHk ? 7.8 : 1;
+  // Locale: gozeen-cn 为简体中文出租站（中文版已上提站根），恒为 CNY 押金口径
+  var isZhHk = true; // 恒中文
+  var CURRENCY_SYMBOL = '¥';
+  var CURRENCY_CODE = 'CNY';
+  var RATE = 7.2;
 
-  // Tax & Shipping configuration (amounts in USD internally; formatPrice converts to display currency)
-  var TAX_RATE = 0.13;
-  var SHIPPING_RATES = {
-    'HK': { cost: 200 / 7.8,  labelEn: 'Hong Kong',    labelZh: '香港' },
-    'CN': { cost: 1000 / 7.8, labelEn: 'China Mainland', labelZh: '中國大陸' },
-    'TW': { cost: 1500 / 7.8, labelEn: 'Taiwan',        labelZh: '台灣' },
-    'MO': { cost: 800 / 7.8,  labelEn: 'Macau',         labelZh: '澳門' }
-  };
+  // Tax & Shipping：租赁押金模式不另收运费/税费（税率归零、运费表清空）
+  var TAX_RATE = 0;
+  var SHIPPING_RATES = {};
 
   // ========== Cart Data ==========
 
@@ -39,7 +34,7 @@
         }
       } catch (e) { /* ignore */ }
       if (!this._data || !Array.isArray(this._data.items)) {
-        this._data = { items: [], total_price: 0, item_count: 0, currency: 'USD' };
+        this._data = { items: [], total_price: 0, item_count: 0, currency: 'CNY' };
       }
       return this._data;
     },
@@ -152,7 +147,7 @@
      * Clear entire cart
      */
     clear: function () {
-      this._data = { items: [], total_price: 0, item_count: 0, currency: 'USD' };
+      this._data = { items: [], total_price: 0, item_count: 0, currency: 'CNY' };
       this._save();
       this.updateCartCount();
     },
@@ -266,7 +261,7 @@
       qtyEl.textContent = product.quantity || 1;
     }
     if (qtyLabelEl) {
-      qtyLabelEl.textContent = isZhHk ? '數量：' : 'Quantity:';
+      qtyLabelEl.textContent = '数量：';
     }
 
     // Update cart popup count
@@ -462,14 +457,14 @@
       if (calc.regionKnown) {
         shippingEl.textContent = Cart.formatPrice(calc.shipping);
       } else {
-        shippingEl.textContent = isZhHk ? '待計算' : 'TBD';
+        shippingEl.textContent = '—';
       }
     }
     if (totalEl) {
       if (calc.regionKnown) {
         totalEl.textContent = Cart.formatPrice(calc.total);
       } else {
-        totalEl.textContent = isZhHk ? '待計算' : 'TBD';
+        totalEl.textContent = Cart.formatPrice(calc.total);
       }
     }
     totalsBreakdown.style.display = 'block';
@@ -546,7 +541,7 @@
             '<span class="cart__line-total">' + Cart.formatPrice(lineTotal) + '</span>' +
           '</td>' +
           '<td class="cart__remove text-right">' +
-            '<a class="cart__remove-btn text-link" href="#" data-variant-id="' + item.variant_id + '" style="color:#f73437;font-size:12px;">' + (isZhHk ? '移除' : 'Remove') + '</a>' +
+            '<a class="cart__remove-btn text-link" href="#" data-variant-id="' + item.variant_id + '" style="color:#f73437;font-size:12px;">移除</a>' +
           '</td>' +
         '</tr>';
     }
@@ -611,9 +606,8 @@
     // Bind checkout button - redirect to checkout page
     var checkoutBtn = cartWrapper.querySelector('input[name="checkout"], .cart__submit');
     if (checkoutBtn) {
-      // Determine current language path
-      var isZhHk2 = window.location.pathname.indexOf('/zh-hk/') !== -1;
-      var checkoutUrl = isZhHk2 ? '/zh-hk/checkout.html' : '/checkout.html';
+      // gozeen-cn 中文版已上提站根，结账页固定为根路径
+      var checkoutUrl = '/checkout.html';
 
       // Replace form action or button behavior
       var form = cartWrapper.querySelector('form.cart');
@@ -649,7 +643,7 @@
     var data = Cart.get();
 
     if (data.items.length === 0) {
-      orderSummary.innerHTML = '<p style="text-align:center;padding:40px;">' + (isZhHk ? '你的購物車是空的。' : 'Your cart is empty.') + '</p>';
+      orderSummary.innerHTML = '<p style="text-align:center;padding:40px;">您的购物车是空的。</p>';
       return;
     }
 
@@ -665,7 +659,7 @@
           '<div style="flex:1;">' +
             '<div style="font-weight:600;">' + item.title + '</div>' +
             (item.variant_title ? '<div style="color:#666;font-size:13px;">' + item.variant_title + '</div>' : '') +
-            '<div style="color:#666;font-size:13px;">' + (isZhHk ? '數量：' : 'Qty: ') + item.quantity + '</div>' +
+            '<div style="color:#666;font-size:13px;">数量：' + item.quantity + '</div>' +
           '</div>' +
           '<div style="font-weight:600;">' + Cart.formatPrice(lineTotal) + '</div>' +
         '</div>';
@@ -673,33 +667,14 @@
 
     var subtotal = data.total_price;
 
-    // Read region from localStorage (saved by cart page)
-    var region = localStorage.getItem('zeen_region') || '';
-    var calc = Cart.calcTaxAndShipping(region);
-
-    // Labels: use traditional Chinese for zh-HK, English otherwise
-    var labelSubtotal = isZhHk ? '小計' : 'Subtotal';
-    var labelShipping = isZhHk ? '運費' : 'Shipping';
-    var labelTax = isZhHk ? '稅項' : 'Tax';
-    var labelTotal = isZhHk ? '總計' : 'Total';
-
-    var shippingLine, taxLine;
-    if (calc.regionKnown) {
-      shippingLine = '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#666;"><span>' + labelShipping + '</span><span>' + Cart.formatPrice(calc.shipping) + '</span></div>';
-    } else {
-      shippingLine = '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#666;"><span>' + labelShipping + '</span><span>' + (isZhHk ? '將在下一步計算' : 'Calculated at next step') + '</span></div>';
-    }
-    taxLine = '<div style="display:flex;justify-content:space-between;padding:4px 0;color:#666;"><span>' + labelTax + '</span><span>' + Cart.formatPrice(calc.tax) + '</span></div>';
-
+    // 租赁押金模式：无运费/税费，应收 = 押金总额
     var summaryHtml =
       '<div style="border:1px solid #e5e5e5;border-radius:8px;padding:20px;">' +
-        '<h3 style="margin:0 0 16px;font-size:18px;">' + (isZhHk ? '訂單摘要' : 'Order Summary') + '</h3>' +
+        '<h3 style="margin:0 0 16px;font-size:18px;">订购押金</h3>' +
         itemsHtml +
         '<div style="margin-top:16px;padding-top:16px;border-top:1px solid #e5e5e5;">' +
-          '<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>' + labelSubtotal + '</span><span>' + Cart.formatPrice(subtotal) + '</span></div>' +
-          shippingLine +
-          taxLine +
-          '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:18px;font-weight:700;border-top:2px solid #333;margin-top:8px;"><span>' + labelTotal + '</span><span>' + Cart.formatPrice(calc.total) + ' ' + CURRENCY_CODE + '</span></div>' +
+          '<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>押金</span><span>' + Cart.formatPrice(subtotal) + '</span></div>' +
+          '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:18px;font-weight:700;border-top:2px solid #333;margin-top:8px;"><span>应付押金</span><span>' + Cart.formatPrice(subtotal) + ' ' + CURRENCY_CODE + '</span></div>' +
         '</div>' +
       '</div>';
 

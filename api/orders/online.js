@@ -53,11 +53,31 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, id: mappedOrderId, idempotent: true });
     }
 
+    // ---- 租赁参数：押金=实付金额，月租可前端透传，否则默认 = 押金 ÷ 36 ----
+    const leaseIn = body.lease || {};
+    const depositAmount = Number(body.totalCents != null ? body.totalCents / 100 : (payment.amount || 0));
+    const termMonths = Number(leaseIn.termMonths) || 36;
+    const monthlyRent = Number(leaseIn.monthlyRent) > 0
+      ? Number(leaseIn.monthlyRent)
+      : termMonths > 0 ? Number((depositAmount / termMonths).toFixed(2)) : 0;
+
     const newOrder = {
       id: await genOrderId(),
       paymentIntentId,
       source,
       sourceLabel: SOURCE_LABELS[source] || '官网在线支付',
+      type: 'lease',
+      lease: {
+        depositAmount,
+        monthlyRent,
+        termMonths,
+        startDate: null, // 计租起始日：默认发货日，由 admin 在后台确认填
+        paidPeriods: 0,
+        remainingDeposit: depositAmount,
+        depositRefunded: false,
+        refundTime: null,
+        payHistory: [],
+      },
       products: products.map((p) => ({
         name: String(p.name || p.title || ''),
         code: String(p.code || p.variant || ''),
@@ -72,7 +92,7 @@ module.exports = async function handler(req, res) {
       payment: {
         method: String(payment.method || 'airwallex'),
         amount: Number(payment.amount != null ? payment.amount : (body.totalCents || 0) / 100),
-        currency: String(payment.currency || 'USD'),
+        currency: String(payment.currency || 'CNY'),
         status: String(payment.status || 'paid'),
         txnId: String(payment.txnId || paymentIntentId),
       },

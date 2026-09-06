@@ -103,7 +103,7 @@ var ADMIN = {
 
   money: function (v, c) {
     var n = Number(v) || 0;
-    return (c || 'USD') === 'HKD' ? 'HK$' + n.toFixed(2) : '$' + n.toFixed(2);
+    return '¥' + n.toFixed(2);
   },
 
   esc: function (s) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
@@ -81,7 +82,7 @@ a{
 </head>
 <body>
 <noscript></noscript>
-<a class="in-page-link visually-hidden skip-link" href="#MainContent">Skip to content</a>
+<a class="in-page-link visually-hidden skip-link" href="#MainContent">跳至内容</a>
 <style data-shopify="">
 
   .cart-popup {
@@ -90,7 +91,7 @@ a{
 <div aria-labelledby="CartPopupHeading" aria-modal="true" class="cart-popup-wrapper cart-popup-wrapper--hidden critical-hidden" data-cart-popup-wrapper="" role="dialog">
 <div class="cart-popup" data-cart-popup="" tabindex="-1">
 <div class="cart-popup__header">
-<h2 class="cart-popup__heading" id="CartPopupHeading">Just added to your cart</h2>
+<h2 class="cart-popup__heading" id="CartPopupHeading">已加入购物车</h2>
 <button aria-label="Close" class="cart-popup__close" data-cart-popup-close=""><svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg></button>
 </div>
 <div class="cart-popup-item">
@@ -102,7 +103,7 @@ a{
 </div>
 <div class="cart-popup-item__quantity">
 <span class="visually-hidden" data-cart-popup-quantity-label=""></span>
-<span aria-hidden="true">Qty:</span>
+<span aria-hidden="true">数量：</span>
 <span aria-hidden="true" data-cart-popup-quantity=""></span>
 </div>
 </div>
@@ -110,13 +111,13 @@ a{
 <div class="flex justify-center my-4">
 <div>
 <a class="cart-popup__cta-link btn inline-block" href="/cart.html">
-          View cart (<span data-cart-popup-cart-quantity=""></span>)
+          查看购物车（<span data-cart-popup-cart-quantity=""></span>)
         </a>
 </div>
 </div>
 <div class="cart-popup__dismiss">
 <button class="cart-popup__dismiss-button text-link text-link--accent" data-cart-popup-dismiss="">
-        Continue shopping
+        继续购物
       </button>
 </div>
 </div>
@@ -135,24 +136,24 @@ a{
       }
     
   </style>
-<div aria-label="Search" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
+<div aria-label="搜寻" aria-modal="true" class="search-bar drawer drawer--top critical-hidden" data-predictive-search-drawer="" id="SearchDrawer" role="dialog">
 <div class="search-bar__interior">
 <div class="search-form__container" data-search-form-container="">
 <form action="/search" class="search-form search-bar__form" method="get" role="search">
 <div class="search-form__input-wrapper">
-<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="Search" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
+<input aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" aria-label="搜寻" aria-owns="predictive-search-results" class="search-form__input search-bar__input" data-base-url="/search" data-predictive-search-drawer-input="" name="q" placeholder="Search" role="combobox" type="text"/>
 <input aria-hidden="true" name="options[prefix]" type="hidden" value="last"/>
 <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
 </div>
 <button class="search-bar__submit search-form__submit" data-search-form-submit="" type="submit">
 <svg aria-hidden="true" class="icon icon-search" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M35.6 36l-9.8-9.8c4.1-5.4 3.6-13.2-1.3-18.1-5.4-5.4-14.2-5.4-19.7 0-5.4 5.4-5.4 14.2 0 19.7 2.6 2.6 6.1 4.1 9.8 4.1 3 0 5.9-1 8.3-2.8l9.8 9.8c.4.4.9.6 1.4.6s1-.2 1.4-.6c.9-.9.9-2.1.1-2.9zm-20.9-8.2c-2.6 0-5.1-1-7-2.9-3.9-3.9-3.9-10.1 0-14C9.6 9 12.2 8 14.7 8s5.1 1 7 2.9c3.9 3.9 3.9 10.1 0 14-1.9 1.9-4.4 2.9-7 2.9z"></path></svg>
-<span class="icon__fallback-text">Submit</span>
+<span class="icon__fallback-text">提交</span>
 </button>
 </form>
 <div class="search-bar__actions">
 <button class="btn--link search-bar__close js-drawer-close" type="button">
 <svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
-<span class="icon__fallback-text">Close search</span>
+<span class="icon__fallback-text">关闭搜寻</span>
 </button>
 </div>
 </div>
@@ -161,7 +162,7 @@ a{
 <div class="spacer h-[94px] xl:h-[117px]"></div>
 <div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
 <header class="site-header border-bottom logo--left bg-white" role="banner">
-<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">Call us today at (00852) 3050-1862</p></a></div>
+<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">立即致电 (00852) 3050-1862</p></a></div>
 <div class="site-header__mobile-nav relative z-10 bg-white">
 <div class="flex items-center justify-between px-8 w-full">
 <div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
@@ -178,49 +179,46 @@ a{
 <ul class="site-nav list--inline" id="SiteNav">
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/zeen.html">
-<span class="site-nav__label">Order Your Zeen</span>
+<span class="site-nav__label">订购 Zeen</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/collections/accessories.html">
-<span class="site-nav__label">Accessories</span>
+<span class="site-nav__label">配件</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/events.html">
-<span class="site-nav__label">Zeen Demos</span>
+<span class="site-nav__label">Zeen 示范</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/help.html">
-<span class="site-nav__label">Training</span>
+<span class="site-nav__label">训练</span>
 </a>
 </li>
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/contact-us.html">
-<span class="site-nav__label">Contact Us</span>
+<span class="site-nav__label">联络我们</span>
 </a>
 </li>
-
 
 </ul>
 </nav>
 <div class="grid__item lg:w-1/6 w-1/2 text-right site-header__icons site-header__icons--plus">
 <div class="site-header__icons-wrapper gap-4">
 <div class="site-header__lang-switcher" style="display:flex;align-items:center;margin-left:12px;gap:4px;font-size:14px;">
-<a href="/zh-hk/policies/terms-of-service.html" style="color:#666;text-decoration:none;" title="繁中">繁中</a>
-<span style="color:#999;">|</span>
-<span style="color:#be1e2d;font-weight:700;">English</span>
+
 </div>
 <a class="site-header__icon site-header__cart w-4" href="/cart.html">
 <svg aria-hidden="true" class="icon icon-cart" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"></path></svg>
-<span class="icon__fallback-text">Cart</span>
+<span class="icon__fallback-text">购物车</span>
 <div class="site-header__cart-count hide critical-hidden" data-cart-count-bubble="" id="CartCount">
 <span data-cart-count="">0</span>
-<span class="icon__fallback-text medium-up--hide">items</span>
+<span class="icon__fallback-text medium-up--hide">件</span>
 </div>
 </a>
-<button aria-controls="MobileNav" aria-expanded="false" aria-label="Menu" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
+<button aria-controls="MobileNav" aria-expanded="false" aria-label="选单" class="btn--link w-4 site-header__icon lg:hidden js-mobile-nav-toggle mobile-nav--open" type="button">
 <svg aria-hidden="true" class="icon icon-hamburger" focusable="false" role="presentation" viewbox="0 0 37 40"><path d="M33.5 25h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0-11.5h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2zm0 23h-30c-1.1 0-2-.9-2-2s.9-2 2-2h30c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
 <svg aria-hidden="true" class="icon icon-close" focusable="false" role="presentation" viewbox="0 0 40 40"><path class="layer" d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"></path></svg>
 </button>
@@ -232,31 +230,29 @@ a{
 <ul class="mobile-nav" id="MobileNav">
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/zeen.html">
-<span class="mobile-nav__label">Order Your Zeen</span>
+<span class="mobile-nav__label">订购 Zeen</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/collections/accessories.html">
-<span class="mobile-nav__label">Accessories</span>
+<span class="mobile-nav__label">配件</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/events.html">
-<span class="mobile-nav__label">Zeen Demos</span>
+<span class="mobile-nav__label">Zeen 示范</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/help.html">
-<span class="mobile-nav__label">Training</span>
+<span class="mobile-nav__label">训练</span>
 </a>
 </li>
 <li class="mobile-nav__item">
 <a class="mobile-nav__link" href="/pages/contact-us.html">
-<span class="mobile-nav__label">Contact Us</span>
+<span class="mobile-nav__label">联络我们</span>
 </a>
 </li>
-
-<li class="mobile-nav__item"><span class="mobile-nav__link" style="color:#be1e2d;font-weight:700;">English</span></li><li class="mobile-nav__item"><a class="mobile-nav__link" href="/zh-hk/policies/terms-of-service.html">繁中</a></li>
 </ul>
 </nav>
 </header>
@@ -288,12 +284,12 @@ a{
 <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
 <div class="shopify-policy__container">
 <div class="shopify-policy__title">
-<h1>Terms of service</h1>
+<h1>服务条款</h1>
 </div>
 <div class="shopify-policy__body">
 <div class="rte">
-<p><strong>OVERVIEW</strong> <br/> This website is operated by Zeen. Throughout the site, the terms “we”, “us” and “our” refer to Zeen. Zeen offers this website, including all information, tools and Services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here. <br/> <br/> By visiting our site and/ or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content. <br/> <br/> Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any Services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service. <br/> <br/> Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes. <br/> <br/> Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and Services to you. <br/> <br/> <strong>SECTION 1 - ONLINE STORE TERMS</strong> <br/> By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site. <br/> You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws). <br/> You must not transmit any worms or viruses or any code of a destructive nature. <br/> A breach or violation of any of the Terms will result in an immediate termination of your Services. <br/> <br/> <strong>SECTION 2 - GENERAL CONDITIONS</strong> <br/> We reserve the right to refuse Service to anyone for any reason at any time. <br/> You understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks. <br/> You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service or any contact on the website through which the Service is provided, without express written permission by us. <br/> The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms. <br/> <br/> <strong>SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION</strong> <br/> We are not responsible if information made available on this site is not accurate, complete or current. The material on this site is provided for general information only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information. Any reliance on the material on this site is at your own risk. <br/> This site may contain certain historical information. Historical information, necessarily, is not current and is provided for your reference only. We reserve the right to modify the contents of this site at any time, but we have no obligation to update any information on our site. You agree that it is your responsibility to monitor changes to our site. <br/> <br/> <strong>SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES</strong> <br/> Prices for our products are subject to change without notice. <br/> We reserve the right at any time to modify or discontinue the Service (or any part or content thereof) without notice at any time. <br/> We shall not be liable to you or to any third-party for any modification, price change, suspension or discontinuance of the Service. <br/> <br/> <strong>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</strong> <br/> Certain products or Services may be available exclusively online through the website. These products or Services may have limited quantities and are subject to return or exchange only according to our Refund Policy: [<a href="/policies/refund-policy.html">LINK TO REFUND POLICY</a>] <br/> We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate. <br/> We reserve the right, but are not obligated, to limit the sales of our products or Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to limit the quantities of any products or Services that we offer. All descriptions of products or product pricing are subject to change at anytime without notice, at the sole discretion of us. We reserve the right to discontinue any product at any time. Any offer for any product or Service made on this site is void where prohibited. <br/> We do not warrant that the quality of any products, Services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected. <br/> <br/> <strong>SECTION 6 - ACCURACY OF BILLING AND ACCOUNT INFORMATION</strong> <br/> We reserve the right to refuse any order you place with us. We may, in our sole discretion, limit or cancel quantities purchased per person, per household or per order. These restrictions may include orders placed by or under the same customer account, the same credit card, and/or orders that use the same billing and/or shipping address. In the event that we make a change to or cancel an order, we may attempt to notify you by contacting the e‑mail and/or billing address/phone number provided at the time the order was made. We reserve the right to limit or prohibit orders that, in our sole judgment, appear to be placed by dealers, resellers or distributors. <br/> <br/> You agree to provide current, complete and accurate purchase and account information for all purchases made at our store. You agree to promptly update your account and other information, including your email address and credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed. <br/> <br/> For more details, please review our Refund Policy: [<a href="/policies/refund-policy.html">LINK TO REFUND POLICY</a>] <br/> <br/> <strong>SECTION 7 - OPTIONAL TOOLS</strong> <br/> We may provide you with access to third-party tools over which we neither monitor nor have any control nor input. <br/> You acknowledge and agree that we provide access to such tools ”as is” and “as available” without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools. <br/> Any use by you of the optional tools offered through the site is entirely at your own risk and discretion and you should ensure that you are familiar with and approve of the terms on which tools are provided by the relevant third-party provider(s). <br/> We may also, in the future, offer new Services and/or features through the website (including the release of new tools and resources). Such new features and/or Services shall also be subject to these Terms of Service. <br/> <br/> <strong>SECTION 8 - THIRD-PARTY LINKS</strong> <br/> Certain content, products and Services available via our Service may include materials from third-parties. <br/> Third-party links on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for examining or evaluating the content or accuracy and we do not warrant and will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or Services of third-parties. <br/> We are not liable for any harm or damages related to the purchase or use of goods, Services, resources, content, or any other transactions made in connection with any third-party websites. Please review carefully the third-party's policies and practices and make sure you understand them before you engage in any transaction. Complaints, claims, concerns, or questions regarding third-party products should be directed to the third-party. <br/> <br/> <strong>SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS</strong> <br/> If, at our request, you send certain specific submissions (for example contest entries) or without a request from us, you send creative ideas, suggestions, proposals, plans, or other materials, whether online, by email, by postal mail, or otherwise (collectively, 'comments'), you agree that we may, at any time, without restriction, edit, copy, publish, distribute, translate and otherwise use in any medium any comments that you forward to us. We are and shall be under no obligation (1) to maintain any comments in confidence; (2) to pay compensation for any comments; or (3) to respond to any comments. <br/> We may, but have no obligation to, monitor, edit or remove content that we determine in our sole discretion to be unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service. <br/> You agree that your comments will not violate any right of any third-party, including copyright, trademark, privacy, personality or other personal or proprietary right. You further agree that your comments will not contain libelous or otherwise unlawful, abusive or obscene material, or contain any computer virus or other malware that could in any way affect the operation of the Service or any related website. You may not use a false e‑mail address, pretend to be someone other than yourself, or otherwise mislead us or third-parties as to the origin of any comments. You are solely responsible for any comments you make and their accuracy. We take no responsibility and assume no liability for any comments posted by you or any third-party. <br/> <br/> <strong>SECTION 10 - PERSONAL INFORMATION</strong> <br/> Your submission of personal information through the store is governed by our Privacy Policy, which can be viewed here: [<a href="/policies/privacy-policy.html">LINK TO PRIVACY POLICY</a>] <br/> <br/> <strong>SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS</strong> <br/> Occasionally there may be information on our site or in the Service that contains typographical errors, inaccuracies or omissions that may relate to product descriptions, pricing, promotions, offers, product shipping charges, transit times and availability. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information or cancel orders if any information in the Service or on any related website is inaccurate at any time without prior notice (including after you have submitted your order). <br/> We undertake no obligation to update, amend or clarify information in the Service or on any related website, including without limitation, pricing information, except as required by law. No specified update or refresh date applied in the Service or on any related website, should be taken to indicate that all information in the Service or on any related website has been modified or updated. <br/> <br/> <strong>SECTION 12 - PROHIBITED USES</strong> <br/> In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses. <br/> <br/> <strong>SECTION 13 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</strong> <br/> We do not guarantee, represent or warrant that your use of our Service will be uninterrupted, timely, secure or error-free. <br/> We do not warrant that the results that may be obtained from the use of the Service will be accurate or reliable. <br/> You agree that from time to time we may remove the Service for indefinite periods of time or cancel the Service at any time, without notice to you. <br/> You expressly agree that your use of, or inability to use, the Service is at your sole risk. The Service and all products and Services delivered to you through the Service are (except as expressly stated by us) provided 'as is' and 'as available' for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement. <br/> In no case shall Zeen Go, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, Service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the Service or any products procured using the Service, or for any other claim related in any way to your use of the Service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the Service or any content (or product) posted, transmitted, or otherwise made available via the Service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by law. <br/> <br/> <strong>SECTION 14 - INDEMNIFICATION</strong> <br/> You agree to indemnify, defend and hold harmless Zeen Go and our parent, subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, Service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party. <br/> <br/> <strong>SECTION 15 - SEVERABILITY</strong> <br/> In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining provisions. <br/> <br/> <strong>SECTION 16 - TERMINATION</strong> <br/> The obligations and liabilities of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes. <br/> These Terms of Service are effective unless and until terminated by either you or us. You may terminate these Terms of Service at any time by notifying us that you no longer wish to use our Services, or when you cease using our site. <br/> If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and you will remain liable for all amounts due up to and including the date of termination; and/or accordingly may deny you access to our Services (or any part thereof). <br/> <br/> <strong>SECTION 17 - ENTIRE AGREEMENT</strong> <br/> The failure of us to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision. <br/> These Terms of Service and any policies or operating rules posted by us on this site or in respect to the Service constitutes the entire agreement and understanding between you and us and governs your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service). <br/> Any ambiguities in the interpretation of these Terms of Service shall not be construed against the drafting party. <br/> <br/> <strong>SECTION 18 - GOVERNING LAW</strong> <br/> These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of United States. <br/> <br/> <strong>SECTION 19 - CHANGES TO TERMS OF SERVICE</strong> <br/> You can review the most current version of the Terms of Service at any time at this page. <br/> We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes. <br/> <br/> <strong>SECTION 20 - CONTACT INFORMATION</strong> <br/> Questions about the Terms of Service should be sent to us at info@gozeen.hk. <br/> Our contact information is posted below:</p>
-<p><br/>Exokinetics HK.<br/>UNIT 05, 12/F, THE CLOUD, NO.111 TUNG CHAU STREET, TAI KOK TSUI, HONG KONG<br/>(00852) 3050-1862<br/> info@gozeen.hk</p>
+<p><strong>概述</strong> <br/> 本网站由 Zeen 运营。在整个网站中，「我们」、「我们的」均指 Zeen。Zeen 提供本网站，包括本站向你（即使用者）提供的所有资讯、工具和服务，但以你接受本站列明的所有条款、条件、政策和通知为条件于此处。 <br/> <br/> 透过访问我们的网站和/或向我们购买商品，即使用我们的「服务」，并同意受以下条款和条件（「服务条款」、「条款」）约束，包括本文提及及/或可通过超连结取得的那些附加条款、条件和政策。这些服务条款适用于网站的所有使用者，包括但不限于浏览者、供应商、客户、商户及/或内容贡献者。 <br/> <br/> 在访问或使用我们的网站之前，请仔细阅读这些服务条款。透过访问或使用网站的任何部分，你 同意受本服务条款约束。如果你不同意本协议的所有条款及条件，则不得访问网站或使用任何服务。如果本服务条款被视为要约，则接受明确限于本服务条款。 <br/> <br/> 添加到目前商店的任何新功能或工具也将受服务条款的约束。你可以随时在本页面查阅最新版本最新版本。我们保留透过在网站发布更新及/或更改来更新、更改或替换本服务条款任何部分的权利。你有责任定期查看本页面的变更。你在发布任何变更后继续使用或访问网站，即构成接受即表示你接受这些变更。 <br/> <br/> 我们的商店托管于 Shopify Inc.。他们为我们提供网上电子商务平台，使我们能够向你销售产品和服务。服务给您。 <br/> <br/> <strong>第 1 节 — 网上商店条款</strong> <br/> 同意这些服务条款，即表示你声明你已达到你所在州或省的法定成年年龄，或者你已达到的法定成年年龄，或者你已达到你所在州或省的法定成年年龄，并且你已同意我们允许你的任何未成年受抚养人使用本网站。 <br/> 你不得将我们的产品用于任何非法或未经授权的用途，也不得在使用服务时违反你所在司法管辖区的任何法律（包括但不限于版权法）。 <br/> 你不得传播任何蠕虫、病毒或任何具破坏性的代码。 <br/> 任何违反条款的行为将导致你的服务立即终止。 <br/> <br/> <strong>第 2 节 — 一般条件</strong> <br/> 我们保留随时以任何理由拒绝向任何人提供服务的权利。 <br/> 你理解你的内容（不包括信用卡资讯）可能会以未加密方式传输，并涉及（a）透过各种网络传输；透过各种网络传输；以及（b）为符合及适应连接网络或设备的技术要求而进行更改。信用卡资讯在网络传输过程中始终加密。 <br/> 你同意不复制、重制、拷贝、出售、转售或利用服务的任何部分、服务的使用、或对服务的存取服务或网站上提供服务的任何联络方式，除非经我们明确书面许可。 <br/> 本协议中使用的标题仅为方便而设，不会限制或以其他方式影响这些条款。 <br/> <br/> <strong>第 3 节 — 资讯的准确性、完整性和时效性</strong> <br/> 如果本网站提供的资讯不准确、不完整或不最新，我们概不负责。本网站上的资料仅供仅供一般资讯参考，不应被依赖或用作做出决策的唯一依据，而不咨询更准确、更完整或更及时的主要资讯来源。依赖本网站上的材料风险自负。 <br/> 本网站可能包含某些历史资讯。历史资讯必然不是最新的，仅供你参考。我们保留仅供参考。我们保留随时修改本网站内容的权利，但我们没有义务更新网站上的任何资讯。你同意监控我们网站的变更是你的责任。 <br/> <br/> <strong>第 4 节 — 服务和价格的修改</strong> <br/> 我们产品的价格如有更改，恕不另行通知。 <br/> 我们保留随时修改或终止服务（或其任何部分或内容）的权利，恕不另行通知。 <br/> 对于服务的任何修改、价格变更、暂停或终止，我们不对你或任何第三方承担责任。 <br/> <br/> <strong>第 5 节 — 产品或服务（如适用）</strong> <br/> 某些产品或服务可能仅透过网站在线上提供。这些产品或服务可能数量有限，数量有限，仅可根据我们的退款政策退货或换货： [LINK TO REFUND POLICY] <br/> 我们已尽一切努力尽可能准确地显示商店中出现的产品颜色和图像。我们无法保证你的电脑萤幕显示的任何颜色会准确。 <br/> 我们保留（但没有义务）限制向任何人士、地理区域或司法管辖区销售我们的产品或服务的权利。司法管辖区。我们可根据个别情况行使此权利。我们保留限制我们提供的任何产品或服务数量的权利。所有产品描述或产品定价我们可随时自行决定更改，恕不另行通知。我们保留随时停止任何产品的权利。本网站上对任何产品或服务的要约在禁止的地区无效。 <br/> 我们不保证你购买或获得的任何产品、服务、资讯或其他材料的品质将符合符合你的期望，或服务中的任何错误将被更正。 <br/> <br/> <strong>第 6 节 — 帐单和帐户资讯的准确性</strong> <br/> 我们保留拒绝你向我们下的任何订单的权利。我们可自行决定限制或取消按人、每户或每份订单进行限制或取消。这些限制可能包括由同一客户帐户、同一信用卡下的订单，以及/或使用相同帐单和/或送货地址的订单。如果我们更改或取消订单，我们可能会尝试透过联络下单时提供的电邮和/或帐单地址/电话号码来通知你。我们保留限制或禁止我们自行判断似乎由经销商、转售商或分销商下达的订单的权利。 <br/> <br/> 你同意为在我们商店进行的所有购买提供最新、完整和准确的购买和帐户资讯。你同意及时更新你的帐户及其他资讯，包括电邮地址、信用卡号码及到期日，以便我们能够完成你的交易并在需要时联络你。 <br/> <br/> 有关更多详情，请查阅我们的退款政策：[<a href="#">退款政策连结</a>] <br/> <br/> <strong>第 7 节 — 可选工具</strong> <br/> 我们可能向你提供第三方工具的存取权限，我们既不监控也无任何控制或输入权。 <br/> 你承认并同意，我们以「现状」和「可用」的方式提供此类工具的存取，不附带任何明示或暗示的保证、陈述或任何种类的条件，且不附带任何背书。对于你使用可选第三方工具所产生或与之相关的任何谤任，我们不承担任何谤任。 <br/> 你使用透过网站提供的可选工具完全由你自行承担风险和酌情决定，你应确保你熟悉并同意相关第三方供应商提供工具的条款。 <br/> 我们也可能在未来透过网站提供新服务和/或功能（包括发布新工具和资源）。及资源）。此类新功能及/或服务亦应受本服务条款约束。 <br/> <br/> <strong>第 8 节 — 第三方连结</strong> <br/> 透过我们的服务提供的某些内容、产品和服务可能包含来自第三方的材料。 <br/> 本网站上的第三方连结可能会将你引导至与我们无关的第三方网站。我们不负责 审查或评估内容或准确性，我们不保证亦不对任何第三方材料或网站，或第三方的任何其他材料、产品或服务承担任何责任。 <br/> 对于与购买或使用商品、服务、资源、内容或任何其他第三方网站相关交易。请在进行任何交易之前仔细审查第三方的政策同惯例，确保你理解他们。有关第三方产品的投诉、索赔、疑虑或问题应直接向第三方提出。 <br/> <br/> <strong>第 9 节 — 使用者评论、反馈和其他提交内容</strong> <br/> 如果应我们的要求，你发送某些特定提交内容（例如比赛参赛作品），或者在没有我们要求的情况下，你发送创意创意、建议、提案、计划或其他材料，无论是在线、通过电邮、邮寄或其他方式（统称「评论」），你同意我们可以随时无限制地编辑、复制、发布、分发、翻译及以任何方式使用你转发给我们的任何评论。我们没有义务（1）对任何评论保密；（2）为任何评论支付报酬；或（3）回应任何评论。 <br/> 我们可以（但没有义务）监控、编辑或删除我们自行决定认为非法、冒犯、威胁性、诽谤性、中伤性、色情、淫秽或其他令人反感或侵犯任何方知识产权或本服务条款的评论。 <br/> 你同意你的评论不会侵犯任何第三方的任何权利，包括版权、商标、私隐、人格或或其他个人或专有权利。你进一步同意你的评论不会包含诽谤或其他非法、辱骂或淫秽材料，也不会包含任何可能以任何方式影响服务或任何相关网站运作的电脑病毒或其他恶意软件。你不得使用虚假的电邮地址、冒充他人或以其他方式误导我们或第三方关于任何评论的来源。你对你所做的任何评论及其准确性负全部责任。我们对你或任何第三方发布的任何评论不承担任何责任，也不负任何法律责任。 <br/> <br/> <strong>第 10 节 — 个人资讯</strong> <br/> 你透过商店提交个人资讯受我们的私隐政策管辖，你可在以下位置查阅：[<a href="#">私隐政策连结</a>] <br/> <br/> <strong>第 11 节 — 错误、不准确和遗漏</strong> <br/> 我们的网站或服务中可能偶尔包含有关产品描述、价格、促销、优惠、运费、运输时间和其他资讯的排版错误、不准确或遗漏。描述、定价、促销、优惠、产品运费、运输时间及可用性。如果服务或任何相关网站上的任何资讯不准确，我们保留随时更正任何错误、不准确或遗漏，并更改或更新资讯或取消订单的权利，恕不另行通知（包括在你提交订单之后）。 <br/> 我们没有义务更新、修订或澄清服务或任何相关网站上的资讯，包括但不限于价格资讯、除法律要求外。服务或任何相关网站上应用的任何指定更新或刷新日期不应被视为表明服务或任何相关网站中的所有资讯已被修改或更新。 <br/> <br/> <strong>第 12 节 — 禁止用途</strong> <br/> 除服务条款中规定的其他禁止事项外，你不得将网站或其内容用于：（a）任何非法目的；（b） 唆使他人执行或参与任何非法行为；（c）违反任何国际、联邦、省或州法规、规则、法律或地方法令；（d）侵犯或违反我们的知识产权或他人的知识产权；（e）基于性别、性取向、宗教、族裔、种族、年龄、原国籍或残疾进行骚扰、辱骂、侮辱、伤害、诽谤、中伤、贬低、恐吓或歧视；（f）提交虚假或误导性资讯；（g）上传或传播病毒或任何其他类型的恶意程式码，将会或可能以任何方式影响服务或任何相关网站、其他网站或互联网的功能或运作；（h）收集或追踪他人的个人资讯；（i）发送垃圾邮件、钓鱼、域名欺诈、借口诈骗、爬虫、抓取；（j）出于任何淫秽或不道德目的；或（k）干扰或规避服务或任何相关网站、其他网站或互联网的安全功能。 我们保留因违反任何禁止用途而终止你使用服务或任何相关网站的权利。 <br/> <br/> <strong>第 13 节 — 免责声明；责任限制</strong> <br/> 我们不保证、声明或担保你对我们服务的使用将不会中断、及时、安全或无错误。 <br/> 我们不担保使用服务可能获得的结果将准确或可靠。 <br/> 你同意我们可能不时无限期移除服务或随时取消服务，而无需通知你。 <br/> 你明确同意，你使用或无法使用服务完全由你自行承担风险。透过服务提供给你的服务及所有产品和服务服务及所有产品和服务（除我们明确声明外）均以「现状」及「可用」方式提供，不附带任何形式的明示或暗示陈述、保证或条件，包括所有关于适销性、可销售品质、特定用途适用性、耐用性、所有权及不侵权的暗示保证或条件。 <br/> 在任何情况下，Zeen Go、我们的董事、高级职员、员工、附属公司、代理、承包商、实习生、供应商、服务提供者或授权人均不对任何伤害、损失、索赔，或任何直接、间接、附带、惩罚性、特殊或后果性损害，包括但不限于利润损失、收入损失、储蓄损失、数据损失、替代成本或任何类似损害，无论是基于合约、侵权（包括疏忽）、严格责任或其他，因你使用任何服务或透过服务获得的任何产品而产生，或与你使用服务或任何产品相关的任何其他索赔，包括但不限于任何内容中的任何错误或遗漏，或因使用服务或透过服务发布、传输或以其他方式提供的任何内容（或产品）而导致的任何形式的损失或损害，即使已被告知此类损害的可能性。由于某些州或司法管辖区不允许排除或限制后果性或附带损害的责任，在此类州或司法管辖区，我们的责任应限于法律允许的最大范围内。 <br/> <br/> <strong>第 14 节 — 赔偿</strong> <br/> 你同意赔偿、辩护并使 Zeen Go 及我们的母公司、子公司、附属公司、合作伙伴、高级职员、董事、代理、承包商、授权人、服务提供者、分包商、供应商、实习生和员工，使其免受任何第三方因你违反本服务条款或其引用的文件，或你违反任何法律或第三方权利而提出的任何索赔或要求（包括合理的律师费）的损害。 <br/> <br/> <strong>第 15 节 — 可分割性</strong> <br/> 如果这些服务条款的任何条款被确定为非法、无效或不可执行，该条款仍应在最大限度内可执行，在适用法律允许的最大范围内仍然可执行，不可执行部分应被视为从本服务条款中分离，此类判定不影响任何其他剩余条款的有效性及可执行性。 <br/> <br/> <strong>第 16 节 — 终止</strong> <br/> 各方在终止日期之前产生的义务和责任在所有目的下应在协议终止后继续有效。 <br/> 这些服务条款持续有效，除非由你或我们终止。你可以随时透过通知我们你不再使用我们的服务来终止这些服务条款。你不再希望使用我们的服务，或当你停止使用我们网站时。 <br/> 如果我们自行判断你未能或我们怀疑你未能遵守这些服务条款的任何条款或规定，我们也可以终止 本协议，恕不另行通知，你仍须对截至终止日期（含该日）的所有应付金额负责；及/或相应地可能拒绝你访问我们的服务（或其任何部分）。 <br/> <br/> <strong>第 17 节 — 完整协议</strong> <br/> 我们未能行使或执行这些服务条款的任何权利或规定，不构成对该权利或规定的放弃。 <br/> 这些服务条款以及我们在本网站或就服务发布的任何政策或营运规则，构成你与我们之间的完整协议和谅解，你同我们之间的完整协议，管辖你对服务的使用，取代你同我们之间任何先前或同期的协议、通讯同建议，无论是口头定是书面（包括但不限于服务条款的任何先前版本）。 <br/> 对这些服务条款解释中的任何歧义不应作不利于起草方的解释。 <br/> <br/> <strong>第 18 节 — 管辖法律</strong> <br/> 这些服务条款以及我们向你提供服务的任何单独协议，均受美国宾夕法尼亚州法律管辖并据其解释。 <br/> <br/> <strong>第 19 节 — 服务条款的变更</strong> <br/> 你可以随时在本页面查阅最新版本的服务条款。 <br/> 我们保留自行决定透过在我们的网站发布更新和变更来更新、更改或替换这些服务条款任何部分的权利。你有责任定期查看我们网站的变更。你在本服务条款的任何变更发布后继续使用或访问我们的网站或服务，即构成接受该等变更。 <br/> <br/> <strong>第 20 节 — 联络资讯</strong> <br/> 有关服务条款的问题，请发送至 info@gozeen.cn。 <br/> 我们的联络资讯如下：</p>
+<p><br/>Exokinetics HK.<br/>香港九龙大角咀通州街111号云之端12楼05室<br/>(00852) 3050-1862<br/> info@gozeen.cn</p>
 </div>
 </div>
 </div>
@@ -321,27 +317,27 @@ a{
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                  Order Your Zeen
+                  订购 Zeen
                 </a>
 </li>
 <li>
 <a href="/collections/accessories.html">
-                  Accessories
+                  配件
                 </a>
 </li>
 <li>
 <a href="/pages/events.html">
-                  Zeen Demos
+                  Zeen 示范
                 </a>
 </li>
 <li>
 <a href="/pages/help.html">
-                  Training
+                  训练指南
                 </a>
 </li>
 <li>
 <a href="/pages/contact-us.html">
-                  Contact Us
+                  联络我们
                 </a>
 </li>
 </ul>
@@ -354,89 +350,89 @@ a{
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                      Order Your Zeen
+                      订购 Zeen
                     </a>
 </li>
 <li>
 <a href="/collections/accessories.html">
-                      Shop Accessories
+                      选购配件
                     </a>
 </li>
 <li>
 <a href="/pages/distributors.html">
-                      Distributors
+                      经销商
                     </a>
 </li>
 <li>
 <a href="/pages/events.html">
-                      Demo Sign-Up
+                      示范登记
                     </a>
 </li>
 <li>
 <a href="/pages/contact-us.html">
-                      Contact Us
+                      联络我们
                     </a>
 </li>
 </ul>
 </div>
 <div class="gap-8 lg:col-span-1">
 <div class="font-bold">
-                Learn
+                了解更多
               </div>
 <ul class="grid gap-2">
 <li>
 <a href="/pages/our-story.html">
-                      About the Zeen Team
+                      关于 Zeen 团队
                     </a>
 </li>
 <li>
 <a href="/pages/press.html">
-                      Press &amp; News
+                      新闻报导
                     </a>
 </li>
 <li>
 <a href="/pages/funding.html">
-                      Funding your Zeen
+                      Zeen 资助方案
                     </a>
 </li>
 <li>
 <a href="/pages/faqs.html">
-                      FAQs
+                      常见问题
                     </a>
 </li>
 <li>
-<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_EN.pdf">
-                      Product Manual
+<a href="/assets/s/files/1/0555/0234/0277/files/919007_Zeen_Product_Manual_v1-6_CHT.pdf">
+                      产品手册
                     </a>
 </li>
 <li>
 <a href="/assets/s/files/1/0555/0234/0277/files/Zeen_Adjustment_Tables.png" target="_blank" rel="noopener">
-                      Adjustment Tables
+                      调整参数表
                     </a>
 </li>
 <li>
 <a href="/pages/warranty-policy.html">
-                      Limited Warranty
+                      有限保养
                     </a>
 </li>
 <li>
 <a href="/pages/international.html">
-                      International Policy
+                      国际政策
                     </a>
 </li>
 <li>
 <a href="/policies/refund-policy.html">
-                      Return &amp; Refund Policy
+                      退货及退款政策
                     </a>
 </li>
 <li>
 <a href="/policies/privacy-policy.html">
-                      Privacy Policy
+                      私隐政策
                     </a>
 </li>
 <li>
 <a href="/policies/terms-of-service.html">
-                      Terms of Service
+                      服务条款
                     </a>
 </li>
 </ul>
@@ -444,12 +440,12 @@ a{
 <div class="grid gap-8 col-span-2">
 <div class="grid gap-4">
 <div>
-            Sign up for our newsletter
+            订阅我们的电子报
           </div>
 </div>
 <div class="grid gap-6">
 <div>
-<a class="btn inline-block w-full text-center" href="/pages/newsletter.html">Sign up</a>
+<a class="btn inline-block w-full text-center" href="/pages/newsletter.html">订阅</a>
 </div>
 <div>
 <div>
@@ -487,21 +483,21 @@ a{
 <div class="grid lg:grid-cols-2 gap-12 items-start py-12 lg:py-24">
 <div class="paragraphs">
 <div>
-        2026 GoZeen.hk All rights reserved.
+        2026 GoZeen.hk 版权所有。
         <br/><br/>
-        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="Admin Login">Admin Login</a>
+        <a href="/admin/login" style="color:#fff5e7;text-decoration:none;" title="后台登入">后台登入</a>
 </div>
-<p>Exokinetics HK.</p><p>UNIT 05, 12/F, THE CLOUD, NO.111 TUNG CHAU STREET, TAI KOK TSUI, HONG KONG</p><p>(00852) 3050-1862</p>
+<p>Exokinetics HK.</p><p>香港九龙大角咀通州街111号云之端12楼05室</p><p>(00852) 3050-1862</p>
 </div>
 <div>
 <div class="paragraphs">
-<p>Zeen is proudly designed and assembled in the United States.</p><p> </p>
+<p>Zeen 在美国自豪地设计和组装。</p><p> </p>
 </div>
 <div class="w-24">
 <img alt="" class="" height="240" loading="lazy" sizes="(min-width: px) -50px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" src="/assets/cdn/shop/files/American_Flag_-_footer.png" srcset="/assets/cdn/shop/files/American_Flag_-_footer.png" width="400"/>
 </div>
 <div class="paragraphs">
-<p> </p><p>Our designs are protected by both domestic and international patents.</p><p></p><p><strong>The Zeen is VA approved</strong> --</p><p>Company: Exokinetics HK.</p><p>Unique Entity ID: ZF8UYSDQYJC1</p><p>CAGE code: 9G1G3</p>
+<p> </p><p>我们的设计受国内及国际专利保护。</p><p></p><p><strong>Zeen 已获 VA 认证</strong> --</p><p>公司：Exokinetics HK.</p><p>Unique Entity ID: ZF8UYSDQYJC1</p><p>CAGE code: 9G1G3</p>
 </div>
 </div>
 </div>
@@ -510,11 +506,11 @@ a{
 </div>
 </footer>
 </div>
-<div aria-hidden="true" class="visually-hidden" id="slideshow-info">Use left/right arrows to navigate the slideshow or swipe left/right if using a mobile device</div>
+<div aria-hidden="true" class="visually-hidden" id="slideshow-info">使用左右箭头浏览幻灯片，如使用流动装置则左右滑动</div>
 </div>
 <ul hidden="">
-<li id="a11y-refresh-page-message">Choosing a selection results in a full page refresh.</li>
-<li id="a11y-selection-message">Press the space key then arrow keys to make a selection.</li>
+<li id="a11y-refresh-page-message">选择项目会导致页面重新整理。</li>
+<li id="a11y-selection-message">按空格键然后使用箭头键进行选择。</li>
 </ul>
 <script>
     if (window._wisepopsSkipShopifyDeprecatedSnippet !== true) {
@@ -620,6 +616,47 @@ a{
   });
 </script>
 <script data-source-attribution="shopify.standard_actions" src="/assets/storefront/standard-actions.js" type="module"></script>
-<script src="../assets/js/zeen-support.js"></script>
+<script src="/assets/js/zeen-support.js"></script>
+
+<script>
+(function(){
+  var RATE = 7.8;
+  var priceSelectors = ['.price','.product__price','.money','.cart-item__price','.cart-subtotal__price','[data-price]'];
+
+  function formatCNY(amount) {
+    return '¥' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function convertPrices() {
+    priceSelectors.forEach(function(sel) {
+      var els = document.querySelectorAll(sel);
+      els.forEach(function(el) {
+        if (el.dataset.converted === 'hkd') return;
+        var text = el.textContent || '';
+        var match = text.match(/\$([\d,]+\.?\d*)/);
+        if (match) {
+          var usdStr = match[1].replace(/,/g, '');
+          var usd = parseFloat(usdStr);
+          if (!isNaN(usd) && usd > 0) {
+            var hkd = usd * RATE;
+            el.textContent = formatCNY(hkd);
+            el.dataset.converted = 'hkd';
+            var label = document.createElement('small');
+            label.style.cssText = 'font-size:12px;color:#888;margin-left:4px;font-weight:400;';
+            label.textContent = '(CNY)';
+            el.appendChild(label);
+          }
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', convertPrices);
+  } else {
+    convertPrices();
+  }
+})();
+</script>
 </body>
 </html>
