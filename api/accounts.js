@@ -7,7 +7,7 @@
  * DELETE /api/accounts?username=xx  -> 删除账号
  *
  * 约束：
- * - 角色仅允许 dealer / support（禁止创建/修改为 admin）
+ * - 角色仅允许 support（禁止创建/修改为 admin）
  * - 禁止删除 admin 账号、禁止删除自己
  * - 密码使用 _auth.js 的 hashPassword + 随机 salt 存储
  */

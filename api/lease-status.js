@@ -40,6 +40,11 @@ module.exports = async function handler(req, res) {
       return res.status(403).json({ error: 'phone_mismatch' });
     }
 
+    // 配件购买单（无租赁记录）不提供租赁进度查询
+    if (!order.lease) {
+      return res.status(400).json({ error: 'not_a_lease_order' });
+    }
+
     const lease = order.lease || {};
     const payHistory = Array.isArray(lease.payHistory) ? lease.payHistory : [];
     const depositAmount = Number(lease.depositAmount != null ? lease.depositAmount : (order.payment && order.payment.amount) || 0);

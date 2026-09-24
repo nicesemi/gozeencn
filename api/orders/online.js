@@ -31,7 +31,7 @@ module.exports = async function handler(req, res) {
     const customer = body.customer || {};
     const shipping = body.shipping || {};
     const payment = body.payment || {};
-    const source = body.source === 'dealer' ? 'dealer' : 'online';
+    const source = 'online';
 
     // ---- 基础校验 ----
     if (!paymentIntentId) {
@@ -53,36 +53,51 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, id: mappedOrderId, idempotent: true });
     }
 
-    // ---- 租赁参数：押金=实付金额，月租可前端透传，否则默认 = 押金 ÷ 36 ----
+    // ---- 订单类型：整机租赁(lease) / 配件购买(purchase) / 混合(mixed) ----
+    const kinds = products.map((p) => (p.kind === 'lease' ? 'lease' : 'purchase'));
+    const hasLease = kinds.indexOf('lease') !== -1;
+    const hasPurchase = kinds.indexOf('purchase') !== -1;
+    const orderType = hasLease && hasPurchase ? 'mixed' : (hasLease ? 'lease' : 'purchase');
+
+    // ---- 财务口径：租押金（整机）与货款（配件）分列，实付 = 合计 ----
     const leaseIn = body.lease || {};
-    const depositAmount = Number(body.totalCents != null ? body.totalCents / 100 : (payment.amount || 0));
+    const paidTotal = Number(body.totalCents != null ? body.totalCents / 100 : (payment.amount || 0));
+    const depositAmount = products.reduce((sum, p) => {
+      const k = p.kind === 'lease' ? 'lease' : 'purchase';
+      return k === 'lease' ? sum + (Number(p.unitPrice || p.price || 0) * (parseInt(p.quantity, 10) || 1)) : sum;
+    }, 0);
+    const purchaseAmount = hasPurchase ? Math.max(paidTotal - depositAmount, 0) : 0;
     const termMonths = Number(leaseIn.termMonths) || 36;
     const monthlyRent = Number(leaseIn.monthlyRent) > 0
       ? Number(leaseIn.monthlyRent)
-      : termMonths > 0 ? Number((depositAmount / termMonths).toFixed(2)) : 0;
+      : termMonths > 0 && hasLease ? Number((depositAmount / termMonths).toFixed(2)) : 0;
 
     const newOrder = {
       id: await genOrderId(),
       paymentIntentId,
       source,
       sourceLabel: SOURCE_LABELS[source] || '官网在线支付',
-      type: 'lease',
-      lease: {
-        depositAmount,
-        monthlyRent,
-        termMonths,
-        startDate: null, // 计租起始日：默认发货日，由 admin 在后台确认填
-        paidPeriods: 0,
-        remainingDeposit: depositAmount,
-        depositRefunded: false,
-        refundTime: null,
-        payHistory: [],
-      },
+      type: orderType,
+      ...(hasLease ? {
+        lease: {
+          depositAmount,
+          monthlyRent,
+          termMonths,
+          startDate: null, // 计租起始日：默认发货日，由 admin 在后台确认填
+          paidPeriods: 0,
+          remainingDeposit: depositAmount,
+          depositRefunded: false,
+          refundTime: null,
+          payHistory: [],
+        },
+      } : {}),
+      ...(hasPurchase ? { purchaseAmount } : {}),
       products: products.map((p) => ({
         name: String(p.name || p.title || ''),
         code: String(p.code || p.variant || ''),
         quantity: parseInt(p.quantity, 10) || 1,
         unitPrice: Number(p.unitPrice || p.price || 0),
+        kind: p.kind === 'lease' ? 'lease' : 'purchase',
       })),
       customer: {
         name: String(customer.name || shipping.recipient || ''),

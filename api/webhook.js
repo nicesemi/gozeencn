@@ -58,35 +58,47 @@ module.exports = async function handler(req, res) {
       if (mappedOrderId) {
         saved = true;
       } else {
-        const products = (order.products || []).map((p) => ({
-          name: p.name || p.code || '',
-          code: p.code || '',
-          quantity: p.quantity || 1,
-          unitPrice: Number(p.unit_price || 0) / 100,
-        }));
-        const depositAmount = Number(amount) || 0;
+        const kindsStr = String(metadata.kinds || 'lease');
+        const kindsArr = kindsStr.split(',').filter(Boolean);
+        const hasLease = kindsArr.indexOf('lease') !== -1;
+        const hasPurchase = kindsArr.indexOf('purchase') !== -1;
+        const orderType = hasLease && hasPurchase ? 'mixed' : (hasLease ? 'lease' : 'purchase');
+        const depositAmount = Number(metadata.deposit_amount) > 0
+          ? Number(metadata.deposit_amount)
+          : (hasLease ? Number(amount) : 0);
+        const purchaseAmount = hasPurchase ? Math.max(Number(amount) - depositAmount, 0) : 0;
         const termMonths = Number(metadata.term_months) || 36;
         const monthlyRent =
           Number(metadata.monthly_rent) > 0
             ? Number(metadata.monthly_rent)
-            : termMonths > 0 ? Number((depositAmount / termMonths).toFixed(2)) : 0;
+            : termMonths > 0 && hasLease ? Number((depositAmount / termMonths).toFixed(2)) : 0;
+        const products = (order.products || []).map((p, i) => ({
+          name: p.name || p.code || '',
+          code: p.code || '',
+          quantity: p.quantity || 1,
+          unitPrice: Number(p.unit_price || 0) / 100,
+          kind: kindsArr[i] || (hasLease ? 'lease' : 'purchase'),
+        }));
         const newOrder = {
           id: await genOrderId(),
           paymentIntentId: id,
           source: 'online',
           sourceLabel: '官网在线支付',
-          type: 'lease',
-          lease: {
-            depositAmount,
-            monthlyRent,
-            termMonths,
-            startDate: null,
-            paidPeriods: 0,
-            remainingDeposit: depositAmount,
-            depositRefunded: false,
-            refundTime: null,
-            payHistory: [],
-          },
+          type: orderType,
+          ...(hasLease ? {
+            lease: {
+              depositAmount,
+              monthlyRent,
+              termMonths,
+              startDate: null,
+              paidPeriods: 0,
+              remainingDeposit: depositAmount,
+              depositRefunded: false,
+              refundTime: null,
+              payHistory: [],
+            },
+          } : {}),
+          ...(hasPurchase ? { purchaseAmount } : {}),
           products,
           customer: {
             name: [shipping.first_name, shipping.last_name].filter(Boolean).join(' ') || '',

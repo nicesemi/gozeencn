@@ -77,11 +77,11 @@ var ADMIN = {
   },
 
   roleLabel: function (r) {
-    return { admin: '管理员', dealer: '经销商', support: '客服' }[r] || r;
+    return { admin: '管理员', support: '客服' }[r] || r;
   },
 
   sourceLabel: function (s) {
-    return { online: '官网在线', dealer: '经销商', manual: '客服转账' }[s] || s;
+    return { online: '官网在线', manual: '客服转账' }[s] || s;
   },
 
   statusLabel: function (s) {

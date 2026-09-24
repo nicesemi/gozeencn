@@ -1,53 +1,53 @@
 /**
  * GET  /api/orders?source=&status=&q=&limit=&offset=  订单列表（需登录）
- * POST /api/orders                                   手动录入订单（经销商/客服/管理员）
- * body: { source: 'dealer'|'manual', products:[], customer:{}, payment:{}, shipping:{}, logistics:{} }
+ * POST /api/orders                                   手动录入订单（客服/管理员）
+ * body: { source: 'manual', products:[], customer:{}, payment:{}, shipping:{}, logistics:{} }
  */
 const { requireAuth } = require('./_auth');
 const { saveOrder, listOrders, genOrderId } = require('./_orders');
 
 const SOURCES = {
   online: '官网在线支付',
-  dealer: '经销商录入',
   manual: '客服转账录入',
 };
 
 function normalizeManualOrder(body, user) {
   const now = new Date().toISOString();
-  // 强制来源逻辑：dealer -> dealer，support -> manual，仅 admin 可依 body.source 选择（非 dealer 即 manual）
-  let source;
-  if (user.role === 'dealer') {
-    source = 'dealer';
-  } else if (user.role === 'support') {
-    source = 'manual';
-  } else {
-    source = body.source === 'dealer' ? 'dealer' : 'manual';
-  }
+  // 后台手动录入统一归为客服录入（manual），不再区分经销商来源
+  const source = 'manual';
+  const orderType = body.type === 'purchase' ? 'purchase' : 'lease';
+  const paidAmount = Number((body.payment && body.payment.amount) || 0);
   // 租赁参数（押金=payment.amount，月租/租期/计租起始可前台覆盖）
   const leaseIn = body.lease || {};
-  const depositAmount = Number(
-    (body.payment && body.payment.amount) || leaseIn.depositAmount || 0
-  );
+  const depositAmount = orderType === 'purchase'
+    ? 0
+    : Number((body.payment && body.payment.amount) || leaseIn.depositAmount || 0);
   const termMonths = Number(leaseIn.termMonths) || 36;
   const monthlyRent =
-    Number(leaseIn.monthlyRent) > 0
-      ? Number(leaseIn.monthlyRent)
-      : termMonths > 0
-        ? Number((depositAmount / termMonths).toFixed(2))
-        : 0;
+    orderType === 'purchase'
+      ? 0
+      : Number(leaseIn.monthlyRent) > 0
+        ? Number(leaseIn.monthlyRent)
+        : termMonths > 0
+          ? Number((depositAmount / termMonths).toFixed(2))
+          : 0;
   return {
-    type: 'lease',
-    lease: {
-      depositAmount,
-      monthlyRent,
-      termMonths,
-      startDate: leaseIn.startDate || null,
-      paidPeriods: 0,
-      remainingDeposit: depositAmount,
-      depositRefunded: false,
-      refundTime: null,
-      payHistory: [],
-    },
+    type: orderType,
+    ...(orderType === 'purchase'
+      ? { purchaseAmount: paidAmount }
+      : {
+          lease: {
+            depositAmount,
+            monthlyRent,
+            termMonths,
+            startDate: leaseIn.startDate || null,
+            paidPeriods: 0,
+            remainingDeposit: depositAmount,
+            depositRefunded: false,
+            refundTime: null,
+            payHistory: [],
+          },
+        }),
     source,
     sourceLabel: SOURCES[source],
     enteredBy: user ? user.username : null,
@@ -56,6 +56,7 @@ function normalizeManualOrder(body, user) {
       code: (p.code || '').trim(),
       quantity: parseInt(p.quantity, 10) || 1,
       unitPrice: parseFloat(p.unitPrice) || 0,
+      kind: orderType === 'purchase' ? 'purchase' : (p.kind === 'purchase' ? 'purchase' : 'lease'),
     })),
     customer: {
       name: (body.customer && body.customer.name) || '',
@@ -95,8 +96,7 @@ module.exports = async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
-      // dealer 只能查看自己录入的订单
-      const enteredBy = session.role === 'dealer' ? session.username : null;
+      const enteredBy = null;
       const orders = await listOrders({
         source: req.query.source || null,
         status: req.query.status || null,

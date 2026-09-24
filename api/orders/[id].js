@@ -18,20 +18,12 @@ module.exports = async function handler(req, res) {
     if (req.method === 'GET') {
       const order = await getOrder(id);
       if (!order) return res.status(404).json({ error: 'not_found' });
-      // dealer 只能查看自己录入的订单
-      if (session.role === 'dealer' && order.enteredBy !== session.username) {
-        return res.status(403).json({ error: 'forbidden' });
-      }
       return res.status(200).json({ order });
     }
 
     if (req.method === 'PUT') {
       const order = await getOrder(id);
       if (!order) return res.status(404).json({ error: 'not_found' });
-      // dealer 只能修改自己录入的订单
-      if (session.role === 'dealer' && order.enteredBy !== session.username) {
-        return res.status(403).json({ error: 'forbidden' });
-      }
       const body = req.body || {};
 
       // 只允许更新以下字段
@@ -54,7 +46,7 @@ module.exports = async function handler(req, res) {
         });
       }
 
-      // ---- 租赁运营动作（仅 admin，dealer/support 无权改动租赁数据）----
+      // ---- 租赁运营动作（仅 admin，support 无权改动租赁数据）----
       if (session.role === 'admin') {
         // 1) 更新租赁基础字段（月租/租期/计租起始等，merge 语义）
         if (body.lease && typeof body.lease === 'object') {
@@ -73,6 +65,9 @@ module.exports = async function handler(req, res) {
 
         // 2) 登记一期租金
         if (body.addRent) {
+          if (!order.lease && order.type !== 'lease') {
+            return res.status(400).json({ error: 'not_a_lease_order' });
+          }
           const cur = order.lease || { payHistory: [], paidPeriods: 0, remainingDeposit: (order.payment && order.payment.amount) || 0, depositAmount: (order.payment && order.payment.amount) || 0 };
           if (!Array.isArray(cur.payHistory)) cur.payHistory = [];
           const period = parseInt(body.addRent.period, 10) || (cur.payHistory.length + 1);
@@ -105,6 +100,9 @@ module.exports = async function handler(req, res) {
 
         // 3) 退剩余押金（提前结束）
         if (body.refundDeposit) {
+          if (!order.lease && order.type !== 'lease') {
+            return res.status(400).json({ error: 'not_a_lease_order' });
+          }
           const cur = order.lease || { payHistory: [], paidPeriods: 0, remainingDeposit: (order.payment && order.payment.amount) || 0, depositAmount: (order.payment && order.payment.amount) || 0 };
           if (!Array.isArray(cur.payHistory)) cur.payHistory = [];
           if (cur.depositRefunded) {

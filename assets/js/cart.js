@@ -96,7 +96,8 @@
           image: product.image || '',
           handle: product.handle || '',
           variant_title: product.variant_title || '',
-          quantity: product.quantity || 1
+          quantity: product.quantity || 1,
+          kind: product.kind || 'purchase'
         });
       }
 
@@ -396,7 +397,8 @@
             image: image,
             handle: handle,
             variant_title: variantTitle,
-            quantity: qty
+            quantity: qty,
+            kind: form.getAttribute('data-kind') || 'purchase'
           };
 
           Cart.add(variantId, product);
@@ -648,10 +650,21 @@
     }
 
     var itemsHtml = '';
+    var leaseTotal = 0;
+    var purchaseTotal = 0;
     for (var i = 0; i < data.items.length; i++) {
       var item = data.items[i];
       var lineTotal = item.price * item.quantity;
       var imgSrc = item.image || '/assets/cdn/shop/files/Cushion_iso.png';
+      var kindTag = item.kind === 'lease'
+        ? '<div style="color:#f73437;font-size:12px;margin-top:2px;">租赁 · 押金</div>'
+        : '<div style="color:#666;font-size:12px;margin-top:2px;">购买 · 货款</div>';
+
+      if (item.kind === 'lease') {
+        leaseTotal += lineTotal;
+      } else {
+        purchaseTotal += lineTotal;
+      }
 
       itemsHtml +=
         '<div class="checkout-item" style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #e5e5e5;">' +
@@ -660,21 +673,31 @@
             '<div style="font-weight:600;">' + item.title + '</div>' +
             (item.variant_title ? '<div style="color:#666;font-size:13px;">' + item.variant_title + '</div>' : '') +
             '<div style="color:#666;font-size:13px;">数量：' + item.quantity + '</div>' +
+            kindTag +
           '</div>' +
           '<div style="font-weight:600;">' + Cart.formatPrice(lineTotal) + '</div>' +
         '</div>';
     }
 
-    var subtotal = data.total_price;
+    var rowsHtml = '';
+    if (leaseTotal > 0) {
+      rowsHtml +=
+        '<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>租赁押金（整机 · 租满 36 期赠机）</span><span>' + Cart.formatPrice(leaseTotal) + '</span></div>';
+    }
+    if (purchaseTotal > 0) {
+      rowsHtml +=
+        '<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>配件货款（购买）</span><span>' + Cart.formatPrice(purchaseTotal) + '</span></div>';
+    }
+    var grandTotal = leaseTotal + purchaseTotal;
 
-    // 租赁押金模式：无运费/税费，应收 = 押金总额
+    // 租赁押金模式：应收 = 押金 + 配件货款（运费/税费未计）
     var summaryHtml =
       '<div style="border:1px solid #e5e5e5;border-radius:8px;padding:20px;">' +
-        '<h3 style="margin:0 0 16px;font-size:18px;">订购押金</h3>' +
+        '<h3 style="margin:0 0 16px;font-size:18px;">订单明细</h3>' +
         itemsHtml +
         '<div style="margin-top:16px;padding-top:16px;border-top:1px solid #e5e5e5;">' +
-          '<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>押金</span><span>' + Cart.formatPrice(subtotal) + '</span></div>' +
-          '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:18px;font-weight:700;border-top:2px solid #333;margin-top:8px;"><span>应付押金</span><span>' + Cart.formatPrice(subtotal) + ' ' + CURRENCY_CODE + '</span></div>' +
+          rowsHtml +
+          '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:18px;font-weight:700;border-top:2px solid #333;margin-top:8px;"><span>应付金额</span><span>' + Cart.formatPrice(grandTotal) + ' ' + CURRENCY_CODE + '</span></div>' +
         '</div>' +
       '</div>';
 

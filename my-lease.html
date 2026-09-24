@@ -97,6 +97,7 @@
         if (res.j && res.j.error === 'order_not_found') msg = '未找到该订单，请核对订单号';
         else if (res.j && res.j.error === 'phone_mismatch') msg = '手机号与订单不匹配，请核对';
         else if (res.j && res.j.error === 'orderId_and_phone_required') msg = '请填写订单号与手机号';
+        else if (res.j && res.j.error === 'not_a_lease_order') msg = '该订单为配件购买单，无租赁进度可查';
         else msg = (res.j && res.j.error) || '查询失败，请稍后再试';
         $('errbox').textContent = msg; $('errbox').style.display = 'block';
         return;

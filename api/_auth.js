@@ -2,7 +2,7 @@
  * 认证模块
  * - 账号存于 KV: acct:<username> -> { username, name, role, passwordHash, salt }
  * - 会话存于 KV: session:<token> -> { username, role, name }  TTL 24h
- * - 首次登录时若账号在环境变量中声明（ADMIN/DEALER/SUPPORT 系列），则自动创建种子账号
+ * - 首次登录时若账号在环境变量中声明（ADMIN/SUPPORT 系列），则自动创建种子账号
  */
 const crypto = require('crypto');
 const { getRedis, kvGetJSON, kvSetJSON, kvDelete, scanKeys } = require('./_kv');
@@ -15,7 +15,6 @@ function seedAccounts() {
   const list = [];
   const defs = [
     { username: process.env.ADMIN_USERNAME || 'admin', password: process.env.ADMIN_PASSWORD, role: 'admin', name: process.env.ADMIN_NAME || '管理员' },
-    { username: process.env.DEALER_USERNAME || 'dealer', password: process.env.DEALER_PASSWORD, role: 'dealer', name: process.env.DEALER_NAME || '经销商' },
     { username: process.env.SUPPORT_USERNAME || 'support', password: process.env.SUPPORT_PASSWORD, role: 'support', name: process.env.SUPPORT_NAME || '客服' },
   ];
   for (const d of defs) {
@@ -49,10 +48,10 @@ async function ensureAccount(username) {
 }
 
 // ===== 账号管理（供 /api/accounts 使用）=====
-// 角色白名单：仅允许创建/修改为 dealer / support；admin 仅种子账号存在，不可被账号管理接口创建或改动
-const MANAGABLE_ROLES = ['dealer', 'support'];
+// 角色白名单：仅允许创建/修改为 support；admin 仅种子账号存在，不可被账号管理接口创建或改动
+const MANAGABLE_ROLES = ['support'];
 
-// 列出所有可管理账号（含已物化的种子账号 dealer / support）
+// 列出所有可管理账号（含已物化的种子账号 support）
 async function listAccounts() {
   // 主数据源：扫描 acct:* 前缀的所有 key（涵盖历史脚本直接写入、未进 accts:index 的账号）
   let keys = await scanKeys('acct:*');
@@ -133,7 +132,7 @@ async function updateAccount(username, { name, role, password }) {
   };
 }
 
-// 删除账号（仅 dealer/support，调用方需校验不可删除 admin 与自己）
+// 删除账号（仅 support，调用方需校验不可删除 admin 与自己）
 async function deleteAccount(username) {
   const r = getRedis();
   const multi = r.multi();

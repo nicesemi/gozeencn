@@ -1282,7 +1282,6 @@ first.parentNode.insertBefore(script, first);
 <div class="spacer h-[94px] xl:h-[117px]"></div>
 <div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
 <header class="site-header border-bottom logo--left bg-white" role="banner">
-<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">立即致电 (00852) 3050-1862</p></a></div>
 <div class="site-header__mobile-nav relative z-10 bg-white">
 <div class="flex items-center justify-between px-8 w-full">
 <div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
@@ -1299,7 +1298,7 @@ first.parentNode.insertBefore(script, first);
 <ul class="site-nav list--inline" id="SiteNav">
 <li>
 <a class="site-nav__link site-nav__link--main" href="/pages/zeen.html">
-<span class="site-nav__label">订购 Zeen</span>
+<span class="site-nav__label">租赁 Zeen</span>
 </a>
 </li>
 <li>
@@ -1349,7 +1348,7 @@ first.parentNode.insertBefore(script, first);
 <ul class="mobile-nav" id="MobileNav">
 <li class="mobile-nav__item border-bottom">
 <a class="mobile-nav__link" href="/pages/zeen.html">
-<span class="mobile-nav__label">订购 Zeen</span>
+<span class="mobile-nav__label">租赁 Zeen</span>
 </a>
 </li>
 <li class="mobile-nav__item border-bottom">
@@ -1475,7 +1474,7 @@ first.parentNode.insertBefore(script, first);
 <span class="visually-hidden visually-hidden--inline">原价</span>
 </dt>
 <dd>
-<span class="price-item price-item--regular" data-regular-price="" data-price-usd="130.00">押金 ¥936.00</span>
+<span class="price-item price-item--regular" data-regular-price="" data-price-usd="130.00">¥936.00</span>
 </dd>
 </div>
 <div class="price__sale">
@@ -1483,7 +1482,7 @@ first.parentNode.insertBefore(script, first);
 <span class="visually-hidden visually-hidden--inline">优惠价</span>
 </dt>
 <dd>
-<span class="price-item price-item--sale" data-sale-price="">押金 ¥936.00</span>
+<span class="price-item price-item--sale" data-sale-price="">¥936.00</span>
 </dd>
 <dt>
 <span class="visually-hidden visually-hidden--inline">原价</span>
@@ -1510,43 +1509,7 @@ first.parentNode.insertBefore(script, first);
 </div>
 </dl>
 
-<!-- 以租代购:租赁方案(增量插入) -->
-<div class="lease-plan" id="lease-plan-zeen-seat-pad" style="margin:16px 0 4px;padding:16px;background:#fdf6ef;border:1px solid #f0d9c6;border-radius:8px;">
-  <div style="font-size:15px;font-weight:700;color:#b03a2e;">以租代购 · 押金方案</div>
-  <div style="margin-top:8px;font-size:14px;line-height:1.8;color:#333;">
-    押金 <strong style="font-size:17px;">¥936.00</strong>
-    <span style="color:#999;">｜</span> 月租 <strong>¥26.00</strong> / 月 × 36 期
-  </div>
-  <details style="margin-top:10px;">
-    <summary style="cursor:pointer;font-size:13px;color:#b03a2e;outline:none;">查看 36 期月租明细表</summary>
-    <table style="width:100%;margin-top:8px;border-collapse:collapse;font-size:12px;color:#333;">
-      <thead><tr style="background:#f5efe9;text-align:right;"><th style="padding:4px 6px;border-bottom:1px solid #e3ddd3;text-align:left;">期数</th><th style="padding:4px 6px;border-bottom:1px solid #e3ddd3;">当期租金</th><th style="padding:4px 6px;border-bottom:1px solid #e3ddd3;">累计已付</th><th style="padding:4px 6px;border-bottom:1px solid #e3ddd3;">剩余押金</th></tr></thead>
-      <tbody id="lease-table-zeen-seat-pad"></tbody>
-    </table>
-  </details>
-  <div style="margin-top:10px;font-size:12px;color:#666;">36 期租满，押金余额归零，产品归您所有；提前退租按未租期比例退还剩余押金。</div>
-</div>
-<script>
-(function(){
-  if (window.LEASE && window.LEASE.done) return;
-  window.LEASE = { deposit: 936.0, months: 36, monthly: 26.0, done: true };
-  var tb = document.getElementById("lease-table-zeen-seat-pad");
-  if (!tb) return;
-  var rows = "";
-  var paid = 0;
-  for (var n = 1; n <= 36; n++) {
-    var rent = Math.round(26.0 * 100) / 100;
-    if (n === 36) rent = Math.round((936.0 - paid) * 100) / 100;
-    paid = Math.round((paid + rent) * 100) / 100;
-    var remain = n === 36 ? 0 : Math.round((936.0 - paid) * 100) / 100;
-    rows += '<tr><td style="padding:4px 6px;border-bottom:1px solid #f1ede6;text-align:left;">第' + n + '期</td>'
-      + '<td style="padding:4px 6px;border-bottom:1px solid #f1ede6;">¥' + rent.toFixed(2) + '</td>'
-      + '<td style="padding:4px 6px;border-bottom:1px solid #f1ede6;">¥' + paid.toFixed(2) + '</td>'
-      + '<td style="padding:4px 6px;border-bottom:1px solid #f1ede6;">¥' + remain.toFixed(2) + '</td></tr>';
-  }
-  tb.innerHTML = rows;
-})();
-</script>
+
 
 </div>
 </div>
@@ -1556,7 +1519,7 @@ first.parentNode.insertBefore(script, first);
 </div>
 </div>
 <div class="block mt-8">
-<form accept-charset="UTF-8" action="/cart/add" class="product-form product-form-template--16569889980597__main" data-hs-cf-bound="true" data-product-form="" enctype="multipart/form-data" id="product_form_7472947822773" method="post" novalidate="novalidate"><input name="form_type" type="hidden" value="product"/><input name="utf8" type="hidden" value="✓"/>
+<form accept-charset="UTF-8" action="/cart/add" data-kind="purchase" class="product-form product-form-template--16569889980597__main" data-hs-cf-bound="true" data-product-form="" enctype="multipart/form-data" id="product_form_7472947822773" method="post" novalidate="novalidate"><input name="form_type" type="hidden" value="product"/><input name="utf8" type="hidden" value="✓"/>
 <div>
 
 </div>
@@ -1762,7 +1725,7 @@ first.parentNode.insertBefore(script, first);
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                  订购 Zeen
+                  租赁 Zeen
                 </a>
 </li>
 <li>
@@ -1795,7 +1758,7 @@ first.parentNode.insertBefore(script, first);
 <ul class="grid gap-2">
 <li>
 <a href="/pages/zeen.html">
-                      订购 Zeen
+                      租赁 Zeen
                     </a>
 </li>
 <li>
@@ -1803,11 +1766,7 @@ first.parentNode.insertBefore(script, first);
                       选购配件
                     </a>
 </li>
-<li>
-<a href="/pages/distributors.html">
-                      经销商
-                    </a>
-</li>
+
 <li>
 <a href="/pages/events.html">
                       示范登记
@@ -1835,11 +1794,7 @@ first.parentNode.insertBefore(script, first);
                       新闻报导
                     </a>
 </li>
-<li>
-<a href="/pages/funding.html">
-                      Zeen 资助方案
-                    </a>
-</li>
+
 <li>
 <a href="/pages/faqs.html">
                       常见问题

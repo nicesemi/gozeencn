@@ -19,7 +19,6 @@
     <select id="f-source">
       <option value="">全部来源</option>
       <option value="online">官网在线</option>
-      <option value="dealer">经销商录入</option>
       <option value="manual">客服转账录入</option>
     </select>
     <select id="f-status">
@@ -132,12 +131,22 @@
     var html = '';
     // 租金实收（真实服务收入，必填主口径）
     html += '<div class="stat-card highlight"><div class="stat-label">租金实收（押金内抵扣）</div><div class="stat-value">' + money(summary.rentCollected || 0, 'CNY') + '</div></div>';
-    // 总收入（仅已收款）——押金（暂收）
+    // 押金入账（暂收）——仅整机租赁
     html += '<div class="stat-card"><div class="stat-label">押金入账（已收款，暂收）</div>';
-    if (!summary.totalRevenue.length) {
+    if (!summary.depositCollected || !summary.depositCollected.length) {
       html += '<div class="stat-value">-</div>';
     } else {
-      summary.totalRevenue.forEach(function (r) {
+      summary.depositCollected.forEach(function (r) {
+        html += '<div class="stat-value">' + money(r.revenue, r.currency) + '</div>';
+      });
+    }
+    html += '</div>';
+    // 配件货款（实收）——仅购买
+    html += '<div class="stat-card"><div class="stat-label">配件货款（已收款，实收）</div>';
+    if (!summary.purchaseCollected || !summary.purchaseCollected.length) {
+      html += '<div class="stat-value">-</div>';
+    } else {
+      summary.purchaseCollected.forEach(function (r) {
         html += '<div class="stat-value">' + money(r.revenue, r.currency) + '</div>';
       });
     }

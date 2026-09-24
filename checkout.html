@@ -80,7 +80,6 @@ body { background-color: #fff; color: #333; }
 <div class="spacer h-[94px] xl:h-[117px]"></div>
 <div class="fixed top-0 left-0 right-0 z-30" data-header-section="" data-section-id="header" data-section-type="header-section">
 <header class="site-header border-bottom logo--left bg-white" role="banner">
-<div aria-label="Announcement" class="announcement-bar py-2" role="region" style="color: #ffffff; background-color: #f73437;"><a class="announcement-bar__link" href="/pages/contact-us.html"><p class="announcement-bar__message">立即致电 (00852) 3050-1862</p></a></div>
 <div class="site-header__mobile-nav relative z-10 bg-white">
 <div class="flex items-center justify-between px-8 w-full">
 <div class="grid__item lg:w-1/6 w-1/2 logo-align--left">
@@ -93,7 +92,7 @@ body { background-color: #fff; color: #333; }
 </div>
 <nav class="grid__item lg:w-4/6 hidden lg:block" role="navigation">
 <ul class="site-nav list--inline">
-<li><a class="site-nav__link site-nav__link--main" href="/pages/zeen.html"><span class="site-nav__label">订购 Zeen</span></a></li>
+<li><a class="site-nav__link site-nav__link--main" href="/pages/zeen.html"><span class="site-nav__label">租赁 Zeen</span></a></li>
 <li><a class="site-nav__link site-nav__link--main" href="/collections/accessories.html"><span class="site-nav__label">配件</span></a></li>
 <li><a class="site-nav__link site-nav__link--main" href="/pages/events.html"><span class="site-nav__label">Zeen 示范</span></a></li>
 <li><a class="site-nav__link site-nav__link--main" href="/pages/help.html"><span class="site-nav__label">训练</span></a></li>
@@ -330,7 +329,8 @@ body { background-color: #fff; color: #333; }
         code: it.variant_title || it.variant || '',
         quantity: it.quantity || 1,
         unitPrice: it.price || 0,
-        image: it.image || ''
+        image: it.image || '',
+        kind: it.kind === 'lease' ? 'lease' : 'purchase'
       };
     });
     var email = (document.getElementById('contact-email') || {}).value || '';
@@ -434,12 +434,13 @@ body { background-color: #fff; color: #333; }
       el.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">您的购物车是空的。</div>';
       return;
     }
-    var subtotal = 0;
+    var leaseTotal = 0;
+    var purchaseTotal = 0;
     var html = '<div style="background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:24px;">';
     html += '<h3 style="font-size:16px;font-weight:700;margin:0 0 16px;border-bottom:1px solid #eee;padding-bottom:12px;">订单摘要</h3>';
     items.forEach(function(item){
       var lineTotal = (item.price || 0) * (item.quantity || 1);
-      subtotal += lineTotal;
+      if (item.kind === 'lease') { leaseTotal += lineTotal; } else { purchaseTotal += lineTotal; }
       html += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f5f5f5;">';
       if (item.image) {
         html += '<img src="' + item.image + '" alt="' + (item.title || '') + '" style="width:64px;height:64px;object-fit:contain;border-radius:4px;background:#f9f9f9;" />';
@@ -448,13 +449,21 @@ body { background-color: #fff; color: #333; }
       html += '<div style="font-weight:600;font-size:14px;">' + (item.title || '产品') + '</div>';
       if (item.variant) html += '<div style="font-size:12px;color:#888;">' + item.variant + '</div>';
       html += '<div style="font-size:12px;color:#888;">数量：' + (item.quantity || 1) + '</div>';
+      html += '<div style="font-size:12px;' + (item.kind === 'lease' ? 'color:#f73437;' : 'color:#888;') + '">' + (item.kind === 'lease' ? '租赁 · 押金' : '购买 · 货款') + '</div>';
       html += '</div>';
       html += '<div style="font-weight:600;font-size:14px;">¥' + lineTotal.toFixed(2) + '</div>';
       html += '</div>';
     });
+    var grandTotal = leaseTotal + purchaseTotal;
     html += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid #eee;">';
-    html += '<div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding-top:8px;"><span>应付押金</span><span id="order-total-amount">¥' + subtotal.toFixed(2) + '</span></div>';
-    html += '<div style="font-size:12px;color:#888;margin-top:6px;padding-top:6px;border-top:1px solid #eee;">押金为产品原价，租满 36 期将返还押金并赠送产品。不含运费及税费。</div>';
+    if (leaseTotal > 0) {
+      html += '<div style="display:flex;justify-content:space-between;font-size:14px;padding-top:6px;"><span>租赁押金（整机）</span><span>¥' + leaseTotal.toFixed(2) + '</span></div>';
+    }
+    if (purchaseTotal > 0) {
+      html += '<div style="display:flex;justify-content:space-between;font-size:14px;padding-top:6px;"><span>配件货款（购买）</span><span>¥' + purchaseTotal.toFixed(2) + '</span></div>';
+    }
+    html += '<div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;padding-top:8px;"><span>应付金额</span><span id="order-total-amount">¥' + grandTotal.toFixed(2) + '</span></div>';
+    html += '<div style="font-size:12px;color:#888;margin-top:6px;padding-top:6px;border-top:1px solid #eee;">押金为产品原价，租满 36 期将返还押金并赠送产品；配件为全款购买。不含运费及税费。</div>';
     html += '</div>';
     html += '</div>';
     el.innerHTML = html;
@@ -531,7 +540,7 @@ body { background-color: #fff; color: #333; }
           currency: currency || 'CNY',
           merchant_order_id: merchantOrderId,
           request_id: requestId,
-          descriptor: 'Zeen 租赁押金',
+          descriptor: descriptor,
           return_url: window.location.href,
           order: {
             products: orderData.products,
@@ -540,7 +549,22 @@ body { background-color: #fff; color: #333; }
           },
           metadata: {
             shipping_phone: orderData.shipping_phone,
-            customer_email: orderData.customer_email
+            customer_email: orderData.customer_email,
+            kinds: orderData.products.map(function (p) { return p.kind === 'lease' ? 'lease' : 'purchase'; }).join(','),
+            deposit_amount: (function () {
+              var dep = 0;
+              orderData.products.forEach(function (p) {
+                if (p.kind === 'lease') dep += (Number(p.unitPrice) || 0) * (Number(p.quantity) || 1);
+              });
+              return Number(dep.toFixed(2));
+            })(),
+            purchase_amount: (function () {
+              var dep = 0;
+              orderData.products.forEach(function (p) {
+                if (p.kind === 'lease') dep += (Number(p.unitPrice) || 0) * (Number(p.quantity) || 1);
+              });
+              return Number((orderData.totalCents / 100 - dep).toFixed(2));
+            })()
           }
         })
       })
@@ -849,6 +873,5 @@ body { background-color: #fff; color: #333; }
   loadOrderSummary();
 })();
 </script>
-<script src="./assets/js/zeen-support.js"></script>
 </body>
 </html>

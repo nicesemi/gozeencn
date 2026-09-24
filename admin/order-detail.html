@@ -197,7 +197,7 @@
       document.getElementById('order-title').textContent = o.id;
 
       document.getElementById('d-status').innerHTML = ADMIN.statusBadge(o.status);
-      document.getElementById('d-type').textContent = o.type === 'lease' ? '租赁（押金）' : (o.type === 'sale' ? '销售' : (o.type || '租赁（押金）'));
+      document.getElementById('d-type').textContent = o.type === 'lease' ? '租赁（押金）' : (o.type === 'purchase' ? '配件购买（货款）' : (o.type || '租赁（押金）'));
       document.getElementById('d-source').textContent = o.sourceLabel || o.source || '';
       document.getElementById('d-created').textContent = (o.createdAt || '').replace('T', ' ').slice(0, 19);
       document.getElementById('d-paystatus').innerHTML = ADMIN.payBadge(o.payment);
@@ -270,6 +270,12 @@
 
   // ---- 租赁进度渲染与操作 ----
   function renderLease(o) {
+    // 配件购买单无租赁：隐藏租赁区块
+    if (!o.lease || o.type === 'purchase') {
+      var lc = document.getElementById('lease-card');
+      if (lc) lc.style.display = 'none';
+      return;
+    }
     var l = o.lease || {};
     var deposit = Number(l.depositAmount != null ? l.depositAmount : (o.payment && o.payment.amount) || 0);
     var monthly = Number(l.monthlyRent || 0);

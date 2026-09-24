@@ -18,14 +18,15 @@
     <div class="card">
       <h3>订单来源</h3>
       <div style="display:flex;gap:20px;">
-        <label id="source-dealer" style="display:flex;align-items:center;gap:6px;font-weight:500;">
-          <input type="radio" name="source" value="dealer" checked> 经销商录入
-        </label>
         <label id="source-manual" style="display:flex;align-items:center;gap:6px;font-weight:500;">
           <input type="radio" name="source" value="manual"> 客服转账录入
         </label>
       </div>
-      <div style="margin-top:10px;font-size:13px;color:#8b7355;">订单类型：租赁（押金）· 币种：CNY</div>
+      <div style="margin-top:10px;font-size:13px;color:#8b7355;">订单类型：
+        <label style="display:inline-flex;align-items:center;gap:4px;font-weight:500;color:#333;"><input type="radio" name="otype" value="lease" checked onchange="toggleOrderType()"> 整机租赁（押金）</label>
+        <label style="display:inline-flex;align-items:center;gap:4px;font-weight:500;color:#333;margin-left:14px;"><input type="radio" name="otype" value="purchase" onchange="toggleOrderType()"> 配件购买（货款）</label>
+        · 币种：CNY
+      </div>
     </div>
 
     <div class="card">
@@ -103,7 +104,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="lease-box">
       <h3>租赁参数（押金=支付金额，月租默认=押金÷36）</h3>
       <div class="form-grid">
         <div><label>月租（元/月）</label><input type="number" id="l-monthly" step="0.01" min="0" placeholder="留空自动=押金÷36"></div>
@@ -121,25 +122,21 @@
   if (!ADMIN.requireLogin()) { /* 已跳转 */ }
   document.getElementById('topbar').innerHTML = ADMIN.renderTopbar('new');
 
-  // 按角色过滤来源选项：dealer 仅经销商录入，support 仅客服转账录入，admin 两者可选
+  // 后台手动录入统一为"客服转账"来源（已无经销商渠道）
   var role = ADMIN.user ? ADMIN.user.role : '';
-  var fixedSource = null;
-  if (role === 'dealer') {
-    fixedSource = 'dealer';
-    var srcManual = document.getElementById('source-manual');
-    if (srcManual) srcManual.remove();
-  } else if (role === 'support') {
-    fixedSource = 'manual';
-    var srcDealer = document.getElementById('source-dealer');
-    if (srcDealer) srcDealer.remove();
-    var srcManual2 = document.getElementById('source-manual');
-    if (srcManual2) {
-      var radioManual = srcManual2.querySelector('input[type="radio"]');
-      if (radioManual) radioManual.checked = true;
-    }
+  var fixedSource = 'manual';
+  var srcManual = document.getElementById('source-manual');
+  if (srcManual) {
+    var radioManual = srcManual.querySelector('input[type="radio"]');
+    if (radioManual) radioManual.checked = true;
   }
 
   var prodSeq = 0;
+  function toggleOrderType() {
+    var isPurchase = (document.querySelector('input[name="otype"]:checked') || {}).value === 'purchase';
+    var box = document.getElementById('lease-box');
+    if (box) box.style.display = isPurchase ? 'none' : '';
+  }
   function addProductRow(data) {
     data = data || {};
     var wrap = document.getElementById('prod-list');
@@ -158,6 +155,7 @@
   function submitOrder(e) {
     e.preventDefault();
     var source = fixedSource || (document.querySelector('input[name="source"]:checked') || {}).value || 'manual';
+    var otype = (document.querySelector('input[name="otype"]:checked') || {}).value || 'lease';
     var products = [];
     document.querySelectorAll('#prod-list .prod-row').forEach(function (row) {
       var name = row.querySelector('.prod-name').value.trim();
@@ -166,14 +164,15 @@
         name: name,
         code: row.querySelector('.prod-code').value.trim(),
         quantity: parseInt(row.querySelector('.prod-qty').value, 10) || 1,
-        unitPrice: parseFloat(row.querySelector('.prod-price').value) || 0
+        unitPrice: parseFloat(row.querySelector('.prod-price').value) || 0,
+        kind: otype === 'purchase' ? 'purchase' : 'lease'
       });
     });
     if (!products.length) { alert('请至少填写一个产品'); return false; }
 
     var body = {
       source: source,
-      type: 'lease',
+      type: otype,
       lease: {
         monthlyRent: parseFloat(document.getElementById('l-monthly').value) || 0,
         termMonths: parseInt(document.getElementById('l-term').value, 10) || 36,

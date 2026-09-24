@@ -15,7 +15,6 @@
     <select id="f-source">
       <option value="">全部来源</option>
       <option value="online">官网在线</option>
-      <option value="dealer">经销商录入</option>
       <option value="manual">客服转账录入</option>
     </select>
     <select id="f-status">
@@ -62,12 +61,9 @@
   function money(v, c) { return ADMIN.money(v, c); }
 
   var role = ADMIN.user ? ADMIN.user.role : '';
-  if (role === 'dealer') {
-    document.getElementById('f-source').disabled = true;
-  }
 
   function loadOrders() {
-    var source = role === 'dealer' ? 'dealer' : document.getElementById('f-source').value;
+    var source = document.getElementById('f-source').value;
     var status = document.getElementById('f-status').value;
     var q = document.getElementById('f-q').value.trim();
     var params = new URLSearchParams();

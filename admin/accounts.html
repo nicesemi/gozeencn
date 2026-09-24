@@ -15,7 +15,6 @@
     .hint { color: #888; font-size: 12px; margin-top: 4px; }
     .role-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
     .role-admin { background: #fdeaea; color: #c0392b; }
-    .role-dealer { background: #e8f1fd; color: #2471c4; }
     .role-support { background: #fef4e6; color: #d88918; }
     @media (max-width: 768px) { .acct-form .form-grid { grid-template-columns: 1fr; } }
   </style>
@@ -56,7 +55,6 @@
       <div>
         <label>角色 *</label>
         <select id="a-role">
-          <option value="dealer">经销商</option>
           <option value="support">客服</option>
         </select>
       </div>
@@ -83,7 +81,7 @@
   function esc(s) { return ADMIN.esc(s); }
 
   function roleBadge(r) {
-    var cls = r === 'admin' ? 'role-admin' : (r === 'dealer' ? 'role-dealer' : 'role-support');
+    var cls = r === 'admin' ? 'role-admin' : 'role-support';
     return '<span class="role-badge ' + cls + '">' + esc(ADMIN.roleLabel(r)) + '</span>';
   }
 
@@ -129,7 +127,7 @@
     document.getElementById('form-title').textContent = '新增账号';
     document.getElementById('a-username').value = '';
     document.getElementById('a-name').value = '';
-    document.getElementById('a-role').value = 'dealer';
+    document.getElementById('a-role').value = 'support';
     document.getElementById('a-password').value = '';
     document.getElementById('a-username').disabled = false;
     document.getElementById('password-hint').textContent = '';

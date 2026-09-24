@@ -14,7 +14,6 @@ const { getRedis, kvGetJSON } = require('./_kv');
 
 const SOURCES = {
   online: '官网在线支付',
-  dealer: '经销商录入',
   manual: '客服转账录入',
 };
 
@@ -93,10 +92,32 @@ module.exports = async function handler(req, res) {
 
     // 3) summary
     const currencyTotals = {};
+    const depositByCurrency = {};
+    const purchaseByCurrency = {};
     paid.forEach((o) => {
       const c = o.payment.currency || 'CNY';
       currencyTotals[c] = (currencyTotals[c] || 0) + (Number(o.payment.amount) || 0);
+      // 押金口径：仅含整机租赁（lease）的订单计 lease.depositAmount
+      if (o.lease && o.lease.depositAmount) {
+        depositByCurrency[c] = (depositByCurrency[c] || 0) + (Number(o.lease.depositAmount) || 0);
+      }
+      // 货款口径：配件购买（purchase）实收货款
+      if (o.purchaseAmount) {
+        purchaseByCurrency[c] = (purchaseByCurrency[c] || 0) + (Number(o.purchaseAmount) || 0);
+      }
     });
+    const byDeposit = sortCurrencies(
+      Object.keys(depositByCurrency).map((c) => ({
+        currency: c,
+        revenue: Number(depositByCurrency[c].toFixed(2)),
+      }))
+    );
+    const byPurchase = sortCurrencies(
+      Object.keys(purchaseByCurrency).map((c) => ({
+        currency: c,
+        revenue: Number(purchaseByCurrency[c].toFixed(2)),
+      }))
+    );
     const byCurrency = sortCurrencies(
       Object.keys(currencyTotals).map((c) => ({
         currency: c,
@@ -202,9 +223,10 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({
       summary: {
-        totalRevenue: byCurrency, // 押金（暂收）收入，按币种，仅已收款
+        totalRevenue: byCurrency, // 收款流水总额（押金暂收 + 货款实收），按币种，仅已收款
         rentCollected, // 租金（实收）总额，按 CNY
-        depositCollected: byCurrency,
+        depositCollected: byDeposit, // 押金（暂收）口径，仅整机租赁，按币种
+        purchaseCollected: byPurchase, // 货款（实收）口径，仅配件购买，按币种
         totalOrders: filtered.length,
         paidOrders: paid.length,
         cancelledOrders: filtered.filter((o) => o.status === 'cancelled').length,
