@@ -2,7 +2,7 @@
 <html class="no-js" lang="zh-CN">
 <head>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script type="text/tp-defer">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -16,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta content="niWRivpWGmxSwEYmZPm5hqtPjiOIbauqrrgMUD0ydQk" name="google-site-verification"/>
 <link crossorigin="" href="https://cdn.shopify.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.shopifycdn.com" rel="preconnect"/>
-<link href="https://monorail-edge.shopifysvc.com" rel="preconnect"/><link as="style" href="//cdn.shopify.com/s/files/1/0555/0234/0277/t/7/assets/theme.css?v=148698344571887103411711045961" rel="preload"/>
+<link as="style" href="//cdn.shopify.com/s/files/1/0555/0234/0277/t/7/assets/theme.css?v=148698344571887103411711045961" rel="preload"/>
 <link as="font" crossorigin="" href="https://fonts.shopifycdn.com/raleway/raleway_n5.0f898fcb9d16ae9a622ce7e706bb26c4a01b5028.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="" href="https://fonts.shopifycdn.com/raleway/raleway_n4.2c76ddd103ff0f30b1230f13e160330ff8b2c68a.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="" href="https://fonts.shopifycdn.com/raleway/raleway_n7.740cf9e1e4566800071db82eeca3cca45f43ba63.woff2" rel="preload" type="font/woff2"/>
@@ -755,7 +755,7 @@ Shopify.SignInWithShop.User.recognized = false;</script>
 <script>
   function portableWalletsCleanup(e){e&&e.src&&console.error("Failed to load portable wallets script "+e.src);var t=document.querySelectorAll("shopify-accelerated-checkout .shopify-payment-button__skeleton, shopify-accelerated-checkout-cart .wallet-cart-button__skeleton"),e=document.getElementById("shopify-buyer-consent");for(let e=0;e<t.length;e++)t[e].remove();e&&e.remove()}function portableWalletsNotLoadedAsModule(e){e instanceof ErrorEvent&&"string"==typeof e.message&&e.message.includes("import.meta")&&"string"==typeof e.filename&&e.filename.includes("portable-wallets")&&(window.removeEventListener("error",portableWalletsNotLoadedAsModule),window.Shopify.PaymentButton.failedToLoad=e,"loading"===document.readyState?document.addEventListener("DOMContentLoaded",window.Shopify.PaymentButton.init):window.Shopify.PaymentButton.init())}window.addEventListener("error",portableWalletsNotLoadedAsModule);
 </script>
-<script crossorigin="anonymous" onerror="portableWalletsCleanup(this)" src="https://cdn.shopify.com/shopifycloud/portable-wallets/latest/portable-wallets.en.js" type="module"></script>
+<script type="text/tp-defer" data-tp-type="module" data-tp-src="https://cdn.shopify.com/shopifycloud/portable-wallets/latest/portable-wallets.en.js" onerror="portableWalletsCleanup(this)" crossorigin="anonymous"></script>
 <script nomodule="">
   document.addEventListener("DOMContentLoaded", portableWalletsCleanup);
 </script>
@@ -787,22 +787,20 @@ Shopify.SignInWithShop.User.recognized = false;</script>
       </style>
 <script id="shopify-cfh-end">window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.end');</script>
 <!-- Google tags (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-5XH2S4XLQR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
+<script type="text/tp-defer" data-tp-src="https://www.googletagmanager.com/gtag/js?id=G-5XH2S4XLQR"></script>
+<script type="text/tp-defer">window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-5XH2S4XLQR');
 </script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-11050044830"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+<script type="text/tp-defer" data-tp-src="https://www.googletagmanager.com/gtag/js?id=AW-11050044830"></script>
+<script type="text/tp-defer">window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date()); gtag('config', 'AW-11050044830');
   </script>
 <!-- Hotjar Tracking Code  -->
-<script defer="" src="https://t.contentsquare.net/uxa/e71c8b129fe78.js"></script>
+<script type="text/tp-defer" data-tp-src="https://t.contentsquare.net/uxa/e71c8b129fe78.js"></script>
 <!-- BEGIN app block: shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200 -->
 <!-- BEGIN app snippet: pagefly-cro-ab-testing-main -->
 <script>
@@ -906,8 +904,8 @@ Shopify.SignInWithShop.User.recognized = false;</script>
   })()
 </script>
 <!-- END app block -->
-<link href="https://monorail-edge.shopifysvc.com" rel="dns-prefetch"/>
-<script>(function(){if ("sendBeacon" in navigator && "performance" in window) {try {var session_token_from_headers = performance.getEntriesByType('navigation')[0].serverTiming.find(x => x.name == '_s').description;} catch {var session_token_from_headers = undefined;}var session_cookie_matches = document.cookie.match(/_shopify_s=([^;]*)/);var session_token_from_cookie = session_cookie_matches && session_cookie_matches.length === 2 ? session_cookie_matches[1] : "";var session_token = session_token_from_headers || session_token_from_cookie || "";function handle_abandonment_event(e) {var entries = performance.getEntries().filter(function(entry) {return /monorail-edge.shopifysvc.com/.test(entry.name);});if (!window.abandonment_tracked && entries.length === 0) {window.abandonment_tracked = true;var currentMs = Date.now();var navigation_start = performance.timing.navigationStart;var payload = {shop_id: 55502340277,url: window.location.href,navigation_start,duration: currentMs - navigation_start,session_token,page_type: "product"};window.navigator.sendBeacon("https://monorail-edge.shopifysvc.com/v1/produce", JSON.stringify({schema_id: "online_store_buyer_site_abandonment/1.1",payload: payload,metadata: {event_created_at_ms: currentMs,event_sent_at_ms: currentMs}}));}}window.addEventListener('pagehide', handle_abandonment_event);}}());</script>
+
+<script type="text/tp-defer">(function(){if ("sendBeacon" in navigator && "performance" in window) {try {var session_token_from_headers = performance.getEntriesByType('navigation')[0].serverTiming.find(x => x.name == '_s').description;} catch {var session_token_from_headers = undefined;}var session_cookie_matches = document.cookie.match(/_shopify_s=([^;]*)/);var session_token_from_cookie = session_cookie_matches && session_cookie_matches.length === 2 ? session_cookie_matches[1] : "";var session_token = session_token_from_headers || session_token_from_cookie || "";function handle_abandonment_event(e) {var entries = performance.getEntries().filter(function(entry) {return /monorail-edge.shopifysvc.com/.test(entry.name);});if (!window.abandonment_tracked && entries.length === 0) {window.abandonment_tracked = true;var currentMs = Date.now();var navigation_start = performance.timing.navigationStart;var payload = {shop_id: 55502340277,url: window.location.href,navigation_start,duration: currentMs - navigation_start,session_token,page_type: "product"};window.navigator.sendBeacon("https://monorail-edge.shopifysvc.com/v1/produce", JSON.stringify({schema_id: "online_store_buyer_site_abandonment/1.1",payload: payload,metadata: {event_created_at_ms: currentMs,event_sent_at_ms: currentMs}}));}}window.addEventListener('pagehide', handle_abandonment_event);}}());</script>
 <script>
   window.__TREKKIE_SHIM_QUEUE = window.__TREKKIE_SHIM_QUEUE || [];
 </script>
@@ -920,7 +918,7 @@ Shopify.SignInWithShop.User.recognized = false;</script>
     window.ShopifyAnalytics.meta[attr] = meta[attr];
   }
 </script>
-<script class="analytics">
+<script type="text/tp-defer" class="analytics">
   (function () {
     var customDocumentWrite = function(content) {
       var jquery = null;
@@ -1106,6 +1104,7 @@ first.parentNode.insertBefore(script, first);
 </script>
 <script data-application="storefront-renderer" data-monorail-region="shop_domain" data-page-type="product" data-render-region="gcp-us-west1" data-resource-timing-sampling-rate="10" data-shop-id="55502340277" data-shs="true" data-shs-beacon="true" data-shs-beacon-endpoint="https://gozeen.cn/api/collect" data-shs-export-with-fetch="true" data-shs-logs-sample-rate="1" data-theme-instance-id="134696337589" data-theme-name="Debut" data-theme-version="17.10.0" defer="" src="https://cdn.shopify.com/shopifycloud/perf-kit/shopify-perf-kit-3.7.0.min.js"></script>
 <meta content="910f0a6d-195d-4490-8a2f-7a444e56eed5" name="shopify-y"/>
+<script src="/assets/js/tp-defer.js"></script>
 </head>
 <body class="template-product">
 <!-- Google Tag Manager (noscript) -->

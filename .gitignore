@@ -18,3 +18,5 @@ cart
 
 # Dependencies
 node_modules/
+.vercel
+.env*
